@@ -1,7 +1,7 @@
 package cz.muni.fi.jboss.book.persistence.dao.impl;
 
 import cz.muni.fi.jboss.book.persistence.dao.ManagerDAO;
-import cz.muni.fi.library.entity.Manager;
+import cz.muni.fi.jboss.book.persistence.entity.Manager;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;

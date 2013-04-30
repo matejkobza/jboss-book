@@ -1,6 +1,7 @@
 package cz.muni.fi.jboss.book.persistence.dao;
 
-import cz.muni.fi.library.entity.User;
+
+import cz.muni.fi.jboss.book.persistence.entity.User;
 import java.util.List;
 
 /**

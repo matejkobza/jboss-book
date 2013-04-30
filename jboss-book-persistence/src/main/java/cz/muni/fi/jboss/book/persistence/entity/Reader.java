@@ -1,13 +1,7 @@
-/**
- * Class Reader.java
- *
- * @author Eduard Tomek
- */
-package cz.muni.fi.library.entity;
+package cz.muni.fi.jboss.book.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
 
 /**
  * Class Reader
@@ -16,23 +10,22 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-public class Reader extends User{
-	
-	@Column
-	private String aboutMe;
+public class Reader extends User {
 
-	public String getAboutMe() {
-		return aboutMe;
-	}
+  private static final long serialVersionUID = -422999082678393615L;
+  @Column
+  private String aboutMe;
 
-	public void setAboutMe(String aboutMe) {
-		this.aboutMe = aboutMe;
-	}
+  public String getAboutMe() {
+    return aboutMe;
+  }
 
-	@Override
-	public String toString() {
-		return super.toString() + ", aboutMe=" + aboutMe + "]";
-	}
+  public void setAboutMe(String aboutMe) {
+    this.aboutMe = aboutMe;
+  }
 
-		
+  @Override
+  public String toString() {
+    return super.toString() + ", aboutMe=" + aboutMe + "]";
+  }
 }

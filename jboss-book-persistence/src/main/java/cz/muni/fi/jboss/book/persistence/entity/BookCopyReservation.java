@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package cz.muni.fi.library.entity;
+package cz.muni.fi.jboss.book.persistence.entity;
 
 import cz.muni.fi.library.enums.ReservationState;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,84 +18,79 @@ import javax.persistence.Table;
  * @author Eduard Tomek
  */
 @Entity
-@Table(name="BookCopyReservation")
-public class BookCopyReservation {
-    
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
-    
-    @ManyToOne
-    @JoinColumn(name="ID_BookCopy")
-    @Column(nullable=false)
-    private BookCopy bookCopy;
-    
-    @ManyToOne
-    @JoinColumn(name="ID_User")
-    @Column(nullable=false)
-    private User user;
-    
-    @Enumerated(EnumType.ORDINAL)
-    @Column(nullable=false)
-    private ReservationState reservationState;
+@Table(name = "BookCopyReservation")
+public class BookCopyReservation implements Serializable {
 
-    public Long getId() {
-        return id;
-    }
+  private static final long serialVersionUID = -83788868169501821L;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
+  @ManyToOne
+  @JoinColumn(name = "ID_BookCopy")
+  private BookCopy bookCopy;
+  @ManyToOne
+  @JoinColumn(name = "ID_User")
+  private User user;
+  @Enumerated(EnumType.ORDINAL)
+  @Column(nullable = false)
+  private ReservationState reservationState;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public BookCopy getBookCopy() {
-        return bookCopy;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setBookCopy(BookCopy bookCopy) {
-        this.bookCopy = bookCopy;
-    }
+  public BookCopy getBookCopy() {
+    return bookCopy;
+  }
 
-    public User getUser() {
-        return user;
-    }
+  public void setBookCopy(BookCopy bookCopy) {
+    this.bookCopy = bookCopy;
+  }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+  public User getUser() {
+    return user;
+  }
 
-    public ReservationState getReservationState() {
-        return reservationState;
-    }
+  public void setUser(User user) {
+    this.user = user;
+  }
 
-    public void setReservationState(ReservationState reservationState) {
-        this.reservationState = reservationState;
-    }
+  public ReservationState getReservationState() {
+    return reservationState;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
-        return hash;
-    }
+  public void setReservationState(ReservationState reservationState) {
+    this.reservationState = reservationState;
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final BookCopyReservation other = (BookCopyReservation) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
+    return hash;
+  }
 
-    @Override
-    public String toString() {
-        return "BookCopyReservation{" + "id=" + id + ", bookCopy=" + bookCopy + ", user=" + user + ", reservationState=" + reservationState + '}';
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
     }
-    
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final BookCopyReservation other = (BookCopyReservation) obj;
+    if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "BookCopyReservation{" + "id=" + id + ", bookCopy=" + bookCopy + ", user=" + user + ", reservationState=" + reservationState + '}';
+  }
 }

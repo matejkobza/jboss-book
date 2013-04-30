@@ -1,7 +1,7 @@
 package cz.muni.fi.jboss.book.persistence.dao;
 
-import cz.muni.fi.library.entity.Book;
-import cz.muni.fi.library.entity.BookCopy;
+import cz.muni.fi.jboss.book.persistence.entity.Book;
+import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import java.util.List;
 
 /**

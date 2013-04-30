@@ -1,11 +1,9 @@
 package cz.muni.fi.jboss.book.persistence.test;
 
 import cz.muni.fi.jboss.book.persistence.dao.impl.BookDAOImpl;
-import cz.muni.fi.library.entity.Book;
+import cz.muni.fi.jboss.book.persistence.entity.Book;
 import javax.ejb.Local;
-import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,16 +20,13 @@ public class BookDAOImplTest {
     
     BookDAOImpl bDao;
     
-    @PersistenceContext
-    private EntityManager em;
-    
     Book testBook1;
     
     
     @Before
     public void setUp(){
         bDao = new BookDAOImpl();
-        bDao.setEm(Persistence.createEntityManagerFactory("test").createEntityManager());
+        bDao.setEm(Persistence.createEntityManagerFactory("test-hibernate").createEntityManager());
         testBook1 = createTestBook1();
     }
     

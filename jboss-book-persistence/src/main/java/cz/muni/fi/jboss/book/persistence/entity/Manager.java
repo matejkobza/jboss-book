@@ -1,9 +1,4 @@
-/**
- * Manager.java
- *
- * @author Eduard Tomek
- */
-package cz.muni.fi.library.entity;
+package cz.muni.fi.jboss.book.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,24 +10,22 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-public class Manager extends User{
-	 
-	@Column
-	private int salary;
+public class Manager extends User {
 
-	public int getSalary() {
-		return salary;
-	}
+  private static final long serialVersionUID = 969250111320136365L;
+  @Column
+  private int salary;
 
-	public void setSalary(int salary) {
-		this.salary = salary;
-	}
+  public int getSalary() {
+    return salary;
+  }
 
-	@Override
-	public String toString() {
-		return super.toString() + ", salary=" + salary + "]";
-	}
-	
-	
+  public void setSalary(int salary) {
+    this.salary = salary;
+  }
 
+  @Override
+  public String toString() {
+    return super.toString() + ", salary=" + salary + "]";
+  }
 }

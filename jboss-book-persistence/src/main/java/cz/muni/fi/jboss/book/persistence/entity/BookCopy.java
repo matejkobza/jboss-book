@@ -1,5 +1,6 @@
-package cz.muni.fi.library.entity;
+package cz.muni.fi.jboss.book.persistence.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,107 +13,104 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
- * Class BookCopy 
- * 
+ * Class BookCopy
+ *
  * @author Eduard Tomek
  */
 @Entity
-@Table(name="BookCopy")
-public class BookCopy {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "ID_BookCopy", nullable = false)
-	private Long id;
-	
-        @Column(nullable=false)
-        @Temporal(javax.persistence.TemporalType.DATE)
-        private Date purchaseDate;
-        
-	@ManyToOne(optional=false)
-	@Column(nullable = false)
-        @JoinColumn(name="ID_Book")
-	private Book book;
-        
-        
+@Table(name = "BookCopy")
+public class BookCopy implements Serializable {
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+  private static final long serialVersionUID = 4881074127449326542L;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "ID_BookCopy", nullable = false)
+  private Long id;
+  @Column(nullable = false)
+  @Temporal(javax.persistence.TemporalType.DATE)
+  private Date purchaseDate;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "ID_Book")
+  private Book book;
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-		
-	}
+  /**
+   * @return the id
+   */
+  public Long getId() {
+    return id;
+  }
 
-    public Date getPurchaseDate() {
-        return purchaseDate;
+  /**
+   * @param id the id to set
+   */
+  public void setId(Long id) {
+    this.id = id;
+
+  }
+
+  public Date getPurchaseDate() {
+    return purchaseDate;
+  }
+
+  public void setPurchaseDate(Date purchaseDate) {
+    this.purchaseDate = purchaseDate;
+  }
+
+  /**
+   * @return the book
+   */
+  public Book getBook() {
+    return book;
+  }
+
+  /**
+   * @param book the book to set
+   */
+  public void setBook(Book book) {
+    this.book = book;
+  }
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((id == null) ? 0 : id.hashCode());
+    return result;
+  }
+
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
-
-    public void setPurchaseDate(Date purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    if (obj == null) {
+      return false;
     }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    BookCopy other = (BookCopy) obj;
+    if (id == null) {
+      if (other.id != null) {
+        return false;
+      }
+    } else if (!id.equals(other.id)) {
+      return false;
+    }
+    return true;
+  }
 
-        
-        
-	/**
-	 * @return the book
-	 */
-	public Book getBook() {
-		return book;
-	}
-
-	/**
-	 * @param book the book to set
-	 */
-	public void setBook(Book book) {
-		this.book = book;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BookCopy other = (BookCopy) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "BookCopy [id=" + id + ", book=" + book + "]";
-	}
-	
-	
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    return "BookCopy [id=" + id + ", book=" + book + "]";
+  }
 }

@@ -1,8 +1,8 @@
 package cz.muni.fi.jboss.book.persistence.dao.impl;
 
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAO;
-import cz.muni.fi.library.entity.Book;
-import cz.muni.fi.library.entity.BookCopy;
+import cz.muni.fi.jboss.book.persistence.entity.Book;
+import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

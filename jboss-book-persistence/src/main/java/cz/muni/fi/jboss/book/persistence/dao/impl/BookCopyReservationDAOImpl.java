@@ -1,9 +1,9 @@
 package cz.muni.fi.jboss.book.persistence.dao.impl;
 
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyReservationDAO;
-import cz.muni.fi.library.entity.BookCopy;
-import cz.muni.fi.library.entity.BookCopyReservation;
-import cz.muni.fi.library.entity.User;
+import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
+import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
+import cz.muni.fi.jboss.book.persistence.entity.User;
 import cz.muni.fi.library.enums.ReservationState;
 import java.util.List;
 import javax.persistence.EntityManager;

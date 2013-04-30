@@ -1,6 +1,6 @@
 package cz.muni.fi.jboss.book.persistence.dao;
 
-import cz.muni.fi.library.entity.Manager;
+import cz.muni.fi.jboss.book.persistence.entity.Manager;
 import java.util.List;
 
 /**

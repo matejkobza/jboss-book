@@ -1,8 +1,7 @@
 package cz.muni.fi.jboss.book.persistence.dao;
 
+import cz.muni.fi.jboss.book.persistence.entity.Book;
 import java.util.List;
-
-import cz.muni.fi.library.entity.Book;
 
 /**
  * Interface BookDAO
