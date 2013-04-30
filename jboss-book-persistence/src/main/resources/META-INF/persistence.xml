@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" 
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-  
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    
     <class>cz.muni.fi.library.entity.Book</class>
     <class>cz.muni.fi.library.entity.BookCopy</class>
     <class>cz.muni.fi.library.entity.Librarian</class>
@@ -13,8 +9,8 @@
     <class>cz.muni.fi.library.entity.Reader</class>
     <class>cz.muni.fi.library.entity.User</class>
     <class>cz.muni.fi.library.entity.BookCopyReservation</class>
-    
     <properties>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
       <property name="hibernate.connection.username" value="root"/>
       <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="hibernate.connection.password" value=""/>
@@ -22,7 +18,6 @@
       <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
   </persistence-unit>
-  
   <persistence-unit name="productPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>cz.muni.fi.library.entity.Book</class>

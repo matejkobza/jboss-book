@@ -8,11 +8,16 @@ import java.util.List;
  * @author Eduard Tomek
  */
 public interface UserDAO {
-   
-    User createUser(User user);
-    User updateUser(User user);
-    void deleteUser(User user);
-    User findUserById(Long id);
-    User findUserByUsername(String username);
-    List<User> findAllUsers(); 
+
+  User createUser(User user);
+
+  User updateUser(User user);
+
+  void deleteUser(User user);
+
+  User findUserById(Long id);
+
+  User findUserByUsername(String username);
+
+  List<User> findAllUsers();
 }

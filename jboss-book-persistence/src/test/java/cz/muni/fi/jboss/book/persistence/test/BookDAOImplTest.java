@@ -31,7 +31,7 @@ public class BookDAOImplTest {
     @Before
     public void setUp(){
         bDao = new BookDAOImpl();
-        bDao.setEm(Persistence.createEntityManagerFactory("testPU").createEntityManager());
+        bDao.setEm(Persistence.createEntityManagerFactory("cz.muni.fi.jboss-book_jboss-book-persistence_jar_1.0-SNAPSHOTPU").createEntityManager());
         testBook1 = createTestBook1();
     }
     
