@@ -4,7 +4,7 @@ import cz.muni.fi.jboss.book.persistence.dao.BookCopyReservationDAO;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
 import cz.muni.fi.jboss.book.persistence.entity.User;
-import cz.muni.fi.library.enums.ReservationState;
+import cz.muni.fi.library.enums.ReservationStateEnum;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -98,7 +98,7 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
   }
 
   @Override
-  public List<BookCopyReservation> findBookCopyReservationsByReservationState(ReservationState rS) {
+  public List<BookCopyReservation> findBookCopyReservationsByReservationState(ReservationStateEnum rS) {
     if (rS == null) {
       throw new NullPointerException("reservation state is null");
     }

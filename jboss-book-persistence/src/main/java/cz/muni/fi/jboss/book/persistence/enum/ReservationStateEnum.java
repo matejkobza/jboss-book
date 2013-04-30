@@ -12,7 +12,7 @@ package cz.muni.fi.library.enums;
  * @author Eduard Tomek
  *
  */
-public enum ReservationState {
+public enum ReservationStateEnum {
 	
 	NEW_RESERVATION, READY_TO_LEND, LENDED, RETURNED
 

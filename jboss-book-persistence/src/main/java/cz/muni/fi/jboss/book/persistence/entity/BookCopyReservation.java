@@ -1,6 +1,6 @@
 package cz.muni.fi.jboss.book.persistence.entity;
 
-import cz.muni.fi.library.enums.ReservationState;
+import cz.muni.fi.library.enums.ReservationStateEnum;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +33,7 @@ public class BookCopyReservation implements Serializable {
   private User user;
   @Enumerated(EnumType.ORDINAL)
   @Column(nullable = false)
-  private ReservationState reservationState;
+  private ReservationStateEnum reservationState;
 
   public Long getId() {
     return id;
@@ -59,11 +59,11 @@ public class BookCopyReservation implements Serializable {
     this.user = user;
   }
 
-  public ReservationState getReservationState() {
+  public ReservationStateEnum getReservationState() {
     return reservationState;
   }
 
-  public void setReservationState(ReservationState reservationState) {
+  public void setReservationState(ReservationStateEnum reservationState) {
     this.reservationState = reservationState;
   }
 

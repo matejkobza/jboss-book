@@ -32,8 +32,10 @@ public class BookDAOImpl implements BookDAO {
             || book.getISBN() < 0 || book.getPages() < 0) {
       throw new IllegalArgumentException("pages or ISBN is null or negative");
     }
+    em.getTransaction().begin();
     em.persist(book);
     em.flush();
+    em.getTransaction().commit();
     return book;
   }
 
