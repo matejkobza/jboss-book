@@ -1,0 +1,14 @@
+Tue Apr 30 22:11:31 CEST 2013 : Apache Derby Network Server - 10.10.1.1 - (1458268) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Tue Apr 30 22:11:31 CEST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-013e-5c92-4946-ffffa36d79cd 
+on database directory /Users/matejkobza/Java/jboss/jboss-book/db-derby/database/jboss-book with class loader sun.misc.Launcher$AppClassLoader@2bbe3d02 
+Loaded from file:/Users/matejkobza/Java/jboss/jboss-book/db-derby/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_10-b18
+user.dir=/Users/matejkobza/Java/jboss/jboss-book/db-derby
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.7.5
+derby.system.home=/Users/matejkobza/Java/jboss/jboss-book/db-derby/database
+Database Class Loader started - derby.database.classpath=''
