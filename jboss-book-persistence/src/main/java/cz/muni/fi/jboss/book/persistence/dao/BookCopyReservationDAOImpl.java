@@ -1,4 +1,4 @@
-package cz.muni.fi.jboss.book.persistence.dao.impl;
+package cz.muni.fi.jboss.book.persistence.dao;
 
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyReservationDAO;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;

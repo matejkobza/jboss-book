@@ -1,4 +1,4 @@
-package cz.muni.fi.jboss.book.persistence.dao.impl;
+package cz.muni.fi.jboss.book.persistence.dao;
 
 import cz.muni.fi.jboss.book.persistence.dao.BookDAO;
 import cz.muni.fi.jboss.book.persistence.entity.Book;

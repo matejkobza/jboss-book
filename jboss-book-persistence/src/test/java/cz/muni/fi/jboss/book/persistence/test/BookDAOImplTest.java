@@ -1,6 +1,6 @@
 package cz.muni.fi.jboss.book.persistence.test;
 
-import cz.muni.fi.jboss.book.persistence.dao.impl.BookDAOImpl;
+import cz.muni.fi.jboss.book.persistence.dao.BookDAOImpl;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
 import javax.ejb.Local;
 import javax.persistence.Persistence;
