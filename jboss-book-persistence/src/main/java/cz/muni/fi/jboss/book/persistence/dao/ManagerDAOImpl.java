@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
  */
 public class ManagerDAOImpl implements ManagerDAO {
 
-  @PersistenceContext
+  @PersistenceContext(unitName="PU")
   EntityManager em;
 
   @Override

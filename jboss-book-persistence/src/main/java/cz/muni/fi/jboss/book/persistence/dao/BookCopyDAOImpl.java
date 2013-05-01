@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
  */
 public class BookCopyDAOImpl implements BookCopyDAO {
 
-  @PersistenceContext
+  @PersistenceContext(unitName="PU")
   private EntityManager em;
 
   public EntityManager getEm() {

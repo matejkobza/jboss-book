@@ -16,7 +16,7 @@ import cz.muni.fi.jboss.book.persistence.entity.User;
  */
 public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
 
-  @PersistenceContext
+  @PersistenceContext(unitName="PU")
   private EntityManager em;
 
   public EntityManager getEm() {

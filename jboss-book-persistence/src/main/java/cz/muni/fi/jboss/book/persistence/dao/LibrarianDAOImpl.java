@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
  */
 public class LibrarianDAOImpl implements LibrarianDAO {
 
-  @PersistenceContext
+  @PersistenceContext(unitName="PU")
   EntityManager em;
 
   @Override

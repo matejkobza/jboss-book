@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
  */
 public class ReaderDAOImpl implements ReaderDAO {
 
-  @PersistenceContext
+  @PersistenceContext(unitName="PU")
   EntityManager em;
 
   @Override
