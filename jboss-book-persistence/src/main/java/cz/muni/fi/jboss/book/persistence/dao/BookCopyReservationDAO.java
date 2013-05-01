@@ -1,10 +1,11 @@
 package cz.muni.fi.jboss.book.persistence.dao;
 
+import java.util.List;
+
+import cz.muni.fi.jboss.book.persistence.ReservationStateEnum;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
 import cz.muni.fi.jboss.book.persistence.entity.User;
-import cz.muni.fi.library.enums.ReservationStateEnum;
-import java.util.List;
 
 /**
  *

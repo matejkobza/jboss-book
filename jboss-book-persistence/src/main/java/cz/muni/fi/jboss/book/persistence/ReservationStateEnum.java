@@ -3,7 +3,7 @@
  *
  * @author Eduard Tomek
  */
-package cz.muni.fi.library.enums;
+package cz.muni.fi.jboss.book.persistence;
 
 /**
  * Enum ReservationState

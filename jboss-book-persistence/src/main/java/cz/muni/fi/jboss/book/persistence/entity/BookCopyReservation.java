@@ -1,7 +1,8 @@
 package cz.muni.fi.jboss.book.persistence.entity;
 
-import cz.muni.fi.library.enums.ReservationStateEnum;
+
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import cz.muni.fi.jboss.book.persistence.ReservationStateEnum;
 
 /**
  *
