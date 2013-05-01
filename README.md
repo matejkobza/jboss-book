@@ -6,7 +6,7 @@ The goal of this project is demonstrate knowledge gained during summer semester 
 - JSF
 - JPA2
 
-How to lunch DB in netbeans:
+How to launch DB in netbeans:
 
 1. New connection
  - in services add new database. Right click on Database and than New Connection. Select Java DB (Network) and click next. On next page insert host as 'localhost' (127.0.0.1), port '1527', database: 'jboss-book', username: 'root' and password: 'toor'.
