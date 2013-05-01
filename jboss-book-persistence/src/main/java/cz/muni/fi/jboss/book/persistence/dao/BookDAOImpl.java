@@ -4,6 +4,7 @@ import cz.muni.fi.jboss.book.persistence.dao.BookDAO;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -64,8 +65,10 @@ public class BookDAOImpl implements BookDAO {
     if (book == null) {
       throw new NullPointerException("book is null");
     }
+    em.getTransaction().begin();
     em.remove(book);
     em.flush();
+    em.getTransaction().commit();    
   }
 
   @Override
