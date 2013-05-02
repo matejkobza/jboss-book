@@ -23,7 +23,7 @@ public class Book implements Serializable {
 
   private static final long serialVersionUID = -3009934453727550437L;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ID_Book", nullable = false)
   private Long id;
   @Column(name = "name")
