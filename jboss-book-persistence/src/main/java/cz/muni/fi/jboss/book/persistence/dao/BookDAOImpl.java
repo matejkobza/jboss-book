@@ -36,7 +36,7 @@ public class BookDAOImpl implements BookDAO {
     em.getTransaction().begin();
     em.persist(book);
     em.flush();
-    em.getTransaction().commit();
+    //em.getTransaction().commit();
     return book;
   }
 
