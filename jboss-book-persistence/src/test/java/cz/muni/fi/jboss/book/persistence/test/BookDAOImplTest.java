@@ -23,6 +23,8 @@ public class BookDAOImplTest {
     bDao = new BookDAOImpl();
     bDao.setEm(Persistence.createEntityManagerFactory("test-hibernate").createEntityManager());
     testBook1 = createTestBook1();
+    // testCreateBook would fail otherwise
+    bDao.setManualTransactions(true);
   }
 
   private Book createTestBook1() {
