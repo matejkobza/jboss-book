@@ -40,5 +40,17 @@
 			<artifactId>jboss-book-persistence</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+	 <dependency>
+	  <groupId>javax.ejb</groupId>
+	  <artifactId>ejb-api</artifactId>
+	  <version>3.0</version>
+	  <type>jar</type>
+	 </dependency>
+	 <dependency>
+	  <groupId>javax</groupId>
+	  <artifactId>javaee-api</artifactId>
+	  <version>6.0</version>
+	  <type>jar</type>
+	 </dependency>
 	</dependencies>
 </project>

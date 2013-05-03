@@ -7,8 +7,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import cz.muni.fi.jboss.book.persistence.entity.Book;
-import cz.muni.fi.library.ejb.managers.BookManager;
-import cz.muni.fi.library.ejb.managers.BookManagerImpl;
+import cz.muni.fi.library.ejb.manager.BookManager;
+import cz.muni.fi.library.ejb.manager.BookManagerImpl;
  
 /**
  * A sample program which acts a remote client for a EJB deployed on AS7 server.

@@ -1,4 +1,4 @@
-package cz.muni.fi.library.ejb.managers;
+package cz.muni.fi.library.ejb.manager;
 
 import java.util.List;
 
