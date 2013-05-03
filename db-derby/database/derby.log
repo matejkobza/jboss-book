@@ -12,3 +12,9 @@ os.arch=x86_64
 os.version=10.7.5
 derby.system.home=/Users/matejkobza/Java/jboss/jboss-book/db-derby/database
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed May 01 15:00:36 CEST 2013: Shutting down Derby engine
+----------------------------------------------------------------
+Wed May 01 15:00:36 CEST 2013:
+Shutting down instance a816c00e-013e-5f55-3a84-ffffa36d79cd on database directory /Users/matejkobza/Java/jboss/jboss-book/db-derby/database/jboss-book with class loader sun.misc.Launcher$AppClassLoader@569764bd 
+----------------------------------------------------------------
