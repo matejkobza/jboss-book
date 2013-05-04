@@ -1,5 +1,7 @@
 package cz.muni.fi.jbossbook.testclient;
 
+import cz.muni.fi.jboss.book.ejb.manager.BookManager;
+import cz.muni.fi.jboss.book.ejb.manager.BookManagerImpl;
 import java.util.Hashtable;
 
 import javax.naming.Context;
@@ -7,8 +9,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import cz.muni.fi.jboss.book.persistence.entity.Book;
-import cz.muni.fi.library.ejb.manager.BookManager;
-import cz.muni.fi.library.ejb.manager.BookManagerImpl;
  
 /**
  * A sample program which acts a remote client for a EJB deployed on AS7 server.
