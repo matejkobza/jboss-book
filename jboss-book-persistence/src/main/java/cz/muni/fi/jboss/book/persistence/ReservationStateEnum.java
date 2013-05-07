@@ -14,6 +14,6 @@ package cz.muni.fi.jboss.book.persistence;
  */
 public enum ReservationStateEnum {
 	
-	NEW_RESERVATION, READY_TO_LEND, LENDED, RETURNED
+	NEW, READY, LENT, RETURNED
 
 }
