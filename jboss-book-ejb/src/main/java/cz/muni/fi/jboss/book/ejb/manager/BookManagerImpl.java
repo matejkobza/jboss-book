@@ -8,8 +8,10 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAO;
 import cz.muni.fi.jboss.book.persistence.dao.BookDAO;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
+import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 
 @Dependent
 @Named("bookManager")
@@ -19,6 +21,9 @@ public class BookManagerImpl implements BookManager {
 	
 	@Inject
 	private BookDAO bookDao;
+	
+	@Inject
+	private BookCopyDAO bookCopyDao;
 
 	@Override
 	public Book addBook(Book book) {
@@ -31,8 +36,8 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public void deleteBook(Book book) {
-		bookDao.deleteBook(book);
+	public void deleteBook(Long bookId) {
+		bookDao.deleteBook(bookDao.findBookById(bookId));
 	}
 
 	@Override
@@ -59,5 +64,23 @@ public class BookManagerImpl implements BookManager {
 	public List<Book> findAllBooks() {
 		return bookDao.findAllBooks();
 	}
+
+	@Override
+	public BookCopy addBookCopy(Long bookId, BookCopy bookCopy) {
+		bookCopy.setBook(bookDao.findBookById(bookId));
+		return bookCopyDao.createBookCopy(bookCopy);
+	}
+
+	@Override
+	public void deleteBookCopy(Long bookCopyId) {
+		bookCopyDao.deleteBookCopy(bookCopyDao.findBookCopyById(bookCopyId));
+	}
+
+	@Override
+	public BookCopy updateBookCopy(BookCopy bookCopy) {
+		return bookCopyDao.updateBookCopy(bookCopy);
+	}
+	
+	
 
 }
