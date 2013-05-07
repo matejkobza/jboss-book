@@ -114,4 +114,18 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
     return em.createQuery(
             "SELECT b FROM BookCopyReservation b").getResultList();
   }
+
+	@Override
+	public List<BookCopyReservation> findBookCopyReservations(User user, ReservationStateEnum rS) {
+		if (user == null) {
+			throw new NullPointerException("user is null");
+		}
+		if (rS == null) {
+			throw new NullPointerException("reservation state is null");
+		}
+		List<BookCopyReservation> reservations = em.createQuery(
+				"SELECT b FROM BookCopyReservation b WHERE b.user == :user AND b.reservationState == :rS")
+				.getResultList();
+		return reservations;
+	}
 }

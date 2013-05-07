@@ -77,6 +77,8 @@ public interface BookCopyReservationDAO {
    * @return all reservation with given reservation state
    */
   List<BookCopyReservation> findBookCopyReservationsByReservationState(ReservationStateEnum rS);
+  
+  List<BookCopyReservation> findBookCopyReservations(User user, ReservationStateEnum rS);
 
   /**
    * Find all book copy reservations
