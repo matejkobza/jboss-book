@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,8 +29,6 @@ public class Book implements Serializable {
   private Long id;
   @Column(name = "name")
   private String title;
-  @Column(name = "author")
-  private String author;
   @Column(name = "publisher")
   private String publisher;
   @Column(name = "pages", nullable = false)
@@ -39,7 +38,11 @@ public class Book implements Serializable {
   @OneToMany
   @JoinColumn(name = "ID_BookCopy")
   private List<BookCopy> bookCopies;
-
+  
+  @ManyToOne
+  @JoinColumn(name = "ID_Author")
+  private Author author;
+  
   public List<BookCopy> getBookCopies() {
     return bookCopies;
   }
@@ -68,20 +71,6 @@ public class Book implements Serializable {
 
   public void setTitle(String title) {
     this.title = title;
-  }
-
-  /**
-   * @return the author
-   */
-  public String getAuthor() {
-    return author;
-  }
-
-  /**
-   * @param author the author to set
-   */
-  public void setAuthor(String author) {
-    this.author = author;
   }
 
   /**

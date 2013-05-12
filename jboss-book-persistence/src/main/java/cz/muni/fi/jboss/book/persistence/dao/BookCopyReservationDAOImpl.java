@@ -111,7 +111,7 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
 
   @Override
   public List<BookCopyReservation> findAllBookCopyReservations() {
-    return em.createQuery(
+    return (List<BookCopyReservation>) em.createQuery(
             "SELECT b FROM BookCopyReservation b").getResultList();
   }
 

@@ -56,7 +56,6 @@ public class BookDAOImpl implements BookDAO {
               "pages or ISBN is null or negative");
     }
     Book dbBook = em.find(Book.class, book.getId());
-    dbBook.setAuthor(book.getAuthor());
     dbBook.setPublisher(book.getPublisher());
     dbBook.setTitle(book.getTitle());
     dbBook.setISBN(book.getISBN());
