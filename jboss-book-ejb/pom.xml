@@ -1,66 +1,233 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <groupId>cz.muni.fi.jboss-book</groupId>
-  <artifactId>jboss-book-ejb</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>ejb</packaging>
-  
-  <name>jboss-book-ejb</name>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-ejb-plugin</artifactId>
-        <version>2.3</version>
-        <configuration>
-          <ejbVersion>3.1</ejbVersion>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>2.6</version>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
-    <dependency>
-      <groupId>cz.muni.fi.jboss-book</groupId>
-      <artifactId>jboss-book-persistence</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>javax.ejb</groupId>
-      <artifactId>ejb-api</artifactId>
-      <version>3.0</version>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>cz.muni.fi.jboss-book</groupId>
+	<artifactId>jboss-book-ejb</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>ejb</packaging>
+
+	<name>jboss-book-ejb</name>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<ejbVersion>3.1</ejbVersion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>1.0.3.Final</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+
+	<dependencies>
+		<dependency>
+			<groupId>cz.muni.fi.jboss-book</groupId>
+			<artifactId>jboss-book-persistence</artifactId>
+			<version>1.0-SNAPSHOT</version>
 			<type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>javax.enterprise</groupId>
-      <artifactId>cdi-api</artifactId>
-      <version>1.1</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <version>6.0</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+		</dependency>
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+			<version>3.0</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+
+
+
+
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1.21</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.1.21</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<version>1.0.0.Final</version>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<version>1.0.0.Final</version>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.as</groupId>
+			<artifactId>jboss-as-arquillian-container-remote</artifactId>
+			<version>7.1.1.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.protocol</groupId>
+			<artifactId>arquillian-protocol-servlet</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.descriptors</groupId>
+			<artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+
+
+
+
+
+
+
+
 </project>
+
+
+
+
+
+
+
+
+
+
+<!-- <repositories> <repository> <repository> <id>eclipse</id> <name>Eclipse 
+	Maven Repository</name> <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url> 
+	</repository> <id>Java.Net</id> <url>http://download.java.net/maven/2/</url> 
+	</repository> </repositories> <dependencies> <dependency> <groupId>org.eclipse.persistence</groupId> 
+	<artifactId>javax.persistence</artifactId> <version>2.0.0</version> <scope>provided</scope> 
+	</dependency> <dependency> <groupId>javax.mail</groupId> <artifactId>mail</artifactId> 
+	<version>1.4</version> <scope>provided</scope> </dependency> <dependency> 
+	<groupId>javax</groupId> <artifactId>javaee-api</artifactId> <version>6.0</version> 
+	<scope>provided</scope> </dependency> <dependency> <groupId>cz.muni.fi.jboss-book</groupId> 
+	<artifactId>jboss-book-persistence</artifactId> <version>1.0-SNAPSHOT</version> 
+	<type>jar</type> </dependency> <dependency> <groupId>javax.ejb</groupId> 
+	<artifactId>ejb-api</artifactId> <version>3.0</version> <type>jar</type> 
+	</dependency> <dependency> <groupId>javax.enterprise</groupId> <artifactId>cdi-api</artifactId> 
+	<version>1.1</version> <scope>provided</scope> </dependency> <dependency> 
+	<groupId>javax</groupId> <artifactId>javaee-api</artifactId> <version>6.0</version> 
+	<scope>provided</scope> </dependency> <dependency> <groupId>org.jboss.spec</groupId> 
+	<artifactId>jboss-javaee-6.0</artifactId> <version>1.0.0.Final</version> 
+	<type>pom</type> </dependency> <dependency> <groupId>org.jboss.arquillian.junit</groupId> 
+	<artifactId>arquillian-junit-container</artifactId> <scope>test</scope> </dependency> 
+	<dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> <version>4.8.1</version> 
+	<scope>test</scope> </dependency> <dependency> <groupId>org.jboss.arquillian.container</groupId> 
+	<artifactId>arquillian-weld-ee-embedded-1.1</artifactId> <version>1.0.0.CR3</version> 
+	<scope>test</scope> </dependency> <dependency> <groupId>org.jboss.weld</groupId> 
+	<artifactId>weld-core</artifactId> <version>1.1.5.Final</version> <scope>test</scope> 
+	</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-simple</artifactId> 
+	<version>1.6.4</version> <scope>test</scope> </dependency> <dependency> <groupId>org.jboss.shrinkwrap.descriptors</groupId> 
+	<artifactId>shrinkwrap-descriptors-impl-javaee</artifactId> <scope>test</scope> 
+	</dependency> </dependencies> <properties> <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
+	</properties> <profiles> <profile> <id>arquillian-jbossas-managed</id> <dependencies> 
+	<dependency> <groupId>org.jboss.spec</groupId> <artifactId>jboss-javaee-6.0</artifactId> 
+	<version>1.0.0.Final</version> <type>pom</type> <scope>provided</scope> </dependency> 
+	<dependency> <groupId>org.jboss.as</groupId> <artifactId>jboss-as-arquillian-container-managed</artifactId> 
+	<version>7.1.1.Final</version> <scope>test</scope> </dependency> <dependency> 
+	<groupId>org.jboss.arquillian.protocol</groupId> <artifactId>arquillian-protocol-servlet</artifactId> 
+	<scope>test</scope> </dependency> </dependencies> </profile> </profiles> 
+	</project> -->
