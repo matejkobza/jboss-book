@@ -127,7 +127,7 @@ public class BookCopyDaoImplTest {
 	}
 	
 	@Test
-	public void testUpdateBookCopyWithNullPurchaseDateOrNullBookCopy(){
+	public void testUpdateBookCopyWithNullIdOrPurchaseDateOrBookCopy(){
 		
 		try {
 			simulateBeginTransaction();
@@ -147,6 +147,17 @@ public class BookCopyDaoImplTest {
 			simulateBeginTransaction();
 			bDao.updateBookCopy(testBookCopy1);
 			simulateEndTransaction();
+			assertTrue(false);
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+		testBookCopy1.setPurchaseDate(new Date());
+		testBookCopy1.setId(null);
+		try {
+			simulateBeginTransaction();
+			bDao.updateBookCopy(testBookCopy1);
+			simulateEndTransaction();
+			assertTrue(false);
 		} catch (IllegalArgumentException ex) {
 			assertTrue(true);
 		}
@@ -167,8 +178,6 @@ public class BookCopyDaoImplTest {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		System.out.println("Date: "+ date +", resultDate: " + result.getPurchaseDate()); 
-		
 		assertNotNull(result.getId());
 		assertEquals(date, result.getPurchaseDate());
 		assertEquals(testBookCopy1.getBook(), result.getBook());
@@ -184,6 +193,16 @@ public class BookCopyDaoImplTest {
 		}catch (NullPointerException ex){
 			assertTrue(true);
 		}
+		BookCopy myBookCopy = new BookCopy();
+		myBookCopy.setId(null);
+		try{
+			bDao.deleteBookCopy(myBookCopy);
+			System.out.println("Not thrown IllegalArgumentException when deleting BookCopywith null id");
+			assertTrue(false);
+		}catch (IllegalArgumentException ex){
+			assertTrue(true);
+		}
+		
 		simulateBeginTransaction();
 		testBookCopy1 = bDao.createBookCopy(testBookCopy1);
 		simulateEndTransaction();
@@ -195,6 +214,15 @@ public class BookCopyDaoImplTest {
 		List<BookCopy> copies = bDao.findAllBookCopies();
 		simulateEndTransaction();
 		assertFalse(copies.contains(testBookCopy1));
-		
+	}
+	
+	@Test
+	public void testFindBook(){
+		simulateBeginTransaction();
+		bDao.createBookCopy(testBookCopy1);
+		List<BookCopy> copies = bDao.findBookCopyByBook(testBookCopy1.getBook());
+		simulateEndTransaction();
+		assertTrue(copies.contains(testBookCopy1));
 	}
 }
+	

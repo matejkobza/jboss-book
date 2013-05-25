@@ -40,8 +40,6 @@ public class Book implements Serializable {
   @Column(name = "ISBN", nullable = false)
   private Long ISBN;
   
-  //@OneToMany(mappedBy= "book", targetEntity=BookCopy.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
-  //@JoinColumn(name = "ID_BookCopy")
   @OneToMany(targetEntity=BookCopy.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
   @IndexColumn(name="BookCopy_ID")
   private List<BookCopy> bookCopies;
@@ -140,7 +138,7 @@ public void setAuthor(Author author) {
 
   @Override
   public String toString() {
-    return "Book [id=" + id + ", name=" + title + ", author=" //+ author
+    return "Book [id=" + id + ", name=" + title + ", author=" + author
             + ", publisher=" + publisher + ", pages=" + pages + ", ISBN="
             + ISBN + "]";
   }

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -37,6 +38,10 @@ public class BookCopy implements Serializable {
   @JoinColumn(name = "ID_Book", referencedColumnName = "ID_Book")
   private Book book;
 
+  @OneToOne(targetEntity=BookCopyReservation.class, fetch= FetchType.EAGER,
+		  cascade=CascadeType.REFRESH, optional = true)
+  @JoinColumn(name = "ID_BookCopyReservation", referencedColumnName = "ID_BookCopyReservation")
+  private BookCopyReservation bookCopyReservation;
   /**
    * @return the id
    */

@@ -38,6 +38,9 @@ public class AuthorDAOImpl implements AuthorDAO{
 		if(author == null){
 			throw new NullPointerException("author is null");
 		}
+		if(author.getId() == null){
+			throw new IllegalArgumentException("id is null");
+		}
 		Author dbAuthor = em.find(Author.class, author.getId());
 		dbAuthor.setBooks(author.getBooks());
 		dbAuthor.setDescription(author.getDescription());
@@ -53,7 +56,11 @@ public class AuthorDAOImpl implements AuthorDAO{
 		if(author == null){
 			throw new NullPointerException("author is null");
 		}
-		em.remove(author);
+		if(author.getId() == null){
+			throw new IllegalArgumentException("id is null");
+		}
+		Author dbAuthor = findAuthorById(author.getId());
+		em.remove(dbAuthor);
 		em.flush();
 	}
 

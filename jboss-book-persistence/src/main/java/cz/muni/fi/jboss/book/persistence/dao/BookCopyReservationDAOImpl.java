@@ -33,7 +33,7 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
       throw new NullPointerException("bookCopyReservation is null");
     }
     if (bookCopyReservation.getBookCopy() == null
-            || bookCopyReservation.getUser() == null
+            //|| bookCopyReservation.getUser() == null
             || bookCopyReservation.getReservationState() == null) {
       throw new IllegalArgumentException("book copy, user or reservation state is null");
     }
@@ -48,12 +48,14 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
       throw new NullPointerException("bookCopyReservation is null");
     }
     if (bookCopyReservation.getBookCopy() == null
-            || bookCopyReservation.getUser() == null
+            //|| bookCopyReservation.getUser() == null
+    		|| bookCopyReservation.getId() == null
             || bookCopyReservation.getReservationState() == null) {
       throw new IllegalArgumentException("book copy, user or reservation state is null");
     }
     BookCopyReservation dbBCR = em.find(BookCopyReservation.class, bookCopyReservation.getId());
     dbBCR.setReservationState(bookCopyReservation.getReservationState());
+    dbBCR.setBookCopy(bookCopyReservation.getBookCopy());
     em.persist(dbBCR);
     em.flush();
     return dbBCR;
@@ -64,6 +66,10 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
     if (bookCopyReservation == null) {
       throw new NullPointerException("bookCopyReservation is null");
     }
+    if(bookCopyReservation.getId() == null){
+    	throw new IllegalArgumentException("id is null");
+    }
+    bookCopyReservation = em.find(BookCopyReservation.class, bookCopyReservation.getId());
     em.remove(bookCopyReservation);
     em.flush();
   }
@@ -83,7 +89,8 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
     }
     List<BookCopyReservation> reservations =
             em.createQuery(
-            "SELECT b FROM BookCopyReservation b WHERE b.bookCopy == :bookCopy").getResultList();
+            "SELECT b FROM BookCopyReservation b WHERE b.bookCopy = :bookCopy")
+            .setParameter("bookCopy", bookCopy).getResultList();
     return reservations;
   }
 
@@ -94,7 +101,8 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
     }
     List<BookCopyReservation> reservations =
             em.createQuery(
-            "SELECT b FROM BookCopyReservation b WHERE b.user == :user").getResultList();
+            "SELECT b FROM BookCopyReservation b WHERE b.user = :user")
+            .setParameter("user", user).getResultList();
     return reservations;
   }
 
@@ -105,7 +113,8 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
     }
     List<BookCopyReservation> reservations =
             em.createQuery(
-            "SELECT b FROM BookCopyReservation b WHERE b.reservationState == :rS").getResultList();
+            "SELECT b FROM BookCopyReservation b WHERE b.reservationState = :rS")
+            .setParameter("rS", rS).getResultList();
     return reservations;
   }
 
@@ -125,6 +134,7 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
 		}
 		List<BookCopyReservation> reservations = em.createQuery(
 				"SELECT b FROM BookCopyReservation b WHERE b.user == :user AND b.reservationState == :rS")
+				.setParameter("user", user).setParameter("rS", rS)
 				.getResultList();
 		return reservations;
 	}

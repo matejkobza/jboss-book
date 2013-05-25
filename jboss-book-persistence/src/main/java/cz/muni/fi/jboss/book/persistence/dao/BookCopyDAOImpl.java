@@ -42,8 +42,10 @@ public class BookCopyDAOImpl implements BookCopyDAO {
     if (bookCopy == null) {
       throw new NullPointerException("bookCopy is null");
     }
-    if (bookCopy.getBook() == null || bookCopy.getPurchaseDate() == null) {
-      throw new IllegalArgumentException("book or purchase date is null");
+    if (bookCopy.getBook() == null 
+    		|| bookCopy.getPurchaseDate() == null
+    		|| bookCopy.getId() == null) {
+      throw new IllegalArgumentException("id, book or purchase date is null");
     }
     BookCopy dbBC = em.find(BookCopy.class, bookCopy.getId());
     dbBC.setBook(bookCopy.getBook());
@@ -57,6 +59,9 @@ public class BookCopyDAOImpl implements BookCopyDAO {
   public void deleteBookCopy(BookCopy bookCopy) {
     if (bookCopy == null) {
       throw new NullPointerException("bookCopy is null");
+    }
+    if(bookCopy.getId() == null){
+    	throw new IllegalArgumentException("id is null");
     }
     BookCopy foundBookCopy = findBookCopyById(bookCopy.getId());
     em.remove(foundBookCopy);
@@ -75,7 +80,8 @@ public class BookCopyDAOImpl implements BookCopyDAO {
     if (book == null) {
       throw new NullPointerException("book is null");
     }
-    return em.createQuery("SELECT b FROM BookCopy b WHERE b.book == :book").getResultList();
+    return em.createQuery("SELECT b FROM BookCopy b WHERE b.book = :book")
+    		.setParameter("book", book).getResultList();
   }
 
   @Override

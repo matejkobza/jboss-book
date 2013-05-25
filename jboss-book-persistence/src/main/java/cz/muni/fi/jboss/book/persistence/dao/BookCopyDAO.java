@@ -28,7 +28,7 @@ public interface BookCopyDAO {
    * @param bookCopy book copy to update
    * @return updated book copy
    * @throws NullPointerException if bookCopy is null
-   * @throws IllegalArgumentException if book or purchaseDate is null
+   * @throws IllegalArgumentException if id, book or purchaseDate is null
    */
   BookCopy updateBookCopy(BookCopy bookCopy);
 
@@ -36,6 +36,7 @@ public interface BookCopyDAO {
    * Delete book copy
    *
    * @param bookCopy book copy which will be deleted
+   * @throws IllegalArgumentException if id is null
    */
   void deleteBookCopy(BookCopy bookCopy);
 

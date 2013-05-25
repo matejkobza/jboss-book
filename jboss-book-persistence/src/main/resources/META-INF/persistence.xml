@@ -6,8 +6,8 @@
     <class>cz.muni.fi.jboss.book.persistence.entity.Book</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.Author</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.BookCopy</class>
-    <!--  <class>cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation</class>
-    <class>cz.muni.fi.jboss.book.persistence.entity.Librarian</class>
+    <class>cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation</class>
+    <!--  <class>cz.muni.fi.jboss.book.persistence.entity.Librarian</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.Manager</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.Reader</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.User</class> -->
@@ -29,8 +29,8 @@
     <class>cz.muni.fi.jboss.book.persistence.entity.Book</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.Author</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.BookCopy</class>
-    <!--  <class>cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation</class>
-    <class>cz.muni.fi.jboss.book.persistence.entity.Librarian</class>
+    <class>cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation</class>
+    <!--  <class>cz.muni.fi.jboss.book.persistence.entity.Librarian</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.Manager</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.Reader</class>
     <class>cz.muni.fi.jboss.book.persistence.entity.User</class>-->

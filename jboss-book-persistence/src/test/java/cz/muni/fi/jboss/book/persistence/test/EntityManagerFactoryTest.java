@@ -17,7 +17,7 @@ public class EntityManagerFactoryTest {
 
   @Before
   public void setUp() {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("test-hibernate");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("testPU");
     entityManager = emf.createEntityManager();
   }
   

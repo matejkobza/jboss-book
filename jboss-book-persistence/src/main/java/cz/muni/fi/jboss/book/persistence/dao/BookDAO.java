@@ -1,5 +1,6 @@
 package cz.muni.fi.jboss.book.persistence.dao;
 
+import cz.muni.fi.jboss.book.persistence.entity.Author;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface BookDAO {
    * @param book book to be updated
    * @return updated book
    * @throws NullPointerException if book is null
-   * @throws IllegalArgumentException if pages or ISBN is null or negative
+   * @throws IllegalArgumentException if id, pages or ISBN is null or negative
    */
   public Book updateBook(Book book);
 
@@ -36,6 +37,7 @@ public interface BookDAO {
    *
    * @param book book to delete
    * @throws NullPointerException if book is null
+   * @throws IllegalArgumentException if id is null
    */
   public void deleteBook(Book book);
 
@@ -73,7 +75,7 @@ public interface BookDAO {
    * @return List of books written by given author
    * @throws NullPointerException if author is null
    */
-  public List<Book> findBookByAuthor(String author);
+  public List<Book> findBookByAuthor(Author author);
 
   /**
    * Find all books

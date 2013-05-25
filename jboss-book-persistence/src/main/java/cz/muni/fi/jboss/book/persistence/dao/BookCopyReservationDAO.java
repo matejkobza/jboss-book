@@ -30,7 +30,7 @@ public interface BookCopyReservationDAO {
    * @param bookCopyReservation
    * @return updated book copy reservation
    * @throws NullPointerException if bookCopyReservation is null
-   * @throws IllegalArgumentException if User, BookCopy or ReservationState is
+   * @throws IllegalArgumentException if Id, User, BookCopy or ReservationState is
    * null
    */
   BookCopyReservation updateBookCopyReservation(BookCopyReservation bookCopyReservation);
@@ -39,6 +39,7 @@ public interface BookCopyReservationDAO {
    * Delete book copy reservation
    *
    * @param bookCopyReservation
+   * @throws IllegalArgumentException if Id is null
    */
   void deleteBookCopyReservation(BookCopyReservation bookCopyReservation);
 

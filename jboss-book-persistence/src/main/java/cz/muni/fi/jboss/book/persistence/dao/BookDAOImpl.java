@@ -1,5 +1,6 @@
 package cz.muni.fi.jboss.book.persistence.dao;
 
+import cz.muni.fi.jboss.book.persistence.entity.Author;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -42,10 +43,13 @@ public class BookDAOImpl implements BookDAO {
     if (book == null) {
       throw new NullPointerException("book is null");
     }
-    if (book.getISBN() == null || book.getPages() == null
-            || book.getISBN() < 0 || book.getPages() < 0) {
+    if (book.getISBN() == null 
+    		|| book.getPages() == null
+            || book.getISBN() < 0 
+            || book.getPages() < 0
+            || book.getId() == null) {
       throw new IllegalArgumentException(
-              "pages or ISBN is null or negative");
+              "id, pages or ISBN is null or negative");
     }
     Book dbBook = em.find(Book.class, book.getId());
     dbBook.setPublisher(book.getPublisher());
@@ -81,7 +85,8 @@ public class BookDAOImpl implements BookDAO {
       throw new NullPointerException("ISBN is null");
     }
     List<Book> books = em.createQuery(
-            "SELECT b FROM Book b WHERE b.ISBN == :ISBN").getResultList();
+            "SELECT b FROM Book b WHERE b.ISBN = :ISBN")
+            .setParameter("ISBN", ISBN).getResultList();
     return books;
   }
 
@@ -91,18 +96,19 @@ public class BookDAOImpl implements BookDAO {
       throw new NullPointerException("title is null");
     }
     List<Book> books = em.createQuery(
-            "SELECT b FROM Book b WHERE b.title == :title").getResultList();
+            "SELECT b FROM Book b WHERE b.title = :title")
+            .setParameter("title", title).getResultList();
     return books;
   }
 
   @Override
-  public List<Book> findBookByAuthor(String author) {
+  public List<Book> findBookByAuthor(Author author) {
     if (author == null) {
       throw new NullPointerException("author is null");
     }
     List<Book> books = em.createQuery(
-            "SELECT b FROM Book b WHERE b.author == :author")
-            .getResultList();
+            "SELECT b FROM Book b WHERE b.author = :author")
+            .setParameter("author", author).getResultList();
     return books;
   }
 

@@ -162,11 +162,21 @@ public class BookDAOImplTest {
 	}
 
 	@Test
-	public void testUpdateBookWithNullISBN() {
+	public void testUpdateBookWithNullISBNOrId() {
 		simulateBeginTransaction();
 		bDao.createBook(testBook1);
 		simulateEndTransaction();
 		testBook1.setISBN(null);
+		try {
+			simulateBeginTransaction();
+			bDao.updateBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+		
+		testBook1.setISBN(Long.MAX_VALUE);
+		testBook1.setId(null);
 		try {
 			simulateBeginTransaction();
 			bDao.updateBook(testBook1);
@@ -222,12 +232,20 @@ public class BookDAOImplTest {
 	}
 
 	@Test
-	public void testDeleteBookWithNull() {
+	public void testDeleteBookWithNullOrNullId() {
 		try {
 			simulateBeginTransaction();
 			bDao.deleteBook(null);
 			simulateEndTransaction();
 		} catch (NullPointerException ex) {
+			assertTrue(true);
+		}
+		testBook1.setId(null);
+		try {
+			simulateBeginTransaction();
+			bDao.updateBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
 			assertTrue(true);
 		}
 		
@@ -247,6 +265,26 @@ public class BookDAOImplTest {
 		simulateEndTransaction();
 		assertFalse(books.contains(testBook1));
 }
+	@Test
+	public void testFindBook(){
+		simulateBeginTransaction();
+		bDao.createBook(testBook1);
+		simulateEndTransaction();
+		simulateBeginTransaction();
+		List<Book> books = bDao.findBookByAuthor(testBook1.getAuthor());
+		simulateEndTransaction();
+		assertTrue(books.contains(testBook1));
+		
+		simulateBeginTransaction();
+		books = bDao.findBookByISBN(testBook1.getISBN());
+		simulateEndTransaction();
+		assertTrue(books.contains(testBook1));
+		
+		simulateBeginTransaction();
+		books = bDao.findBookByTitle(testBook1.getTitle());
+		simulateEndTransaction();
+		assertTrue(books.contains(testBook1));
+	}
 
 	private void simulateBeginTransaction() {
 		em = emf.createEntityManager();
@@ -258,5 +296,6 @@ public class BookDAOImplTest {
 		em.getTransaction().commit();
 		em.close();
 	}
+	
 	
 }

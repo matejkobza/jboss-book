@@ -28,6 +28,7 @@ public interface AuthorDAO {
 	   * @param author author to update
 	   * @return updated author
 	   * @throws NullPointerException if author is null
+	   * @throws IllegalArgumentException if author's id is null
 	   */
 	  Author updateAuthor(Author author);
 
@@ -35,6 +36,7 @@ public interface AuthorDAO {
 	   * Delete author
 	   *
 	   * @param author author which will be deleted
+	   * @throws IllegalArgumentException if author's id is null
 	   */
 	  void deleteAuthor(Author author);
 
