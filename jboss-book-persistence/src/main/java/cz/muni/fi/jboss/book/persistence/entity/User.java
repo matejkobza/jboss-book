@@ -1,6 +1,7 @@
 package cz.muni.fi.jboss.book.persistence.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,13 +19,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "User")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class User implements Serializable {
+public class User implements Serializable, org.picketlink.idm.api.User{
 
   private static final long serialVersionUID = -5392116112798403077L;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "ID_User")
-  private Long id;
+  private String id;
   @Column(name = "username", nullable = false, unique = true)
   private String username;
   @Column(name = "password", nullable = false)
@@ -32,11 +33,11 @@ public class User implements Serializable {
   @Column(name = "name")
   private String name;
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -99,4 +100,9 @@ public class User implements Serializable {
     return "User [id=" + id + ", username=" + username + ", password="
             + password + ", name=" + name;
   }
+
+@Override
+public String getKey() {
+	return username+password;
+}
 }

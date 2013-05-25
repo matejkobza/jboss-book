@@ -37,13 +37,26 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<seam.version>3.1.0.Final</seam.version>
 	</properties>
 
-
-
+	<repositories>
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.jboss.seam</groupId>
+				<artifactId>seam-bom</artifactId>
+				<version>${seam.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
 			<dependency>
 				<groupId>org.jboss.arquillian</groupId>
 				<artifactId>arquillian-bom</artifactId>
@@ -145,13 +158,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-javaee-6.0</artifactId>
-			<version>1.0.0.Final</version>
-			<type>pom</type>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.jboss.as</groupId>
 			<artifactId>jboss-as-arquillian-container-remote</artifactId>
 			<version>7.1.1.Final</version>
@@ -174,6 +180,53 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Seam -->
+		<dependency>
+			<groupId>org.jboss.seam.security</groupId>
+			<artifactId>seam-security-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.seam.security</groupId>
+			<artifactId>seam-security</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<!-- override version to allow Java 7 -->
+			<version>5.3.0.Final</version>
+		</dependency>
+<!-- 
+		<dependency>
+			<groupId>org.jboss.seam.faces</groupId>
+			<artifactId>seam-faces</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.seam.faces</groupId>
+			<artifactId>seam-faces-api</artifactId>
+		</dependency>
+ -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+		<!-- 
+		 <dependency>
+          <groupId>com.ocpsoft</groupId>
+          <artifactId>prettyfaces-jsf2</artifactId>
+          <version>3.3.2</version>
+           
+     </dependency>
+ -->
+
 	</dependencies>
 
 
@@ -185,49 +238,3 @@
 
 
 </project>
-
-
-
-
-
-
-
-
-
-
-<!-- <repositories> <repository> <repository> <id>eclipse</id> <name>Eclipse 
-	Maven Repository</name> <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url> 
-	</repository> <id>Java.Net</id> <url>http://download.java.net/maven/2/</url> 
-	</repository> </repositories> <dependencies> <dependency> <groupId>org.eclipse.persistence</groupId> 
-	<artifactId>javax.persistence</artifactId> <version>2.0.0</version> <scope>provided</scope> 
-	</dependency> <dependency> <groupId>javax.mail</groupId> <artifactId>mail</artifactId> 
-	<version>1.4</version> <scope>provided</scope> </dependency> <dependency> 
-	<groupId>javax</groupId> <artifactId>javaee-api</artifactId> <version>6.0</version> 
-	<scope>provided</scope> </dependency> <dependency> <groupId>cz.muni.fi.jboss-book</groupId> 
-	<artifactId>jboss-book-persistence</artifactId> <version>1.0-SNAPSHOT</version> 
-	<type>jar</type> </dependency> <dependency> <groupId>javax.ejb</groupId> 
-	<artifactId>ejb-api</artifactId> <version>3.0</version> <type>jar</type> 
-	</dependency> <dependency> <groupId>javax.enterprise</groupId> <artifactId>cdi-api</artifactId> 
-	<version>1.1</version> <scope>provided</scope> </dependency> <dependency> 
-	<groupId>javax</groupId> <artifactId>javaee-api</artifactId> <version>6.0</version> 
-	<scope>provided</scope> </dependency> <dependency> <groupId>org.jboss.spec</groupId> 
-	<artifactId>jboss-javaee-6.0</artifactId> <version>1.0.0.Final</version> 
-	<type>pom</type> </dependency> <dependency> <groupId>org.jboss.arquillian.junit</groupId> 
-	<artifactId>arquillian-junit-container</artifactId> <scope>test</scope> </dependency> 
-	<dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> <version>4.8.1</version> 
-	<scope>test</scope> </dependency> <dependency> <groupId>org.jboss.arquillian.container</groupId> 
-	<artifactId>arquillian-weld-ee-embedded-1.1</artifactId> <version>1.0.0.CR3</version> 
-	<scope>test</scope> </dependency> <dependency> <groupId>org.jboss.weld</groupId> 
-	<artifactId>weld-core</artifactId> <version>1.1.5.Final</version> <scope>test</scope> 
-	</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-simple</artifactId> 
-	<version>1.6.4</version> <scope>test</scope> </dependency> <dependency> <groupId>org.jboss.shrinkwrap.descriptors</groupId> 
-	<artifactId>shrinkwrap-descriptors-impl-javaee</artifactId> <scope>test</scope> 
-	</dependency> </dependencies> <properties> <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
-	</properties> <profiles> <profile> <id>arquillian-jbossas-managed</id> <dependencies> 
-	<dependency> <groupId>org.jboss.spec</groupId> <artifactId>jboss-javaee-6.0</artifactId> 
-	<version>1.0.0.Final</version> <type>pom</type> <scope>provided</scope> </dependency> 
-	<dependency> <groupId>org.jboss.as</groupId> <artifactId>jboss-as-arquillian-container-managed</artifactId> 
-	<version>7.1.1.Final</version> <scope>test</scope> </dependency> <dependency> 
-	<groupId>org.jboss.arquillian.protocol</groupId> <artifactId>arquillian-protocol-servlet</artifactId> 
-	<scope>test</scope> </dependency> </dependencies> </profile> </profiles> 
-	</project> -->
