@@ -12,6 +12,16 @@ public class AuthorDAOImpl implements AuthorDAO{
 	
 	@PersistenceContext(unitName="PU")
 	private EntityManager em;
+	
+	
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 
 	@Override
 	public Author createAuthor(Author author) {

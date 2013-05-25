@@ -2,8 +2,11 @@ package cz.muni.fi.jboss.book.persistence.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +32,9 @@ public class BookCopy implements Serializable {
   @Column(nullable = false)
   @Temporal(javax.persistence.TemporalType.DATE)
   private Date purchaseDate;
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "ID_Book")
+  
+  @ManyToOne(targetEntity=Book.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
+  @JoinColumn(name = "ID_Book", referencedColumnName = "ID_Book")
   private Book book;
 
   /**

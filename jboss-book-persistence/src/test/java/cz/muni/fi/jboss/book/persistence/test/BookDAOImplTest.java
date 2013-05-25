@@ -1,180 +1,262 @@
 package cz.muni.fi.jboss.book.persistence.test;
 
+import java.util.List;
+
+import cz.muni.fi.jboss.book.persistence.dao.AuthorDAOImpl;
 import cz.muni.fi.jboss.book.persistence.dao.BookDAOImpl;
+import cz.muni.fi.jboss.book.persistence.entity.Author;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
 import javax.ejb.Local;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * 
  * @author Eduard Tomek
  */
 @Local
 public class BookDAOImplTest {
 
-  BookDAOImpl bDao;
-  Book testBook1;
+	private BookDAOImpl bDao;
+	private Book testBook1;
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("testPU");
+	private EntityManager em;
+	
+	@Before
+	public void setUp(){
+		bDao = new BookDAOImpl();
+		em = emf.createEntityManager();
+		testBook1 = createTestBook1();
+	}
+	
 
-  @Before
-  public void setUp() {
-    bDao = new BookDAOImpl();
-    bDao.setEm(Persistence.createEntityManagerFactory("test-hibernate").createEntityManager());
-    testBook1 = createTestBook1();
-    // testCreateBook would fail otherwise
-    bDao.setManualTransactions(true);
-  }
+	private Book createTestBook1() {
+		Book book = new Book();
+		book.setAuthor(createAuthor());
+		book.setISBN(1000l);
+		book.setTitle("Test bookname1");
+		book.setPages(100);
+		book.setPublisher("Test publisher1");
+		return book;
+	}
+	
+	private Author createAuthor(){
+		Author author = new Author();
+		author.setDescription("test description");
+		author.setFirstName("Karel");
+		author.setSurname("Polacek");
+		
+		AuthorDAOImpl authorDao = new AuthorDAOImpl();
+		authorDao.setEm(emf.createEntityManager());
+		authorDao.getEm().getTransaction().begin();
+		authorDao.createAuthor(author);
+		authorDao.getEm().getTransaction().commit();
+		
+		return author;
+	}
+	@Test
+	public void testCreateNullBook() {
+		try {
+			simulateBeginTransaction();
+			bDao.createBook(null);
+			simulateEndTransaction();
+		} catch (NullPointerException ex) {
+			assertTrue(true);
+		}
+	}
 
-  private Book createTestBook1() {
-    Book book = new Book();
-    book.setAuthor("Test author1");
-    book.setISBN(1000l);
-    book.setTitle("Test bookname1");
-    book.setPages(100);
-    book.setPublisher("Test publisher1");
-    return book;
-  }
+	@Test
+	public void testCreateBookWithNullFields() {
+		Book book = new Book();
+		try {
+			simulateBeginTransaction();
+			bDao.createBook(book);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testCreateNullBook() {
-    try {
-      bDao.createBook(null);
-    } catch (NullPointerException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testCreateBookWithNullISBN() {
+		testBook1.setISBN(null);
+		try {
+			simulateBeginTransaction();
+			bDao.createBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testCreateBookWithNullFields() {
-    Book book = new Book();
-    try {
-      bDao.createBook(book);
-    } catch (IllegalArgumentException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testCreateBookWithNegativeISBN() {
+		testBook1.setISBN(Long.MIN_VALUE);
+		try {
+			simulateBeginTransaction();
+			bDao.createBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testCreateBookWithNullISBN() {
-    testBook1.setISBN(null);
-    try {
-      bDao.createBook(testBook1);
-    } catch (IllegalArgumentException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testCreateBookWithNullPages() {
+		testBook1.setPages(null);
+		try {
+			simulateBeginTransaction();
+			bDao.createBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testCreateBookWithNegativeISBN() {
-    testBook1.setISBN(Long.MIN_VALUE);
-    try {
-      bDao.createBook(testBook1);
-    } catch (IllegalArgumentException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testCreateBookWithNegativePages() {
+		testBook1.setPages(Integer.MIN_VALUE);
+		try {
+			simulateBeginTransaction();
+			bDao.createBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testCreateBookWithNullPages() {
-    testBook1.setPages(null);
-    try {
-      bDao.createBook(testBook1);
-    } catch (IllegalArgumentException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testCreateBook() {
+		simulateBeginTransaction();
+		Book result = null;
+		try{
+			result = bDao.createBook(testBook1);
+    	} catch (Exception e){
+    		e.printStackTrace();
+    	}
+		simulateEndTransaction();
+		assertNotNull(result.getId());
+		assertEquals(testBook1.getISBN(), result.getISBN());
+		assertEquals(testBook1.getPages(), result.getPages());
+		assertEquals(testBook1.getPublisher(), result.getPublisher());
+		assertEquals(testBook1.getTitle(), result.getTitle());
+	}
+	
+	@Test
+	public void testUpdateBookWithNull() {
+		simulateBeginTransaction();
+		bDao.createBook(testBook1);
+		simulateEndTransaction();
+		try {
+			simulateBeginTransaction();
+			bDao.updateBook(null);
+			simulateEndTransaction();
+		} catch (NullPointerException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testCreateBookWithNegativePages() {
-    testBook1.setPages(Integer.MIN_VALUE);
-    try {
-      bDao.createBook(testBook1);
-    } catch (IllegalArgumentException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testUpdateBookWithNullISBN() {
+		simulateBeginTransaction();
+		bDao.createBook(testBook1);
+		simulateEndTransaction();
+		testBook1.setISBN(null);
+		try {
+			simulateBeginTransaction();
+			bDao.updateBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testCreateBook() {
-    Book result = bDao.createBook(testBook1);
-    assertNotNull(result.getId());
-    assertTrue(result.getId() > 0);
-    assertEquals(testBook1.getAuthor(), result.getAuthor());
-    assertEquals(testBook1.getISBN(), result.getISBN());
-    assertEquals(testBook1.getPages(), result.getPages());
-    assertEquals(testBook1.getPublisher(), result.getPublisher());
-    assertEquals(testBook1.getTitle(), result.getTitle());
-  }
+	@Test
+	public void testUpdateBookWithNegativeISBN() {
+		simulateBeginTransaction();
+		bDao.createBook(testBook1);
+		simulateEndTransaction();
+		testBook1.setISBN(Long.MIN_VALUE);
+		try {
+			simulateBeginTransaction();
+			bDao.updateBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testUpdateBookWithNull() {
-    bDao.createBook(testBook1);
-    try {
-      bDao.updateBook(null);
-    } catch (NullPointerException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testUpdateBookWithNegativePages() {
+		simulateBeginTransaction();
+		bDao.createBook(testBook1);
+		simulateEndTransaction();
+		testBook1.setPages(Integer.MIN_VALUE);
+		try {
+			simulateBeginTransaction();
+			bDao.updateBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testUpdateBookWithNullISBN() {
-    bDao.createBook(testBook1);
-    testBook1.setISBN(null);
-    try {
-      bDao.updateBook(testBook1);
-    } catch (IllegalArgumentException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testUpdateBookWithNullPages() {
+		simulateBeginTransaction();
+		bDao.createBook(testBook1);
+		simulateEndTransaction();
+		testBook1.setPages(null);
+		try {
+			simulateBeginTransaction();
+			bDao.updateBook(testBook1);
+			simulateEndTransaction();
+		} catch (IllegalArgumentException ex) {
+			assertTrue(true);
+		}
+	}
 
-  @Test
-  public void testUpdateBookWithNegativeISBN() {
-    bDao.createBook(testBook1);
-    testBook1.setISBN(Long.MIN_VALUE);
-    try {
-      bDao.updateBook(testBook1);
-    } catch (IllegalArgumentException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testDeleteBookWithNull() {
+		try {
+			simulateBeginTransaction();
+			bDao.deleteBook(null);
+			simulateEndTransaction();
+		} catch (NullPointerException ex) {
+			assertTrue(true);
+		}
+		
+	}
 
-  @Test
-  public void testUpdateBookWithNegativePages() {
-    bDao.createBook(testBook1);
-    testBook1.setPages(Integer.MIN_VALUE);
-    try {
-      bDao.updateBook(testBook1);
-    } catch (IllegalArgumentException ex) {
-      assertTrue(true);
-    }
-  }
+	@Test
+	public void testDeleteBook() {
+		simulateBeginTransaction();
+		testBook1 = bDao.createBook(testBook1);
+		simulateEndTransaction();	
+		simulateBeginTransaction();
+		
+		bDao.deleteBook(testBook1);
+		simulateEndTransaction();		
+		simulateBeginTransaction();
+		List<Book> books = bDao.findAllBooks(); 
+		simulateEndTransaction();
+		assertFalse(books.contains(testBook1));
+}
 
-  @Test
-  public void testUpdateBookWithNullPages() {
-    bDao.createBook(testBook1);
-    testBook1.setPages(null);
-    try {
-      bDao.updateBook(testBook1);
-    } catch (IllegalArgumentException ex) {
-      assertTrue(true);
-    }
-  }
+	private void simulateBeginTransaction() {
+		em = emf.createEntityManager();
+		bDao.setEm(em);
+		em.getTransaction().begin();
+	}
 
-  @Test
-  public void testDeleteBookWithNull() {
-    try {
-      bDao.deleteBook(null);
-    } catch (NullPointerException ex) {
-      assertTrue(true);
-    }
-  }
-
-  @Test
-  public void testDeleteBook() {
-    bDao.createBook(testBook1);
-    bDao.deleteBook(testBook1);
-    assertTrue(bDao.findAllBooks().isEmpty());
-  }
+	private void simulateEndTransaction() {
+		em.getTransaction().commit();
+		em.close();
+	}
+	
 }
