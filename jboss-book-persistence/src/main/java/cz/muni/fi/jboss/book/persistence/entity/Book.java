@@ -3,8 +3,10 @@ package cz.muni.fi.jboss.book.persistence.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.IndexColumn;
 
 /**
  * Class Book
@@ -24,7 +28,7 @@ public class Book implements Serializable {
 
   private static final long serialVersionUID = -3009934453727550437L;
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "ID_Book", nullable = false)
   private Long id;
   @Column(name = "name")
@@ -35,13 +39,18 @@ public class Book implements Serializable {
   private Integer pages;
   @Column(name = "ISBN", nullable = false)
   private Long ISBN;
-  @OneToMany
-  @JoinColumn(name = "ID_BookCopy")
+  
+  //@OneToMany(mappedBy= "book", targetEntity=BookCopy.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
+  //@JoinColumn(name = "ID_BookCopy")
+  @OneToMany(targetEntity=BookCopy.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
+  @IndexColumn(name="BookCopy_ID")
   private List<BookCopy> bookCopies;
   
-  @ManyToOne
-  @JoinColumn(name = "ID_Author")
+  @ManyToOne(targetEntity=Author.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
+  @JoinColumn(name = "ID_Author", referencedColumnName = "ID_Author")
   private Author author;
+
+  
   
   public List<BookCopy> getBookCopies() {
     return bookCopies;
@@ -50,6 +59,15 @@ public class Book implements Serializable {
   public void setBookCopies(List<BookCopy> bookCopies) {
     this.bookCopies = bookCopies;
   }
+  
+public Author getAuthor() {
+	return author;
+}
+
+public void setAuthor(Author author) {
+	this.author = author;
+}
+
 
   /**
    * @return the id
@@ -118,46 +136,37 @@ public class Book implements Serializable {
    * @see java.lang.Object#hashCode()
    */
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((ISBN == null) ? 0 : ISBN.hashCode());
-    return result;
-  }
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
 
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (getClass() != obj.getClass()) {
-      return false;
-    }
-    Book other = (Book) obj;
-    if (ISBN == null) {
-      if (other.ISBN != null) {
-        return false;
-      }
-    } else if (!ISBN.equals(other.ISBN)) {
-      return false;
-    }
-    return true;
-  }
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
 
   @Override
   public String toString() {
-    return "Book [id=" + id + ", name=" + title + ", author=" + author
+    return "Book [id=" + id + ", name=" + title + ", author=" //+ author
             + ", publisher=" + publisher + ", pages=" + pages + ", ISBN="
             + ISBN + "]";
   }
+
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	return result;
+}
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Book other = (Book) obj;
+	if (id == null) {
+		if (other.id != null)
+			return false;
+	} else if (!id.equals(other.id))
+		return false;
+	return true;
+}
 }

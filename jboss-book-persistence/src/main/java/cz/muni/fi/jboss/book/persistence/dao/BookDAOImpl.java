@@ -13,7 +13,6 @@ public class BookDAOImpl implements BookDAO {
 
   @PersistenceContext(unitName = "PU")
   private EntityManager em;
-  private boolean manualTransactions = false;
 
   public EntityManager getEm() {
     return em;
@@ -33,15 +32,8 @@ public class BookDAOImpl implements BookDAO {
       throw new IllegalArgumentException(
               "pages or ISBN is null or negative");
     }
-
-    if (manualTransactions) {
-      em.getTransaction().begin();
-    }
     em.persist(book);
     em.flush();
-    if (manualTransactions) {
-      em.getTransaction().commit();
-    }
     return book;
   }
 
@@ -70,16 +62,10 @@ public class BookDAOImpl implements BookDAO {
     if (book == null) {
       throw new NullPointerException("book is null");
     }
-    if (manualTransactions) {
-      em.getTransaction().begin();
-    }
-    em.remove(book);
+    Book dbBook = findBookById(book.getId());
+    em.remove(dbBook);
     em.flush();
-    if (manualTransactions) {
-
-      em.getTransaction().commit();
-    }
-  }
+}
 
   @Override
   public Book findBookById(Long id) {
@@ -123,13 +109,5 @@ public class BookDAOImpl implements BookDAO {
   @Override
   public List<Book> findAllBooks() {
     return em.createQuery("SELECT b FROM Book b").getResultList();
-  }
-
-  public boolean isManualTransactions() {
-    return manualTransactions;
-  }
-
-  public void setManualTransactions(boolean manualTransactions) {
-    this.manualTransactions = manualTransactions;
   }
 }

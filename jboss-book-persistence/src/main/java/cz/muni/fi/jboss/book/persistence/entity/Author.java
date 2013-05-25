@@ -3,14 +3,18 @@ package cz.muni.fi.jboss.book.persistence.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.IndexColumn;
 
 /**
  * Class Author
@@ -37,8 +41,10 @@ public class Author implements Serializable {
   @Column(name = "description")
   private String description;
   
-  @OneToMany
-  @JoinColumn(name = "ID_Book")
+  
+  @OneToMany(targetEntity=Book.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
+  //@JoinColumn(name = "ID_Book")
+  @IndexColumn(name = "Book_ID")
   private List<Book> books;
   
   public Long getId() {
@@ -113,7 +119,7 @@ public class Author implements Serializable {
 	@Override
 	public String toString() {
 		return "Author [id=" + id + ", firstName=" + firstName + ", surname="
-				+ surname + ", description=" + description + ", books=" + books
+				+ surname + ", description=" + description + ", books=" //+ books
 				+ "]";
 	}
 
