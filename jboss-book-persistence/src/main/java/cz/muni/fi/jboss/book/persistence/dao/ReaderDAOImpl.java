@@ -56,7 +56,7 @@ public class ReaderDAOImpl implements ReaderDAO {
   }
 
   @Override
-  public Reader findReaderById(Long id) {
+  public Reader findReaderById(String id) {
     if (id == null) {
       throw new NullPointerException("id is null");
     }

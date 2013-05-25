@@ -44,7 +44,7 @@ public interface ReaderDAO {
    * @return reader with given id
    * @throws NullPointerException if id is null
    */
-  Reader findReaderById(Long id);
+  Reader findReaderById(String id);
 
   /**
    * Find reader by username
