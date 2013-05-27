@@ -3,7 +3,9 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
   <ui:composition>
     <!--<div class="languages_box">
               <span class="red">Languages:</span>
@@ -20,12 +22,35 @@
 
 
     <div class="cart">
-      <div class="title"><span class="title_icon"><h:graphicImage library="images" name="cart.gif" /></span>My cart</div>
-      <div class="home_cart_content">
-        3 x items | <span class="red">TOTAL: 100$</span>
-      </div>
-      <a href="cart.html" class="view_cart">view cart</a>
+      <div class="title display-block">#{msgs['account']}</div>
+      <p:panel styleClass="home_cart_content" id="accountPanel">
+        <h:panelGrid rendered="#{!loginBean.authenticated}" columns="2" styleClass="display-block">
+          <h:outputLabel for="" value="#{msgs['login']}" />          
+          <h:inputText />
 
+          <h:outputLabel for="" value="#{msgs['password']}" />
+          <h:inputSecret />
+
+          <h:commandButton value="#{msgs['login']}" >
+            <f:ajax event="click" listener="#{loginBean.login}" render="accountPanel" />
+          </h:commandButton>
+          <h:column>
+            <h:outputText value="#{msgs['dontHaveAccount']}" />&nbsp;
+            <h:commandLink value="#{msgs['signUp']}" action="registration" />
+          </h:column>
+        </h:panelGrid>
+        <p:panel rendered="#{loginBean.authenticated}" styleClass="accountMenu">
+          <h:commandLink action="newReservation" value="#{msgs['newReservation']}" />
+          <h:commandLink action="borrowed" value="#{msgs['borrowed']}" />
+          <hr />
+          <h:commandLink action="accountSettings" value="#{msgs['accountSettings']}" />
+          <h:commandLink action="systemSettings" value="#{msgs['systemSettings']}" />
+          <hr />
+          <h:commandLink value="#{msgs['logout']}" >
+            <f:ajax event="click" listener="#{loginBean.logout}" render="accountPanel" />
+          </h:commandLink>
+        </p:panel>
+      </p:panel>
     </div>
     <div class="title"><span class="title_icon"><h:graphicImage library="images" name="bullet3.gif" alt="" title="" /></span>About Our Store</div> 
     <div class="about">

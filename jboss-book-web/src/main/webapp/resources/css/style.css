@@ -136,6 +136,7 @@ span.colors{
   float:left;
   font-size:19px;
   margin:10px 0 10px 0;
+  display: block;
 }
 span.title_icon{
   float:left;
@@ -354,7 +355,7 @@ ul.demolayout a.active {
 .cart{
   width:337px;
   float:left;
-  height:40px;
+  
   margin:10px 0 10px 0;
   background:url('#{resource["images/border.gif"]}') no-repeat bottom center;
   padding:0 0 30px 0;
@@ -363,7 +364,7 @@ ul.demolayout a.active {
   float:left;
   padding:3px;
   border:1px #eeedee solid;
-  margin:10px 0 0 15px;
+  margin:10px 0 15px 7px;
 }
 a.view_cart{
   display:block;
@@ -571,4 +572,22 @@ div.pagination span.disabled {
 }
 .display-block {
   display: block;
+}
+.no-padding {
+  padding: 0px;
+}
+.no-margin {
+  margin: 0px;
+}
+.accountMenu {
+  border: 0px;
+  background: none;
+  width: 285px;
+}
+.accountMenu a {
+  display: block;
+}
+hr {
+  border: 0px;
+  border-bottom: 1px #AFAFAF solid;
 }
