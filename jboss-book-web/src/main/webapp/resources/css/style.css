@@ -586,6 +586,10 @@ div.pagination span.disabled {
 }
 .accountMenu a {
   display: block;
+  text-decoration: none;
+}
+.accountMenu a:hover {
+  text-decoration: underline;
 }
 hr {
   border: 0px;

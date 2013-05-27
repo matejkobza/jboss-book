@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
 
   <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                  template="templates/template.xhtml">
+                  template="templates/template2columns.xhtml">
     
-    <ui:define name="content">
-      <h1>#{msgs['registration']}</h1>
-      registration form
+    <ui:define name="leftContent">
+      <h1>#{msgs["registration"]}</h1>
+      <h:panelGrid columns="2">
+        <h:outputLabel for="fullname" value="#{msgs['fullname']}" />
+        <h:inputText id="fullname" binding="#{registrationBean.fullname}" />
+        
+        <h:outputLabel for="username" value="#{msgs['login']}" />
+        <h:inputText id="username" binding="#{registrationBean.username}" />
+        
+        <h:outputLabel for="password" value="#{msgs['password']}" />
+        <h:inputSecret id="password" binding="#{registrationBean.password}" />
+        
+        <h:outputLabel for="password2" value="#{msgs['password2']}" />
+        <h:inputSecret id="password2" binding="#{registrationBean.password2}" />
+        
+        <h:column>&nbsp;</h:column>
+        <h:commandButton value="#{msgs['register']}" />
+        
+      </h:panelGrid>
     </ui:define>
     
   </ui:composition>
