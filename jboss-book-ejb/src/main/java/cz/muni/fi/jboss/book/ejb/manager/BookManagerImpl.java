@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAO;
 import cz.muni.fi.jboss.book.persistence.dao.BookDAO;
+import cz.muni.fi.jboss.book.persistence.entity.Author;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 
@@ -56,7 +57,11 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public List<Book> findBookByAuthor(String author) {
+	public List<Book> findBookByAuthor(String firstName, String surname) {
+		Author author = new Author();
+		author.setFirstName(firstName);
+		author.setSurname(surname);
+		
 		return bookDao.findBookByAuthor(author);
 	}
 
