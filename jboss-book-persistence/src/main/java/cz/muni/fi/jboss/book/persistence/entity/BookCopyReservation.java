@@ -33,11 +33,10 @@ public class BookCopyReservation implements Serializable {
   @Column(name = "ID_BookCopyReservation")
   private Long id;
 
-  /*
   @ManyToOne
   @JoinColumn(name = "ID_User")
   private User user;
-  */
+
   @Enumerated(EnumType.ORDINAL)
   @Column(nullable = false)
   private ReservationStateEnum reservationState;
@@ -63,7 +62,6 @@ public class BookCopyReservation implements Serializable {
     this.bookCopy = bookCopy;
   }
 
-  /*
   public User getUser() {
     return user;
   }
@@ -71,7 +69,7 @@ public class BookCopyReservation implements Serializable {
   public void setUser(User user) {
     this.user = user;
   }
-*/
+
   public ReservationStateEnum getReservationState() {
     return reservationState;
   }
