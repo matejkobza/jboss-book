@@ -51,6 +51,6 @@ public class RegistrationBean implements Serializable {
   }
 
   public void register() {
-    
+    //@TODO implementation
   }
 }
