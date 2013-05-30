@@ -49,4 +49,14 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
+	@Override
+	public boolean authenticate(User user) {
+		User foundUser = em.find(User.class, user.getUsername());
+		if (foundUser == null)
+			return false;
+		return user.getPassword().equals(user.getPassword());
+	}
+
+
+
 }

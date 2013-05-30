@@ -21,4 +21,6 @@ public interface UserDAO {
   User findUserByUsername(String username);
 
   List<User> findAllUsers();
+  
+  boolean authenticate(User user);
 }

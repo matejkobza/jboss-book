@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
-import cz.muni.fi.jboss.book.ejb.security.RegistrationManager;
+import cz.muni.fi.jboss.book.ejb.security.AccountManager;
 import cz.muni.fi.jboss.book.persistence.entity.User;
 
 /**
@@ -28,8 +28,8 @@ public class RegistrationBean implements Serializable {
   
   private User user;
   
-  @EJB(name="RegistrationManager")
-  private RegistrationManager registrationManager;
+  @EJB(name="AccountManager")
+  private AccountManager accountManager;
 
   public String getPassword2() {
     return password2;
@@ -67,7 +67,7 @@ public class RegistrationBean implements Serializable {
   }
 
   public void register() {
-    registrationManager.register(user);
+    accountManager.register(user);
   }
   
 	@PostConstruct

@@ -6,8 +6,6 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.seam.international.status.Messages;
-
 import cz.muni.fi.jboss.book.persistence.dao.UserDAO;
 import cz.muni.fi.jboss.book.persistence.entity.User;
 
@@ -15,13 +13,10 @@ import cz.muni.fi.jboss.book.persistence.entity.User;
 @Named("registrationManager")
 @Stateless
 @Remote
-public class RegistrationManagerImpl implements RegistrationManager {
+public class AccountManagerImpl implements AccountManager {
 	
 	@Inject
 	private UserDAO userDao;
-	
-	@Inject
-	Messages messages;
 	
 	/* (non-Javadoc)
 	 * @see cz.muni.fi.jboss.book.ejb.security.RegistrationManager#register(cz.muni.fi.jboss.book.persistence.entity.User)
@@ -29,6 +24,11 @@ public class RegistrationManagerImpl implements RegistrationManager {
 	@Override
 	public void register(User user) {
 		userDao.createUser(user);
+	}
+
+	@Override
+	public boolean login(User user) {
+		return userDao.authenticate(user);
 	}
 	
 }
