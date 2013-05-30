@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import cz.muni.fi.jboss.book.persistence.ReservationStateEnum;
+import cz.muni.fi.jboss.book.persistence.ReservationState;
 
 /**
  *
@@ -33,16 +33,18 @@ public class BookCopyReservation implements Serializable {
   @Column(name = "ID_BookCopyReservation")
   private Long id;
 
-  @ManyToOne
-  @JoinColumn(name = "ID_User")
+  
+  @ManyToOne(targetEntity=User.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
+  @JoinColumn(name = "ID_User", referencedColumnName = "ID_User")
   private User user;
+  
 
   @Enumerated(EnumType.ORDINAL)
   @Column(nullable = false)
-  private ReservationStateEnum reservationState;
+  private ReservationState reservationState;
   
-  @OneToOne(targetEntity=BookCopy.class, fetch= FetchType.EAGER,
-		  cascade=CascadeType.REFRESH, optional = false)
+  @ManyToOne(targetEntity=BookCopy.class, fetch= FetchType.EAGER,
+		  cascade=CascadeType.REFRESH)
   @JoinColumn(name = "ID_BookCopy", referencedColumnName = "ID_BookCopy")
   private BookCopy bookCopy;
 
@@ -62,6 +64,7 @@ public class BookCopyReservation implements Serializable {
     this.bookCopy = bookCopy;
   }
 
+  
   public User getUser() {
     return user;
   }
@@ -69,12 +72,12 @@ public class BookCopyReservation implements Serializable {
   public void setUser(User user) {
     this.user = user;
   }
-
-  public ReservationStateEnum getReservationState() {
+  
+  public ReservationState getReservationState() {
     return reservationState;
   }
 
-  public void setReservationState(ReservationStateEnum reservationState) {
+  public void setReservationState(ReservationState reservationState) {
     this.reservationState = reservationState;
   }
 
@@ -102,7 +105,7 @@ public class BookCopyReservation implements Serializable {
 
   @Override
   public String toString() {
-    return "BookCopyReservation{" + "id=" + id + ", bookCopy=" + bookCopy + ", user="// + user 
+    return "BookCopyReservation{" + "id=" + id + ", bookCopy=" + bookCopy + ", user=" + user 
     		+ ", reservationState=" + reservationState + '}';
   }
 }

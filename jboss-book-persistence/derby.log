@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Sat May 25 19:15:50 CEST 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-013e-dcb0-6cbb-0000009987d8 
-on database directory memory:/home/edee/git/jboss-book/jboss-book-persistence/unittestdb2 with class loader sun.misc.Launcher$AppClassLoader@113dd59 
+Thu May 30 16:46:35 CEST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-013e-f5e7-9450-00000079db88 
+on database directory memory:/home/edee/git/jboss-book/jboss-book-persistence/unittestdb2 with class loader sun.misc.Launcher$AppClassLoader@26807f 
 Loaded from file:/home/edee/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_07-b10
