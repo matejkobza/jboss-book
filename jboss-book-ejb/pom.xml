@@ -109,6 +109,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.jboss.solder</groupId>
+			<artifactId>solder-impl</artifactId>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>solder-api</artifactId>
+					<groupId>org.jboss.solder</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 			<version>2.1.21</version>
@@ -181,10 +193,8 @@
 		</dependency>
 
 		<!-- Seam -->
-		<!-- <dependency>
-			<groupId>org.jboss.seam.security</groupId>
-			<artifactId>seam-security-api</artifactId>
-		</dependency>-->
+		<!-- <dependency> <groupId>org.jboss.seam.security</groupId> <artifactId>seam-security-api</artifactId> 
+			</dependency> -->
 
 		<dependency>
 			<groupId>org.jboss.seam.security</groupId>
@@ -203,29 +213,15 @@
 			<!-- override version to allow Java 7 -->
 			<version>5.3.0.Final</version>
 		</dependency>
-<!-- 
-		<dependency>
-			<groupId>org.jboss.seam.faces</groupId>
-			<artifactId>seam-faces</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.seam.faces</groupId>
-			<artifactId>seam-faces-api</artifactId>
-		</dependency>
- -->
+		<!-- <dependency> <groupId>org.jboss.seam.faces</groupId> <artifactId>seam-faces</artifactId> 
+			</dependency> <dependency> <groupId>org.jboss.seam.faces</groupId> <artifactId>seam-faces-api</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
-		<!-- 
-		 <dependency>
-          <groupId>com.ocpsoft</groupId>
-          <artifactId>prettyfaces-jsf2</artifactId>
-          <version>3.3.2</version>
-           
-     </dependency>
- -->
+		<!-- <dependency> <groupId>com.ocpsoft</groupId> <artifactId>prettyfaces-jsf2</artifactId> 
+			<version>3.3.2</version> </dependency> -->
 
 	</dependencies>
 
