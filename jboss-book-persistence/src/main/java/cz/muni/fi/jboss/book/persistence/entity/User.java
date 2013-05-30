@@ -26,12 +26,10 @@ import cz.muni.fi.jboss.book.persistence.UserRole;
  */
 @Entity
 @Table(name = "LibraryUser")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable, org.picketlink.idm.api.User{
 
   private static final long serialVersionUID = -5392116112798403077L;
   @Id
-  //@GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "ID_User")
   private String username;
   @Column(name = "password", nullable = false)
@@ -61,7 +59,16 @@ public String getUsername() {
     this.username = username;
   }
 
-  public String getPassword() {
+  public List<BookCopyReservation> getBookCopyReservations() {
+	return bookCopyReservations;
+}
+
+public void setBookCopyReservations(
+		List<BookCopyReservation> bookCopyReservations) {
+	this.bookCopyReservations = bookCopyReservations;
+}
+
+public String getPassword() {
     return password;
   }
 
@@ -113,5 +120,11 @@ public String getKey() {
 public String getId() {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+@Override
+public String toString() {
+	return "User [username=" + username + ", password=" + password + ", name="
+			+ name + ", userRole=" + userRole + "]";
 }
 }

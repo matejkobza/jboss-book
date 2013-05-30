@@ -12,41 +12,50 @@ public class UserDAOImpl implements UserDAO {
 	@PersistenceContext(name = "PU")
 	private EntityManager em;
 	
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
 	@Override
 	public User createUser(User user) {
-		
-		
-		return null;
+
+		em.persist(user);
+		em.flush();
+		return user;
 	}
 
 	@Override
 	public User updateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO What if user can't be found?
+		User dbUser = findUserByUsername(user.getUsername());
+		dbUser.setName(user.getName());
+		dbUser.setPassword(user.getPassword());
+		// TODO Is user role updatable?
+		dbUser.setUserRole(user.getUserRole());
+		em.persist(dbUser);
+		return dbUser;
 	}
 
 	@Override
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public User findUserById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		User dbUser = findUserByUsername(user.getUsername());
+		em.remove(dbUser);
 	}
 
 	@Override
 	public User findUserByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return em.find(User.class, username);
+		
 	}
 
 	@Override
 	public List<User> findAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createQuery("SELECT u FROM User u").getResultList();
 	}
-
 }
