@@ -1,8 +1,16 @@
 package cz.muni.fi.jboss.book.web;
 
 import java.io.Serializable;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.enterprise.inject.Produces;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+
+import cz.muni.fi.jboss.book.ejb.security.RegistrationManager;
+import cz.muni.fi.jboss.book.persistence.entity.User;
 
 /**
  *
@@ -17,6 +25,11 @@ public class RegistrationBean implements Serializable {
   private String username;
   private String password;
   private String password2;
+  
+  private User user;
+  
+  @EJB(name="RegistrationManager")
+  private RegistrationManager registrationManager;
 
   public String getPassword2() {
     return password2;
@@ -32,6 +45,7 @@ public class RegistrationBean implements Serializable {
 
   public void setPassword(String password) {
     this.password = password;
+    user.setPassword(password);
   }
 
   public String getUsername() {
@@ -40,6 +54,7 @@ public class RegistrationBean implements Serializable {
 
   public void setUsername(String username) {
     this.username = username;
+    user.setUsername(username);
   }
 
   public String getFullname() {
@@ -48,9 +63,21 @@ public class RegistrationBean implements Serializable {
 
   public void setFullname(String name) {
     this.fullname = name;
+    user.setName(name);
   }
 
   public void register() {
-    //@TODO implementation
+    registrationManager.register(user);
   }
+  
+	@PostConstruct
+	public void initialize() {
+		user = new User();
+	}
+	
+	@Produces
+	@Named
+	public User getNewUser() {
+		return user;
+	}
 }

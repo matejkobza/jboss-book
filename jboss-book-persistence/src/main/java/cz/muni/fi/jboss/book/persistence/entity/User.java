@@ -17,16 +17,13 @@ import javax.persistence.Table;
  * @author Eduard Tomek
  */
 @Entity
-@Table(name = "User")
+@Table(name = "UserTable")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable, org.picketlink.idm.api.User{
 
   private static final long serialVersionUID = -5392116112798403077L;
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ID_User")
-  private String id;
-  @Column(name = "username", nullable = false, unique = true)
+  @Column(name = "username", nullable = false)
   private String username;
   @Column(name = "password", nullable = false)
   private String password;
@@ -34,11 +31,7 @@ public class User implements Serializable, org.picketlink.idm.api.User{
   private String name;
 
   public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
+    return username;
   }
 
   public String getUsername() {
@@ -65,41 +58,32 @@ public class User implements Serializable, org.picketlink.idm.api.User{
     this.name = name;
   }
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((id == null) ? 0 : id.hashCode());
-    return result;
-  }
+  
 
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (getClass() != obj.getClass()) {
-      return false;
-    }
-    User other = (User) obj;
-    if (id == null) {
-      if (other.id != null) {
-        return false;
-      }
-    } else if (!id.equals(other.id)) {
-      return false;
-    }
-    return true;
-  }
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((username == null) ? 0 : username.hashCode());
+	return result;
+}
 
-  @Override
-  public String toString() {
-    return "User [id=" + id + ", username=" + username + ", password="
-            + password + ", name=" + name;
-  }
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	User other = (User) obj;
+	if (username == null) {
+		if (other.username != null)
+			return false;
+	} else if (!username.equals(other.username))
+		return false;
+	return true;
+}
 
 @Override
 public String getKey() {

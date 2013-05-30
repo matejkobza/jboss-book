@@ -2,14 +2,21 @@ package cz.muni.fi.jboss.book.persistence.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import cz.muni.fi.jboss.book.persistence.entity.User;
 
 public class UserDAOImpl implements UserDAO {
 
+	@PersistenceContext(unitName = "PU")
+	private EntityManager em;
+
 	@Override
 	public User createUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(user);
+		em.flush();
+		return user;
 	}
 
 	@Override

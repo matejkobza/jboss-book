@@ -11,19 +11,19 @@
       <h1>#{msgs["registration"]}</h1>
       <h:panelGrid columns="2">
         <h:outputLabel for="fullname" value="#{msgs['fullname']}" />
-        <h:inputText id="fullname" binding="#{registrationBean.fullname}" />
+        <h:inputText id="fullname" value="#{registrationBean.fullname}" />
         
         <h:outputLabel for="username" value="#{msgs['login']}" />
-        <h:inputText id="username" binding="#{registrationBean.username}" />
+        <h:inputText id="username" value="#{registrationBean.username}" />
         
         <h:outputLabel for="password" value="#{msgs['password']}" />
-        <h:inputSecret id="password" binding="#{registrationBean.password}" />
+        <h:inputSecret id="password" value="#{registrationBean.password}" />
         
         <h:outputLabel for="password2" value="#{msgs['password2']}" />
-        <h:inputSecret id="password2" binding="#{registrationBean.password2}" />
+        <h:inputSecret id="password2" value="#{registrationBean.password2}" />
         
         <h:column>&nbsp;</h:column>
-        <h:commandButton value="#{msgs['register']}" />
+        <h:commandButton value="#{msgs['register']}" action="#{registrationBean.register}" />
         
       </h:panelGrid>
     </ui:define>
