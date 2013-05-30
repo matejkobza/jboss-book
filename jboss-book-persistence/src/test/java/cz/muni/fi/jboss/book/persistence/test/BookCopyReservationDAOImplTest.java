@@ -31,7 +31,7 @@ import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
  */
 public class BookCopyReservationDAOImplTest{
 	private BookCopyReservationDAOImpl bDao;
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("testPU");
 	private EntityManager em;
 	private BookCopyReservation testBookCopyReservation1;
 	
