@@ -6,6 +6,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import cz.muni.fi.jboss.book.persistence.UserRole;
 import cz.muni.fi.jboss.book.persistence.dao.UserDAO;
 import cz.muni.fi.jboss.book.persistence.entity.User;
 
@@ -23,6 +24,8 @@ public class AccountManagerImpl implements AccountManager {
 	 */
 	@Override
 	public void register(User user) {
+		// TODO - set to manager if there's no manager
+		user.setUserRole(UserRole.READER);
 		userDao.createUser(user);
 	}
 
