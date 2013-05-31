@@ -12,7 +12,7 @@ package cz.muni.fi.jboss.book.persistence;
  * @author Eduard Tomek
  *
  */
-public enum ReservationStateEnum {
+public enum ReservationState {
 	
 	NEW, READY, LENT, RETURNED
 

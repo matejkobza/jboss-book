@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import cz.muni.fi.jboss.book.persistence.ReservationStateEnum;
+import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
 import cz.muni.fi.jboss.book.persistence.entity.User;
@@ -48,7 +48,8 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
       throw new NullPointerException("bookCopyReservation is null");
     }
     if (bookCopyReservation.getBookCopy() == null
-            //|| bookCopyReservation.getUser() == null
+            // TODO opravit testy tak abych to mohl odkomentovat
+    		//|| bookCopyReservation.getUser() == null
     		|| bookCopyReservation.getId() == null
             || bookCopyReservation.getReservationState() == null) {
       throw new IllegalArgumentException("book copy, user or reservation state is null");
@@ -107,7 +108,7 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
   }
 
   @Override
-  public List<BookCopyReservation> findBookCopyReservationsByReservationState(ReservationStateEnum rS) {
+  public List<BookCopyReservation> findBookCopyReservationsByReservationState(ReservationState rS) {
     if (rS == null) {
       throw new NullPointerException("reservation state is null");
     }
@@ -125,7 +126,7 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
   }
 
 	@Override
-	public List<BookCopyReservation> findBookCopyReservations(User user, ReservationStateEnum rS) {
+	public List<BookCopyReservation> findBookCopyReservations(User user, ReservationState rS) {
 		if (user == null) {
 			throw new NullPointerException("user is null");
 		}

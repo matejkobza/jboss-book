@@ -2,6 +2,7 @@ package cz.muni.fi.jboss.book.persistence.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,9 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+
+import org.hibernate.annotations.IndexColumn;
 
 /**
  * Class BookCopy
@@ -38,10 +42,11 @@ public class BookCopy implements Serializable {
   @JoinColumn(name = "ID_Book", referencedColumnName = "ID_Book")
   private Book book;
 
-  @OneToOne(targetEntity=BookCopyReservation.class, fetch= FetchType.EAGER,
-		  cascade=CascadeType.REFRESH, optional = true)
-  @JoinColumn(name = "ID_BookCopyReservation", referencedColumnName = "ID_BookCopyReservation")
-  private BookCopyReservation bookCopyReservation;
+  @OneToMany(targetEntity=BookCopyReservation.class, fetch= FetchType.EAGER,
+		  cascade=CascadeType.REFRESH)
+  //@JoinColumn(name = "ID_BookCopyReservation", referencedColumnName = "ID_BookCopyReservation")
+  @IndexColumn(name = "ID_BookCopyReservation")
+  private List<BookCopyReservation> bookCopyReservations;
   /**
    * @return the id
    */

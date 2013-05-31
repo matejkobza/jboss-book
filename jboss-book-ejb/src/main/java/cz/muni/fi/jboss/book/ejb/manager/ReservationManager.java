@@ -2,17 +2,17 @@ package cz.muni.fi.jboss.book.ejb.manager;
 
 import java.util.List;
 
-import cz.muni.fi.jboss.book.persistence.ReservationStateEnum;
+import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
-import cz.muni.fi.jboss.book.persistence.entity.Reader;
+import cz.muni.fi.jboss.book.persistence.entity.User;
 
 public interface ReservationManager {
 
 	/**
 	 * Used by Reader for book reservations
 	 */
-	public BookCopyReservation reserveBook(BookCopy bookCopy, Reader reader);
+	public BookCopyReservation reserveBook(BookCopy bookCopy, User reader);
 
 	/**
 	 * Used by Librarian when the reserved book is prepared
@@ -36,6 +36,6 @@ public interface ReservationManager {
 	 *            Limits the returned reservations to those with the specific
 	 *            Reader. If null, no such filtering is done.
 	 */
-	public List<BookCopyReservation> getBookCopyReservations(Reader reader, ReservationStateEnum state);
+	public List<BookCopyReservation> getBookCopyReservations(User reader, ReservationState state);
 
 }

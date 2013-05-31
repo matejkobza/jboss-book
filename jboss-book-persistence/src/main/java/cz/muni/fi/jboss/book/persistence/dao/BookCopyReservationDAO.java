@@ -2,7 +2,7 @@ package cz.muni.fi.jboss.book.persistence.dao;
 
 import java.util.List;
 
-import cz.muni.fi.jboss.book.persistence.ReservationStateEnum;
+import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
 import cz.muni.fi.jboss.book.persistence.entity.User;
@@ -77,9 +77,9 @@ public interface BookCopyReservationDAO {
    * @param rS enumeration reservation state
    * @return all reservation with given reservation state
    */
-  List<BookCopyReservation> findBookCopyReservationsByReservationState(ReservationStateEnum rS);
+  List<BookCopyReservation> findBookCopyReservationsByReservationState(ReservationState rS);
   
-  List<BookCopyReservation> findBookCopyReservations(User user, ReservationStateEnum rS);
+  List<BookCopyReservation> findBookCopyReservations(User user, ReservationState rS);
 
   /**
    * Find all book copy reservations

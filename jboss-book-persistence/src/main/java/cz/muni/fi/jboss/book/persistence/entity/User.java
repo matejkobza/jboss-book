@@ -1,15 +1,19 @@
 package cz.muni.fi.jboss.book.persistence.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.IndexColumn;
+
+import cz.muni.fi.jboss.book.persistence.UserRole;
 
 /**
  * Class User
@@ -17,24 +21,38 @@ import javax.persistence.Table;
  * @author Eduard Tomek
  */
 @Entity
-@Table(name = "UserTable")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "LibraryUser")
 public class User implements Serializable, org.picketlink.idm.api.User{
 
   private static final long serialVersionUID = -5392116112798403077L;
   @Id
-  @Column(name = "username", nullable = false)
+  @Column(name = "ID_User")
   private String username;
   @Column(name = "password", nullable = false)
   private String password;
   @Column(name = "name")
   private String name;
+  @Column(name = "userRole")
+  private UserRole userRole;
+  
+  @OneToMany(targetEntity=BookCopyReservation.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
+  @IndexColumn(name="BookCopyReservation_ID")
+  private List<BookCopyReservation> bookCopyReservations;
+
 
   public String getId() {
     return username;
   }
 
-  public String getUsername() {
+  public UserRole getUserRole() {
+	return userRole;
+}
+
+public void setUserRole(UserRole userRole) {
+	this.userRole = userRole;
+}
+
+public String getUsername() {
     return username;
   }
 
@@ -42,7 +60,16 @@ public class User implements Serializable, org.picketlink.idm.api.User{
     this.username = username;
   }
 
-  public String getPassword() {
+  public List<BookCopyReservation> getBookCopyReservations() {
+	return bookCopyReservations;
+}
+
+public void setBookCopyReservations(
+		List<BookCopyReservation> bookCopyReservations) {
+	this.bookCopyReservations = bookCopyReservations;
+}
+
+public String getPassword() {
     return password;
   }
 
@@ -58,7 +85,6 @@ public class User implements Serializable, org.picketlink.idm.api.User{
     this.name = name;
   }
 
-  
 
 @Override
 public int hashCode() {
@@ -88,5 +114,11 @@ public boolean equals(Object obj) {
 @Override
 public String getKey() {
 	return username+password;
+}
+
+@Override
+public String toString() {
+	return "User [username=" + username + ", password=" + password + ", name="
+			+ name + ", userRole=" + userRole + "]";
 }
 }

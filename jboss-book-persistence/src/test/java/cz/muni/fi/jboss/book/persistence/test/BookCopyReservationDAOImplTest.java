@@ -14,7 +14,7 @@ import javax.persistence.Persistence;
 import org.junit.Before;
 import org.junit.Test;
 
-import cz.muni.fi.jboss.book.persistence.ReservationStateEnum;
+import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.dao.AuthorDAOImpl;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAOImpl;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyReservationDAOImpl;
@@ -45,7 +45,7 @@ public class BookCopyReservationDAOImplTest{
 	private BookCopyReservation createTestBookCopyReservation(){
 		BookCopyReservation newReservation = new BookCopyReservation();
 		newReservation.setBookCopy(createTestBookCopy());
-		newReservation.setReservationState(ReservationStateEnum.NEW);
+		newReservation.setReservationState(ReservationState.NEW);
 		return newReservation;
 	}
 	
@@ -121,7 +121,7 @@ public class BookCopyReservationDAOImplTest{
 			assertTrue(false);
 		}catch(IllegalArgumentException ex){}
 		
-		myBCReservation.setReservationState(ReservationStateEnum.LENT);
+		myBCReservation.setReservationState(ReservationState.LENT);
 		myBCReservation.setBookCopy(null);
 		try{
 			simulateBeginTransaction();
@@ -166,7 +166,7 @@ public class BookCopyReservationDAOImplTest{
 			assertTrue(false);
 		}catch(IllegalArgumentException ex){}
 		
-		myBCReservation.setReservationState(ReservationStateEnum.LENT);
+		myBCReservation.setReservationState(ReservationState.LENT);
 		myBCReservation.setBookCopy(null);
 		try{ //book copy is null
 			simulateBeginTransaction();
@@ -176,7 +176,7 @@ public class BookCopyReservationDAOImplTest{
 			assertTrue(false);
 		}catch(IllegalArgumentException ex){}
 		
-		myBCReservation.setReservationState(ReservationStateEnum.READY);
+		myBCReservation.setReservationState(ReservationState.READY);
 		myBCReservation.setId(null);
 		myBCReservation.setBookCopy(createTestBookCopy());
 		try{ //id is null
@@ -191,7 +191,7 @@ public class BookCopyReservationDAOImplTest{
 		bDao.createBookCopyReservation(testBookCopyReservation1);
 		simulateEndTransaction();
 		testBookCopyReservation1.setBookCopy(createTestBookCopy());
-		testBookCopyReservation1.setReservationState(ReservationStateEnum.RETURNED);
+		testBookCopyReservation1.setReservationState(ReservationState.RETURNED);
 		BookCopyReservation resultOfUpdate = null;
 		try{
 			simulateBeginTransaction();
