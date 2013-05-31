@@ -10,7 +10,7 @@ import org.picketlink.idm.impl.api.PasswordCredential;
 import cz.muni.fi.jboss.book.persistence.dao.UserDAO;
 import cz.muni.fi.jboss.book.persistence.entity.User;
 
-public class AuthenticatorBean extends BaseAuthenticator {
+public class AuthenticatorBeanBak extends BaseAuthenticator {
 	@Inject
 	Credentials credentials;
 

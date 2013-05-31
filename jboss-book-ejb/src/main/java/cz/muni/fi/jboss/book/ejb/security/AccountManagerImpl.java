@@ -10,7 +10,7 @@ import cz.muni.fi.jboss.book.persistence.dao.UserDAO;
 import cz.muni.fi.jboss.book.persistence.entity.User;
 
 @Dependent
-@Named("registrationManager")
+@Named("accountManager")
 @Stateless
 @Remote
 public class AccountManagerImpl implements AccountManager {
