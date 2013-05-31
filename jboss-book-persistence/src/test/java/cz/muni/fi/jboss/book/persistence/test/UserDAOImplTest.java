@@ -103,7 +103,7 @@ public class UserDAOImplTest {
 		user2.setUsername("SomeOtherUsername");
 		user2.setName("Some  name");
 		user2.setPassword("newPass");
-		user2.setUserRole(UserRole.LIBARIAN);
+		user2.setUserRole(UserRole.LIBRARIAN);
 		simulateBeginTransaction();
 		user2 = uDao.createUser(user2);
 		simulateEndTransaction();
