@@ -26,10 +26,10 @@
       <p:panel styleClass="home_cart_content" id="accountPanel">
         <h:panelGrid rendered="#{!loginBean.authenticated}" columns="2" styleClass="display-block">
           <h:outputLabel for="" value="#{msgs['login']}" />          
-          <h:inputText />
+          <h:inputText value="#{loginBean.username}" id="username" />
 
           <h:outputLabel for="" value="#{msgs['password']}" />
-          <h:inputSecret />
+          <h:inputSecret value="#{loginBean.password}" id="password" />
 
           <h:commandButton value="#{msgs['login']}" >
             <f:ajax event="click" listener="#{loginBean.login}" render="accountPanel" />
