@@ -79,3 +79,6 @@ Icon
 
 # Files I don't know what exactly are for :-)
 MANIFEST.MF
+
+# Log files
+*.log
