@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import javax.ejb.Local;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,8 +15,11 @@ import org.junit.Test;
 import cz.muni.fi.jboss.book.persistence.UserRole;
 import cz.muni.fi.jboss.book.persistence.dao.UserDAOImpl;
 import cz.muni.fi.jboss.book.persistence.entity.User;
-
-
+/**
+ * 
+ * @author Eduard Tomek
+ */
+@Local
 public class UserDAOImplTest {
 	private UserDAOImpl uDao;
 	private User user;

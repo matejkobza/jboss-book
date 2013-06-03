@@ -7,6 +7,7 @@ import java.util.List;
 
 import javassist.bytecode.annotation.LongMemberValue;
 
+import javax.ejb.Local;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -34,6 +35,7 @@ import cz.muni.fi.jboss.book.persistence.entity.User;
  * @author Eduard Tomek
  *
  */
+@Local
 public class BookCopyReservationDAOImplTest{
 	private BookCopyReservationDAOImpl bDao;
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("testPU");
