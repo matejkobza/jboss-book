@@ -123,17 +123,15 @@ public class UserDAOImplTest {
 		simulateEndTransaction();
 		assertTrue(foundUsers.contains(user1));
 		assertTrue(foundUsers.contains(user2));
-		assertTrue(foundUsers.size() == 2);
-		
+				
 		//need to clean up, because of uniqueness of username
 		simulateBeginTransaction();
 		uDao.deleteUser(user1);
-		simulateBeginTransaction();
-		/*
 		simulateEndTransaction();
+		simulateBeginTransaction();
 		uDao.deleteUser(user2);
 		simulateEndTransaction();
-		*/
+		
 	}
 }
 

@@ -11,18 +11,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import cz.muni.fi.jboss.book.persistence.ReservationState;
+import cz.muni.fi.jboss.book.persistence.UserRole;
 import cz.muni.fi.jboss.book.persistence.dao.AuthorDAOImpl;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAOImpl;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyReservationDAOImpl;
 import cz.muni.fi.jboss.book.persistence.dao.BookDAOImpl;
+import cz.muni.fi.jboss.book.persistence.dao.UserDAOImpl;
 import cz.muni.fi.jboss.book.persistence.entity.Author;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
+import cz.muni.fi.jboss.book.persistence.entity.User;
 
 /**
  * 
@@ -31,9 +36,15 @@ import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
  */
 public class BookCopyReservationDAOImplTest{
 	private BookCopyReservationDAOImpl bDao;
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("testPU");
+	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("testPU");
 	private EntityManager em;
 	private BookCopyReservation testBookCopyReservation1;
+	private static User user;
+	
+	@BeforeClass
+	public static void beforeClass(){
+		user = createTestUser1();
+	}
 	
 	@Before
 	public void setUp(){
@@ -46,6 +57,7 @@ public class BookCopyReservationDAOImplTest{
 		BookCopyReservation newReservation = new BookCopyReservation();
 		newReservation.setBookCopy(createTestBookCopy());
 		newReservation.setReservationState(ReservationState.NEW);
+		newReservation.setUser(user);
 		return newReservation;
 	}
 	
@@ -88,6 +100,21 @@ public class BookCopyReservationDAOImplTest{
 		authorDao.createAuthor(author);
 		authorDao.getEm().getTransaction().commit();
 		return author;
+	}
+	//call it only once, because of uniqueness of username
+	private static User createTestUser1(){
+		User user = new User();
+		user.setName("John Lennon");
+		user.setPassword("###Hash####");
+		user.setUsername("Lenny");
+		user.setUserRole(UserRole.MANAGER);
+		UserDAOImpl uDao = new UserDAOImpl();
+		uDao.setEm(emf.createEntityManager());
+		uDao.getEm().getTransaction().begin();
+		user = uDao.createUser(user);
+		uDao.getEm().getTransaction().commit();
+		uDao.getEm().close();
+		return user;
 	}
 	
 	private void simulateBeginTransaction() {
