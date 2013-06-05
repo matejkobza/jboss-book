@@ -19,10 +19,10 @@ import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 @Stateless
 @Remote
 public class BookManagerImpl implements BookManager {
-	
+
 	@Inject
 	private BookDAO bookDao;
-	
+
 	@Inject
 	private BookCopyDAO bookCopyDao;
 
@@ -57,11 +57,16 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
+	public List<Book> findBookByTitlePart(String titlePart) {
+		return bookDao.findBookByTitlePart(titlePart);
+	}
+
+	@Override
 	public List<Book> findBookByAuthor(String firstName, String surname) {
 		Author author = new Author();
 		author.setFirstName(firstName);
 		author.setSurname(surname);
-		
+
 		return bookDao.findBookByAuthor(author);
 	}
 
@@ -85,7 +90,5 @@ public class BookManagerImpl implements BookManager {
 	public BookCopy updateBookCopy(BookCopy bookCopy) {
 		return bookCopyDao.updateBookCopy(bookCopy);
 	}
-	
-	
 
 }

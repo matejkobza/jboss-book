@@ -19,7 +19,7 @@
 						<h:outputLabel for="#{searchBookBean.bookTitle}" value="Book title" />
 						<h:inputText value="#{searchBookBean.bookTitle}" label="Book title"></h:inputText>
 						<h:commandButton type="submit" value="Search"
-							action="#{searchBookBean.searchBook}"></h:commandButton>
+							action="#{searchBookBean.searchBookByTitlePart}"></h:commandButton>
 					</h:panelGrid>
 				</h:form>
 			</p:panel>

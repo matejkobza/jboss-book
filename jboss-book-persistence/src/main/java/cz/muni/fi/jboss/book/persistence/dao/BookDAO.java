@@ -67,6 +67,8 @@ public interface BookDAO {
    * @throws NullPointerException if title is null
    */
   public List<Book> findBookByTitle(String title);
+  
+  public List<Book> findBookByTitlePart(String titlePart);
 
   /**
    * Find book by author

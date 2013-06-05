@@ -35,9 +35,9 @@ public class SearchBookBean {
 		this.searchBookResults = searchBookResults;
 	}
 	
-	public void searchBook() {
+	public void searchBookByTitlePart() {
 		String title = bookTitle == null ? "" : bookTitle.trim();
-		this.searchBookResults = bookManager.findBookByTitle(title);
+		this.searchBookResults = bookManager.findBookByTitlePart(title);
 	}
 
 }

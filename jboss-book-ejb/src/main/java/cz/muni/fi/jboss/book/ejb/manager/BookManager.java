@@ -14,6 +14,7 @@ public interface BookManager {
 	public Book findBookById(Long id);
 	public List<Book> findBookByISBN(Long ISBN);
 	public List<Book> findBookByTitle(String title);
+	public List<Book> findBookByTitlePart(String titlePart);
 	public List<Book> findBookByAuthor(String firstName, String surname);
 	public List<Book> findAllBooks();
 	

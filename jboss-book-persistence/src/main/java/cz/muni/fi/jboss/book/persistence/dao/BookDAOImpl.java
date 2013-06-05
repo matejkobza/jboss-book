@@ -100,8 +100,20 @@ public class BookDAOImpl implements BookDAO {
             .setParameter("title", title).getResultList();
     return books;
   }
+  
+  
 
   @Override
+  public List<Book> findBookByTitlePart(String titlePart) {
+	    if (titlePart == null) {
+	        throw new NullPointerException("titlePart is null");
+	      }
+	    return em.createQuery(
+	            "SELECT b FROM Book b WHERE UPPER(b.title) LIKE UPPER(:title)")
+	            .setParameter("title", "%" + titlePart + "%").getResultList();
+  }
+
+@Override
   public List<Book> findBookByAuthor(Author author) {
     if (author == null) {
       throw new NullPointerException("author is null");
