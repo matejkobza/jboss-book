@@ -38,23 +38,30 @@ public class ReservationManagerImpl implements ReservationManager {
 			// TODO - throw checked exception?
 			throw new IllegalArgumentException("The state of the reservation must be " + requiredState.toString());
 	}
+	
+	private BookCopyReservation getReservation(Long reservationId) {
+		return bookCopyReservationDao.findBookCopyReservationById(reservationId);
+	}
 
 	@Override
-	public void prepareBook(BookCopyReservation reservation) {
+	public void prepareBook(Long reservationId) {
+		BookCopyReservation reservation = getReservation(reservationId);
 		checkReservationState(reservation, ReservationState.NEW);
 		reservation.setReservationState(ReservationState.READY);
 		bookCopyReservationDao.updateBookCopyReservation(reservation);
 	}
 
 	@Override
-	public void lendBook(BookCopyReservation reservation) {
+	public void lendBook(Long reservationId) {
+		BookCopyReservation reservation = getReservation(reservationId);
 		checkReservationState(reservation, ReservationState.READY);
 		reservation.setReservationState(ReservationState.LENT);
 		bookCopyReservationDao.updateBookCopyReservation(reservation);
 	}
 
 	@Override
-	public void returnBook(BookCopyReservation reservation) {
+	public void returnBook(Long reservationId) {
+		BookCopyReservation reservation = getReservation(reservationId);
 		checkReservationState(reservation, ReservationState.LENT);
 		reservation.setReservationState(ReservationState.RETURNED);
 		bookCopyReservationDao.updateBookCopyReservation(reservation);
@@ -63,6 +70,13 @@ public class ReservationManagerImpl implements ReservationManager {
 	@Override
 	public List<BookCopyReservation> getBookCopyReservations(User reader, ReservationState state) {
 		return bookCopyReservationDao.findBookCopyReservations(reader, state);
+	}
+
+	@Override
+	public List<BookCopyReservation> getBookCopyReservations(Long bookCopyId) {
+		BookCopy bookCopy = new BookCopy();
+		bookCopy.setId(bookCopyId);
+		return bookCopyReservationDao.findBookCopyReservationsByBookCopy(bookCopy);
 	}
 
 }

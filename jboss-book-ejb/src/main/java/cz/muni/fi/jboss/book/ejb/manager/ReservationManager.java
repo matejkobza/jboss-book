@@ -17,17 +17,17 @@ public interface ReservationManager {
 	/**
 	 * Used by Librarian when the reserved book is prepared
 	 */
-	public void prepareBook(BookCopyReservation reservation);
+	public void prepareBook(Long reservationId);
 
 	/**
 	 * Used by Librarian when he's lending the book (or BookCopy to be precise)
 	 */
-	public void lendBook(BookCopyReservation reservation);
+	public void lendBook(Long reservationId);
 
 	/**
 	 * Used by Librarian when the Reader returns the book (BookCopy)
 	 */
-	public void returnBook(BookCopyReservation reservation);
+	public void returnBook(Long reservationId);
 
 	/**
 	 * Returns all BookCopyReservations with the specified state
@@ -37,5 +37,12 @@ public interface ReservationManager {
 	 *            Reader. If null, no such filtering is done.
 	 */
 	public List<BookCopyReservation> getBookCopyReservations(User reader, ReservationState state);
+	
+	/**
+	 * Returns all reservations related to this BookCopy
+	 * 
+	 * @param bookCopyId BookCopy ID
+	 */
+	public List<BookCopyReservation> getBookCopyReservations(Long bookCopyId);
 
 }
