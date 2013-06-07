@@ -13,11 +13,13 @@
 		<h1>#{msgs['searchBook']}</h1>
 
 		<h:form>
-			<p:panel header="Search book" style="width: 700;">
+			<p:panel header="Search book" style="width: 400px;">
 				<h:form>
 					<h:panelGrid columns="3" cellpadding="2">
-						<h:outputLabel for="#{searchBookBean.bookTitle}" value="Book title" />
-						<h:inputText value="#{searchBookBean.bookTitle}" label="Book title"></h:inputText>
+						<h:outputLabel for="#{searchBookBean.bookTitle}"
+							value="Book title" />
+						<h:inputText value="#{searchBookBean.bookTitle}"
+							label="Book title"></h:inputText>
 						<h:commandButton type="submit" value="Search"
 							action="#{searchBookBean.searchBookByTitlePart}"></h:commandButton>
 					</h:panelGrid>
@@ -26,8 +28,8 @@
 
 
 			<p:dataTable var="book" value="#{searchBookBean.searchBookResults}"
-				paginator="true" rows="5" style="width: 700">
-				<p:column sortBy="#{book.id}" filterBy="#{book.id}">
+				paginator="true" rows="5" style="width: 400px">
+				<p:column sortBy="#{book.id}">
 					<f:facet name="header">
 						<h:outputText value="Id" />
 					</f:facet>
@@ -38,6 +40,11 @@
 						<h:outputText value="Name" />
 					</f:facet>
 					<h:outputText value="#{book.title}" />
+				</p:column>
+				<p:column>
+					<h:link value="Detail" outcome="/books">
+						<f:param name="id" value="#{book.id}" />
+					</h:link>
 				</p:column>
 			</p:dataTable>
 

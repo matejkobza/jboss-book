@@ -11,4 +11,10 @@
       <var>msgs</var>
     </resource-bundle>
   </application>
+  <navigation-rule>
+    <from-view-id>/jsf/search-book.xhtml</from-view-id>
+    <navigation-case>
+      <to-view-id>/jsf/book.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
 </faces-config>
