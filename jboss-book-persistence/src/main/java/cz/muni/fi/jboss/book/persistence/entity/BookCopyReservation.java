@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import cz.muni.fi.jboss.book.persistence.ReservationState;
 
@@ -36,16 +37,19 @@ public class BookCopyReservation implements Serializable {
   
   @ManyToOne(targetEntity=User.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
   @JoinColumn(name = "ID_User", referencedColumnName = "ID_User")
+  @NotNull
   private User user;
   
 
   @Enumerated(EnumType.ORDINAL)
   @Column(nullable = false)
+  @NotNull
   private ReservationState reservationState;
   
   @ManyToOne(targetEntity=BookCopy.class, fetch= FetchType.EAGER,
 		  cascade=CascadeType.REFRESH)
   @JoinColumn(name = "ID_BookCopy", referencedColumnName = "ID_BookCopy")
+  @NotNull
   private BookCopy bookCopy;
 
   public Long getId() {

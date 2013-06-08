@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.IndexColumn;
 
@@ -33,9 +35,11 @@ public class Author implements Serializable {
   private Long id;
   
   @Column(name = "firstName")
+  @Size(max = 20)
   private String firstName;
   
   @Column(name = "surname")
+  @Size(max = 40)
   private String surname;
   
   @Column(name = "description")
@@ -43,7 +47,6 @@ public class Author implements Serializable {
   
   
   @OneToMany(targetEntity=Book.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
-  //@JoinColumn(name = "ID_Book")
   @IndexColumn(name = "Book_ID")
   private List<Book> books;
   

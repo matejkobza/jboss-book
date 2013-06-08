@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.IndexColumn;
 
@@ -26,13 +28,15 @@ public class User implements Serializable, org.picketlink.idm.api.User{
 
   private static final long serialVersionUID = -5392116112798403077L;
   @Id
-  @Column(name = "ID_User")
+  @Column(name = "ID_User", unique = true)
+  @Size(min = 4, max = 20)
   private String username;
   @Column(name = "password", nullable = false)
   private String password;
   @Column(name = "name")
   private String name;
   @Column(name = "userRole")
+  @NotNull
   private UserRole userRole;
   
   @OneToMany(targetEntity=BookCopyReservation.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
