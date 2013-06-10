@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.validation.constraints.Past;
 
 import org.hibernate.annotations.IndexColumn;
 
@@ -36,6 +37,7 @@ public class BookCopy implements Serializable {
   private Long id;
   @Column(nullable = false)
   @Temporal(javax.persistence.TemporalType.DATE)
+  @Past//purchase date must the date in the past
   private Date purchaseDate;
   
   @ManyToOne(targetEntity=Book.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
@@ -44,7 +46,6 @@ public class BookCopy implements Serializable {
 
   @OneToMany(targetEntity=BookCopyReservation.class, fetch= FetchType.EAGER,
 		  cascade=CascadeType.REFRESH)
-  //@JoinColumn(name = "ID_BookCopyReservation", referencedColumnName = "ID_BookCopyReservation")
   @IndexColumn(name = "ID_BookCopyReservation")
   private List<BookCopyReservation> bookCopyReservations;
   /**

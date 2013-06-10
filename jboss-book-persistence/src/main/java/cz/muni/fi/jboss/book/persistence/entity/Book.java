@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.IndexColumn;
 
@@ -27,17 +30,25 @@ import org.hibernate.annotations.IndexColumn;
 public class Book implements Serializable {
 
   private static final long serialVersionUID = -3009934453727550437L;
+  private static final int TITLE_LENGTH = 100;
+  private static final int PUBLISHER_LENGTH = 100;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "ID_Book", nullable = false)
   private Long id;
-  @Column(name = "name")
+  @Column(name = "name", length = TITLE_LENGTH)
+  @Size(max = TITLE_LENGTH)
   private String title;
-  @Column(name = "publisher")
+  @Column(name = "publisher", length = PUBLISHER_LENGTH)
+  @Size(max = PUBLISHER_LENGTH)
   private String publisher;
   @Column(name = "pages", nullable = false)
+  @Min(0)
   private Integer pages;
   @Column(name = "ISBN", nullable = false)
+  //ISBN from the year 2007 has 13 numbers
+  //older ISBN standarts has less than  13 numbers, so 13 is maximum
+  @Digits(integer = 13, fraction = 0) 
   private Long ISBN;
   
   @OneToMany(targetEntity=BookCopy.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
