@@ -82,3 +82,5 @@ MANIFEST.MF
 
 # Log files
 *.log
+
+jboss-book-persistence/src/main/resources/META-INF/persistence.xml
