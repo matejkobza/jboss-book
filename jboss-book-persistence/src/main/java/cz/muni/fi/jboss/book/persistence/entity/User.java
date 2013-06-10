@@ -28,15 +28,15 @@ public class User implements Serializable, org.picketlink.idm.api.User{
 
   private static final long serialVersionUID = -5392116112798403077L;
   @Id
-  @Column(name = "ID_User", unique = true)
-  @Size(min = 4, max = 20)
+  @Column(name = "ID_User"/*, unique = true*/)
+  //@Size(min = 4, max = 20)
   private String username;
   @Column(name = "password", nullable = false)
   private String password;
   @Column(name = "name")
   private String name;
   @Column(name = "userRole")
-  @NotNull
+  //@NotNull
   private UserRole userRole;
   
   @OneToMany(targetEntity=BookCopyReservation.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
