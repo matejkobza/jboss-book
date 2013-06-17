@@ -1,5 +1,6 @@
 package cz.muni.fi.jboss.book.web;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -13,7 +14,7 @@ import cz.muni.fi.jboss.book.persistence.entity.Book;
 
 @ManagedBean
 @ViewScoped
-public class BookDetailBean {
+public class BookDetailBean implements Serializable {
 
 	@EJB(name = "BookManager")
 	private BookManager bookManager;

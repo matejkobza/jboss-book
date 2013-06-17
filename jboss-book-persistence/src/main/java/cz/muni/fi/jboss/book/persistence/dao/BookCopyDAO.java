@@ -51,7 +51,7 @@ public interface BookCopyDAO {
   /**
    * Find book copy by book. Finds all book copies of given book.
    *
-   * @param bookCopy
+   * @param book book
    * @return List of book copies of given book
    */
   List<BookCopy> findBookCopyByBook(Book book);

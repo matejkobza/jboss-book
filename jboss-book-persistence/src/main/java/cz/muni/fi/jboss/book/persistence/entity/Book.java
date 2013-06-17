@@ -26,7 +26,7 @@ import org.hibernate.annotations.IndexColumn;
  * @author Eduard Tomek
  */
 @Entity
-@Table(name = "Book")
+@Table(name = "BOOK")
 public class Book implements Serializable {
 
   private static final long serialVersionUID = -3009934453727550437L;
@@ -34,15 +34,15 @@ public class Book implements Serializable {
   private static final int PUBLISHER_LENGTH = 100;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ID_Book", nullable = false)
+  @Column(name = "ID_BOOK", nullable = false)
   private Long id;
   @Column(name = "name", length = TITLE_LENGTH)
   @Size(max = TITLE_LENGTH)
   private String title;
-  @Column(name = "publisher", length = PUBLISHER_LENGTH)
+  @Column(name = "PUBLISHER", length = PUBLISHER_LENGTH)
   @Size(max = PUBLISHER_LENGTH)
   private String publisher;
-  @Column(name = "pages", nullable = false)
+  @Column(name = "PAGES", nullable = false)
   @Min(0)
   private Integer pages;
   @Column(name = "ISBN", nullable = false)
@@ -52,11 +52,11 @@ public class Book implements Serializable {
   private Long ISBN;
   
   @OneToMany(targetEntity=BookCopy.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
-  @IndexColumn(name="BookCopy_ID")
+  @IndexColumn(name="BOOKCOPY_ID")
   private List<BookCopy> bookCopies;
   
   @ManyToOne(targetEntity=Author.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
-  @JoinColumn(name = "ID_Author", referencedColumnName = "ID_Author")
+  @JoinColumn(name = "ID_AUTHOR", referencedColumnName = "ID_AUTHOR")
   private Author author;
 
   

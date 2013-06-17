@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Local;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -25,7 +24,6 @@ import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
  * @author Eduard Tomek
  *
  */
-@Local
 public class AuthorDAOImplTest {
 
 	private AuthorDAOImpl aDao;

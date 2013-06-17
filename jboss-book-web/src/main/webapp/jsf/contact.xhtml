@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-  <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                  xmlns:p="http://primefaces.org/ui"
-                  template="templates/template2columns.xhtml">
-    
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/template2columns.xhtml">
+
     <ui:define name="leftContent">
-      <h1>#{msgs['contact']}</h1>
-      
-      <p:panel header="Matej Kobza" styleClass="contactPanel">
-        <div class="row"><span class="width200 float-left display-block">Name:</span><span>Matej Kobza</span></div>
-        <div class="row"><span class="width200 float-left display-block">Position:</span><span>User interface developer</span></div>
-      </p:panel>
-      
-      <p:panel header="Svatopluk Novák" styleClass="contactPanel">
-        some staff about Svatopluk
-      </p:panel>
+        <h1>#{msgs['contact']}</h1>
+
+        <p:panel header="Matej Kobza" styleClass="contactPanel">
+            <div class="row"><span class="width200 float-left display-block">Name:</span><span>Matej Kobza</span></div>
+            <div class="row"><span
+                    class="width200 float-left display-block">Position:</span><span>User interface developer</span>
+            </div>
+        </p:panel>
+
+        <p:panel header="Svatopluk Novák" styleClass="contactPanel">
+            some staff about Svatopluk
+        </p:panel>
+
+        <p:panel header="Eduard Tomek" styleClass="contactPanel">
+            some staff about Edo
+        </p:panel>
+
     </ui:define>
-    
-  </ui:composition>
+
+</ui:composition>
 </html>

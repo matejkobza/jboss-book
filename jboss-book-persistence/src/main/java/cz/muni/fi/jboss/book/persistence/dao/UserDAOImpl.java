@@ -9,7 +9,7 @@ import cz.muni.fi.jboss.book.persistence.entity.User;
 
 public class UserDAOImpl implements UserDAO {
 	
-	@PersistenceContext(name = "PU")
+	@PersistenceContext(unitName="PU")
 	private EntityManager em;
 	
 	public EntityManager getEm() {
@@ -57,13 +57,4 @@ public class UserDAOImpl implements UserDAO {
 	public List<User> findAllUsers() {
 		return em.createQuery("SELECT u FROM User u").getResultList();
 	}
-
-	@Override
-	public boolean authenticate(User user) {
-		User foundUser = em.find(User.class, user.getUsername());
-		if (foundUser == null)
-			return false;
-		return user.getPassword().equals(user.getPassword());
-	}
-
 }

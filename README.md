@@ -2,9 +2,20 @@ Advanced Java EE project - library
 ==================================
 The goal of this project is demonstrate knowledge gained during summer semester 2013 at fi.muni.cz. Usage of jboss java techs is required.
 
-- CDI
+- Team 4 members
+- github account
+- UML specification
+- 3 layer implementation
 - JSF
-- JPA2
+- EJB
+- JPA2 persistence layer
+- CDI
+- 3 security roles
+- Bean Validation
+- Seam 3
+- Arquillian
+- 2 clusters and demonstration of failure of one
+- deployment to PaaS OpenShift
 
 How to launch DB in netbeans:
 

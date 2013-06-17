@@ -27,13 +27,13 @@ import org.hibernate.annotations.IndexColumn;
  * @author Eduard Tomek
  */
 @Entity
-@Table(name = "BookCopy")
+@Table(name = "BOOKCOPY")
 public class BookCopy implements Serializable {
 
   private static final long serialVersionUID = 4881074127449326542L;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ID_BookCopy", nullable = false)
+  @Column(name = "ID_BOOKCOPY", nullable = false)
   private Long id;
   @Column(nullable = false)
   @Temporal(javax.persistence.TemporalType.DATE)
@@ -41,12 +41,12 @@ public class BookCopy implements Serializable {
   private Date purchaseDate;
   
   @ManyToOne(targetEntity=Book.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
-  @JoinColumn(name = "ID_Book", referencedColumnName = "ID_Book")
+  @JoinColumn(name = "ID_BOOK", referencedColumnName = "ID_BOOK")
   private Book book;
 
   @OneToMany(targetEntity=BookCopyReservation.class, fetch= FetchType.EAGER,
 		  cascade=CascadeType.REFRESH)
-  @IndexColumn(name = "ID_BookCopyReservation")
+  @IndexColumn(name = "ID_BOOKCOPYRESERVATION")
   private List<BookCopyReservation> bookCopyReservations;
   /**
    * @return the id

@@ -15,6 +15,7 @@ import cz.muni.fi.jboss.book.persistence.entity.User;
  */
 @ManagedBean
 @SessionScoped
+@Deprecated
 public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1516686394858785542L;
@@ -47,19 +48,19 @@ public class LoginBean implements Serializable {
 		return this.authenticated;
 	}
 
-	// @TODO implement login
 	public void login() {
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
 		
-		if (accountManager.login(user)) {
+		//if (accountManager.login(user)) {
 			this.authenticated = true;
-		}
+		//}
 	}
 
-	// @TODO implement logout
 	public void logout() {
+        //User user = this.accountManager.find(username);
+        //this.accountManager.logout(user);
 		this.authenticated = false;
 	}
 

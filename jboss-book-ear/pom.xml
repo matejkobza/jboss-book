@@ -14,31 +14,34 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
---><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+-->
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <artifactId>jboss-book</artifactId>
+    <!--<parent>
+        <artifactId>jboss-book</artifactId>
+        <groupId>cz.muni.fi.jboss-book</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent> -->
+
+    <artifactId>jboss-book-ear</artifactId>
     <groupId>cz.muni.fi.jboss-book</groupId>
     <version>1.0-SNAPSHOT</version>
-  </parent>
+    <packaging>ear</packaging>
 
-  <artifactId>jboss-book-ear</artifactId>
-  <packaging>ear</packaging>
+    <url>http://jboss.org/jbossas</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
 
-  <name>jboss-book: EAR Module</name>
-  
-  <url>http://jboss.org/jbossas</url>
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <distribution>repo</distribution>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-    </license>
-  </licenses>
-  
     <dependencies>
-
         <!-- Depend on the ejb module and war so that we can package them -->
         <dependency>
             <groupId>cz.muni.fi.jboss-book</groupId>
@@ -49,6 +52,7 @@
         <dependency>
             <groupId>cz.muni.fi.jboss-book</groupId>
             <artifactId>jboss-book-ejb</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <type>ejb</type>
         </dependency>
         <dependency>
@@ -59,58 +63,38 @@
         </dependency>
     </dependencies>
 
-  <build>
+    <build>
         <finalName>${project.artifactId}</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-ear-plugin</artifactId>
-                <version>${version.ear.plugin}</version>
-        <configuration>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
                     <!-- Tell Maven we are using Java EE 6 -->
-            <version>6</version>
+                    <version>6</version>
                     <!-- Use Java EE ear libraries as needed. Java EE ear libraries 
                         are in easy way to package any libraries needed in the ear, and automatically 
                         have any modules (EJB-JARs and WARs) use them -->
-            <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <modules></modules>
                     <fileNameMapping>no-version</fileNameMapping>
-        </configuration>
-      </plugin>
-      <!-- The JBoss AS plugin deploys your ear to a local JBoss AS container -->
-      <!-- Due to Maven's lack of intelligence with EARs we need to configure 
-      the jboss-as maven plugin to skip deployment for all modules. We then enable 
-      it specifically in the ear module. -->
-            <plugin>
-        <groupId>org.jboss.as.plugins</groupId>
-        <artifactId>jboss-as-maven-plugin</artifactId>
-        <configuration>
-          <filename>${project.artifactId}.ear</filename>
-          <skip>false</skip>
-        </configuration>
+                </configuration>
             </plugin>
-    </plugins>
-  </build>
-
-  <profiles>
-    <profile>
-      <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
-      <!-- Use this profile for any OpenShift specific customization your app will need. -->
-      <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
-      <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-      <id>openshift</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-ear-plugin</artifactId>
-            <version>${version.ear.plugin}</version>
-            <configuration>
-              <outputDirectory>deployments</outputDirectory>
-            </configuration>
-          </plugin>
+            <!-- The JBoss AS plugin deploys your ear to a local JBoss AS container -->
+            <!-- Due to Maven's lack of intelligence with EARs we need to configure
+            the jboss-as maven plugin to skip deployment for all modules. We then enable
+            it specifically in the ear module. -->
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <configuration>
+                    <filename>${project.artifactId}.ear</filename>
+                    <skip>false</skip>
+                </configuration>
+                <version>7.1.1.Final</version>
+            </plugin>
         </plugins>
-      </build>
-    </profile>
-  </profiles>
+    </build>
 
 </project>

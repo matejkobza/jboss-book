@@ -9,14 +9,14 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
-import cz.muni.fi.jboss.book.ejb.manager.BookManager;
-import cz.muni.fi.jboss.book.ejb.manager.ReservationManager;
-import cz.muni.fi.jboss.book.ejb.security.AccountManager;
 import cz.muni.fi.jboss.book.persistence.UserRole;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
 import cz.muni.fi.jboss.book.persistence.entity.User;
+import cz.muni.fi.jboss.book.ejb.manager.BookManager;
+import cz.muni.fi.jboss.book.ejb.security.AccountManager;
+import cz.muni.fi.jboss.book.ejb.manager.ReservationManager;
 
 @Singleton
 @Startup
@@ -81,7 +81,7 @@ public class RecordInitializer {
 	}
 
 	private void reserveBooks() {
-		// one bookcopy has already been returned, one is lent, one in reserved
+		// one bookcopy has already been returned, one is lent, one is reserved
 		
 		BookCopy bookCopy = this.bookCopies.get(0);
 

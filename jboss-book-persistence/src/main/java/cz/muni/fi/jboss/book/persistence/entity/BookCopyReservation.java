@@ -25,18 +25,18 @@ import cz.muni.fi.jboss.book.persistence.ReservationState;
  * @author Eduard Tomek
  */
 @Entity
-@Table(name = "BookCopyReservation")
+@Table(name = "BOOKCOPYRESERVATION")
 public class BookCopyReservation implements Serializable {
 
   private static final long serialVersionUID = -83788868169501821L;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ID_BookCopyReservation")
+  @Column(name = "ID_BOOKCOPYRESERVATION")
   private Long id;
 
   
   @ManyToOne(targetEntity=User.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
-  @JoinColumn(name = "ID_User", referencedColumnName = "ID_User")
+  @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")
   @NotNull
   private User user;
   
@@ -48,7 +48,7 @@ public class BookCopyReservation implements Serializable {
   
   @ManyToOne(targetEntity=BookCopy.class, fetch= FetchType.EAGER,
 		  cascade=CascadeType.REFRESH)
-  @JoinColumn(name = "ID_BookCopy", referencedColumnName = "ID_BookCopy")
+  @JoinColumn(name = "ID_BOOKCOPY", referencedColumnName = "ID_BOOKCOPY")
   @NotNull
   private BookCopy bookCopy;
 

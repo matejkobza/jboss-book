@@ -24,30 +24,30 @@ import org.hibernate.annotations.IndexColumn;
  * @author Eduard Tomek
  */
 @Entity
-@Table(name = "Author")
+@Table(name = "AUTHOR")
 public class Author implements Serializable {
 
   private static final long serialVersionUID = -300993445327550437L;
   
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "ID_Author", nullable = false)
+  @Column(name = "ID_AUTHOR", nullable = false)
   private Long id;
   
-  @Column(name = "firstName")
+  @Column(name = "FIRSTNAME")
   @Size(max = 20)
   private String firstName;
   
-  @Column(name = "surname")
+  @Column(name = "SURNAME")
   @Size(max = 40)
   private String surname;
   
-  @Column(name = "description")
+  @Column(name = "DESCRIPTION")
   private String description;
   
   
   @OneToMany(targetEntity=Book.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
-  @IndexColumn(name = "Book_ID")
+  @IndexColumn(name = "BOOK_ID")
   private List<Book> books;
   
   public Long getId() {

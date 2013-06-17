@@ -25,15 +25,14 @@
       <div class="title display-block">#{msgs['account']}</div>
       <p:panel styleClass="home_cart_content" id="accountPanel">
         <h:panelGrid rendered="#{!loginBean.authenticated}" columns="2" styleClass="display-block">
-          <h:outputLabel for="" value="#{msgs['login']}" />          
-          <h:inputText value="#{loginBean.username}" id="username" />
+          <h:outputLabel for="username" value="#{msgs['login']}" />
+          <h:inputText value="#{credentials.username}" id="username" />
 
-          <h:outputLabel for="" value="#{msgs['password']}" />
-          <h:inputSecret value="#{loginBean.password}" id="password" />
+          <h:outputLabel for="password" value="#{msgs['password']}" />
+          <h:inputSecret value="#{credentials.password}" id="password" />
 
-          <h:commandButton value="#{msgs['login']}" >
-            <f:ajax event="click" listener="#{loginBean.login}" render="accountPanel" />
-          </h:commandButton>
+          <h:commandButton value="#{msgs['login']}" action="#{identity.login}" />
+
           <h:column>
             <h:outputText value="#{msgs['dontHaveAccount']}" />&nbsp;
             <h:commandLink value="#{msgs['signUp']}" action="registration" />

@@ -2,6 +2,7 @@ package cz.muni.fi.jbossbook.testclient;
 
 import cz.muni.fi.jboss.book.ejb.manager.BookManager;
 import cz.muni.fi.jboss.book.ejb.manager.BookManagerImpl;
+import cz.muni.fi.jboss.book.persistence.entity.Author;
 import java.util.Hashtable;
 
 import javax.naming.Context;
@@ -39,7 +40,7 @@ public class RemoteEJBClient {
         Book book = new Book();
         book.setTitle("foo");
         book.setPages(200);
-        book.setAuthor("testAuthor");
+        book.setAuthor(new Author());
         book.setISBN(12345L);
         book.setPublisher("publisher");
         

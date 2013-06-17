@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.Local;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,7 +26,6 @@ import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
  * 
  * @author Eduard Tomek
  */
-@Local
 public class BookCopyDaoImplTest {
 	private BookCopyDAOImpl bDao;
 	private BookCopy testBookCopy1;

@@ -6,7 +6,6 @@ import cz.muni.fi.jboss.book.persistence.dao.AuthorDAOImpl;
 import cz.muni.fi.jboss.book.persistence.dao.BookDAOImpl;
 import cz.muni.fi.jboss.book.persistence.entity.Author;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
-import javax.ejb.Local;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -19,7 +18,6 @@ import static org.junit.Assert.*;
  * 
  * @author Eduard Tomek
  */
-@Local
 public class BookDAOImplTest {
 
 	private BookDAOImpl bDao;

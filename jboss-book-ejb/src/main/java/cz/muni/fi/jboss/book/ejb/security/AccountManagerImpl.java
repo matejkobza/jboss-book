@@ -29,10 +29,10 @@ public class AccountManagerImpl implements AccountManager {
 		userDao.createUser(user);
 	}
 
-	@Override
-	public boolean login(User user) {
-		return userDao.authenticate(user);
-	}
-	
+    @Override
+    public User find(String username) {
+        return userDao.findUserByUsername(username);
+    }
+
 }
 
