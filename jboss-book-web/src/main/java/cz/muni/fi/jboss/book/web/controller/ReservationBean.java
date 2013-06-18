@@ -1,4 +1,4 @@
-package cz.muni.fi.jboss.book.web;
+package cz.muni.fi.jboss.book.web.controller;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;

@@ -1,8 +1,6 @@
 package cz.muni.fi.jboss.book.web.core;
 
-import cz.muni.fi.jboss.book.web.LoginBean;
-import cz.muni.fi.jboss.book.web.RegistrationBean;
-import cz.muni.fi.jboss.book.web.ReservationBean;
+import cz.muni.fi.jboss.book.web.controller.LoginBean;
 
 import java.io.Serializable;
 
