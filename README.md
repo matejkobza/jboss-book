@@ -28,7 +28,7 @@ Setup your JBOSS AS datasource for the project. Tested with JBOSS AS 7.1.1.Final
 http://www.hameister.org/JBoss_DatasourceDerby.html
 You need to set your datasource like this:
 
-&lt;datasources&gt;
+&lt;datasources&gt;<br />
   &lt;datasource jndi-name="java:/DerbyDS" pool-name="DerbyDS" enabled="true" use-ccm="false"&gt;
     &lt;connection-url&gt;jdbc:derby://localhost:1527/jboss-book;create=true&lt;/connection-url&gt;
     &lt;driver&gt;org.apache.derby&lt;/driver&gt;
