@@ -11,7 +11,9 @@ import javax.inject.Named;
 import org.jboss.ejb3.annotation.Clustered;
 
 import cz.muni.fi.jboss.book.persistence.ReservationState;
+import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAO;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyReservationDAO;
+import cz.muni.fi.jboss.book.persistence.dao.UserDAO;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
 import cz.muni.fi.jboss.book.persistence.entity.User;
@@ -26,6 +28,12 @@ public class ReservationManagerImpl implements ReservationManager {
 	@Inject
 	private BookCopyReservationDAO bookCopyReservationDao;
 
+	@Inject
+	private BookCopyDAO bookCopyDao;
+
+	@Inject
+	private UserDAO userDao;
+
 	@Override
 	public BookCopyReservation reserveBook(BookCopy bookCopy, User reader) {
 		BookCopyReservation reservation = new BookCopyReservation();
@@ -36,12 +44,17 @@ public class ReservationManagerImpl implements ReservationManager {
 		return bookCopyReservationDao.createBookCopyReservation(reservation);
 	}
 
+	@Override
+	public BookCopyReservation reserveBook(Long bookCopyId, String readerUsername) {
+		return reserveBook(bookCopyDao.findBookCopyById(bookCopyId), userDao.findUserByUsername(readerUsername));
+	}
+
 	private void checkReservationState(BookCopyReservation reservation, ReservationState requiredState) {
 		if (!reservation.getReservationState().equals(requiredState))
 			// TODO - throw checked exception?
 			throw new IllegalArgumentException("The state of the reservation must be " + requiredState.toString());
 	}
-	
+
 	private BookCopyReservation getReservation(Long reservationId) {
 		return bookCopyReservationDao.findBookCopyReservationById(reservationId);
 	}

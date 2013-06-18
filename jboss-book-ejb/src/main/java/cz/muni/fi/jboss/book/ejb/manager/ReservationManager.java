@@ -13,6 +13,8 @@ public interface ReservationManager {
 	 * Used by Reader for book reservations
 	 */
 	public BookCopyReservation reserveBook(BookCopy bookCopy, User reader);
+	
+	public BookCopyReservation reserveBook(Long bookCopyId, String readerUsername);
 
 	/**
 	 * Used by Librarian when the reserved book is prepared
