@@ -8,6 +8,8 @@
   version="2.5">
  
   <display-name>jboss-book-web</display-name>
+  <!-- needed for clustering -->
+  <distributable/> 
   
  
   <!-- Change to "Production" when you are ready to deploy -->

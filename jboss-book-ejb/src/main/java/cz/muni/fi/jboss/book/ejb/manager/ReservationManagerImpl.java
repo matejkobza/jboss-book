@@ -8,6 +8,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.ejb3.annotation.Clustered;
+
 import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyReservationDAO;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
@@ -18,6 +20,7 @@ import cz.muni.fi.jboss.book.persistence.entity.User;
 @Named("reservationManager")
 @Stateless
 @Remote
+@Clustered
 public class ReservationManagerImpl implements ReservationManager {
 
 	@Inject

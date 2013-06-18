@@ -10,6 +10,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.ejb3.annotation.Clustered;
+
 import cz.muni.fi.jboss.book.ejb.entities.BookCopyWithDetails;
 import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAO;
@@ -23,6 +25,7 @@ import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
 @Named("bookManager")
 @Stateless
 @Remote
+@Clustered
 public class BookManagerImpl implements BookManager {
 
 	@Inject

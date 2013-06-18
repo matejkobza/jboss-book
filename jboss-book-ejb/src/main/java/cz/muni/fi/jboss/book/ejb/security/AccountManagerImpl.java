@@ -6,6 +6,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.ejb3.annotation.Clustered;
+
 import cz.muni.fi.jboss.book.persistence.UserRole;
 import cz.muni.fi.jboss.book.persistence.dao.UserDAO;
 import cz.muni.fi.jboss.book.persistence.entity.User;
@@ -14,6 +16,7 @@ import cz.muni.fi.jboss.book.persistence.entity.User;
 @Named("accountManager")
 @Stateless
 @Remote
+@Clustered
 public class AccountManagerImpl implements AccountManager {
 	
 	@Inject
