@@ -36,9 +36,8 @@
                 <h:outputText value="#{bookCopyWithDetails.available}"/>
             </p:column>
             <p:column>
-                <p:commandLink value="Reserve"
-                               actionListener="#{searchBookBean.reserveBook(bookCopyWithDetails.bookCopy.id)}"
-                           action="#" />
+                <h:commandLink value="Reserve"
+                               actionListener="#{searchBookBean.reserveBook(bookCopyWithDetails.bookCopy.id)}" />
             </p:column>
         </p:dataTable>
 	</ui:define>
