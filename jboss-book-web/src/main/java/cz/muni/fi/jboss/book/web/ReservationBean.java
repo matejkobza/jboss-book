@@ -6,6 +6,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import cz.muni.fi.jboss.book.ejb.manager.ReservationManager;
+import cz.muni.fi.jboss.book.web.core.WebBeanFactory;
 
 @ManagedBean
 @ViewScoped
@@ -34,10 +35,15 @@ public class ReservationBean {
 	}
 
 	public boolean reserve(ActionEvent event) {
-		String readerUsername = (String) event.getComponent().getAttributes().get("readerUsername");
-		Long bookCopyId = (Long) event.getComponent().getAttributes().get("bookCopyId");
-		reservationManager.reserveBook(bookCopyId, readerUsername);
-		// TODO
-		return true;
+		//String readerUsername = (String) event.getComponent().getAttributes().get("readerUsername");
+        String username = WebBeanFactory.getLoginBean().getUsername();
+        if(username.isEmpty()) {
+            return false;
+        } else {
+		    Long bookCopyId = (Long) event.getComponent().getAttributes().get("bookCopyId");
+		    reservationManager.reserveBook(bookCopyId, username);
+		    // TODO
+		    return true;
+        }
 	}
 }
