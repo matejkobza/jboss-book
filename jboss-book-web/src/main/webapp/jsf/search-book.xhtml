@@ -20,14 +20,16 @@
 							value="Book title" />
 						<h:inputText value="#{searchBookBean.bookTitle}"
 							label="Book title"></h:inputText>
-						<h:commandButton type="submit" value="Search"
-							action="#{searchBookBean.searchBookByTitlePart}"></h:commandButton>
+						<p:commandButton type="submit" value="Search"
+							actionListener="#{searchBookBean.searchBookByTitlePart}">
+                            <f:ajax render="resultTable" />
+						</p:commandButton>
 					</h:panelGrid>
 				</h:form>
 			</p:panel>
 
 
-			<p:dataTable var="book" value="#{searchBookBean.searchBookResults}"
+			<p:dataTable var="book" id="resultTable" value="#{searchBookBean.searchBookResults}"
 				paginator="true" rows="5" style="width: 400px">
 				<p:column sortBy="#{book.id}">
 					<f:facet name="header">
