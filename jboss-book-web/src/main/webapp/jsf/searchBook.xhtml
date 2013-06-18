@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="templates/template2columns.xhtml">
+
+    <ui:define name="leftContent">
+        <h1>#{msgs['searchBook']}</h1>
+
+        <p:panel header="Search book" style="width: 400px;">
+            <h:panelGrid columns="3" cellpadding="2">
+                <h:outputLabel for="#{searchBookBean.bookTitle}"
+                               value="Book title"/>
+                <h:inputText value="#{searchBookBean.bookTitle}"
+                             label="Book title"></h:inputText>
+                <p:commandButton value="Search" process="@all"
+                                 actionListener="#{searchBookBean.searchBookByTitlePart}"
+                                 update="resultTable" id="submit"/>
+            </h:panelGrid>
+        </p:panel>
+
+        <p:dataTable var="book" id="resultTable" value="#{searchBookBean.searchBookResults}"
+                     paginator="true" rows="5" style="width: 450px">
+            <p:column sortBy="#{book.id}">
+                <f:facet name="header">
+                    <h:outputText value="Id"/>
+                </f:facet>
+                <h:outputText value="#{book.id}"/>
+            </p:column>
+            <p:column sortBy="#{book.title}" filterBy="#{book.title}">
+                <f:facet name="header">
+                    <h:outputText value="Name"/>
+                </f:facet>
+                <h:outputText value="#{book.title}"/>
+            </p:column>
+            <p:column>
+                <h:commandLink value="Book Detail" actionListener="#{searchBookBean.selectBook(book.id)}"
+                               action="bookDetail"/>
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="templates/template2columns.xhtml">
+
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{bookDetailBean.onPageLoad}" />
+	</f:metadata>
+
+	<ui:define name="leftContent">
+        <h1>#{searchBookBean.book.title}</h1>
+        <p:dataTable var="bookCopyWithDetails" value="#{searchBookBean.bookCopies}"
+                     paginator="true" rows="5" style="width: 400px">
+            <p:column sortBy="#{bookCopyWithDetails.bookCopy.id}">
+                <f:facet name="header">
+                    <h:outputText value="Id"/>
+                </f:facet>
+                <h:outputText value="#{bookCopyWithDetails.bookCopy.id}"/>
+            </p:column>
+            <p:column sortBy="#{bookCopyWithDetails.bookCopy.purchaseDate}">
+                <f:facet name="header">
+                    <h:outputText value="Purchase date"/>
+                </f:facet>
+                <h:outputText value="#{bookCopyWithDetails.bookCopy.purchaseDate}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Is available"/>
+                </f:facet>
+                <h:outputText value="#{bookCopyWithDetails.available}"/>
+            </p:column>
+            <p:column>
+                <h:link value="Reserve" outcome="#">
+                    <f:param name="id" value="#{bookCopyWithDetails.bookCopy.id}"/>
+                </h:link>
+            </p:column>
+        </p:dataTable>
+	</ui:define>
+</ui:composition>
+</html>
