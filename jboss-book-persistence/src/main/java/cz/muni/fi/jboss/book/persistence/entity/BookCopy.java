@@ -37,7 +37,7 @@ public class BookCopy implements Serializable {
   private Long id;
   @Column(nullable = false)
   @Temporal(javax.persistence.TemporalType.DATE)
-  @Past//purchase date must the date in the past
+  //@Past//purchase date must the date in the past
   private Date purchaseDate;
   
   @ManyToOne(targetEntity=Book.class, fetch= FetchType.EAGER, cascade= CascadeType.REFRESH)
