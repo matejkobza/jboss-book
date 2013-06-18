@@ -13,6 +13,7 @@ import javax.inject.Named;
 import org.jboss.ejb3.annotation.Clustered;
 
 import cz.muni.fi.jboss.book.ejb.entities.BookCopyWithDetails;
+import cz.muni.fi.jboss.book.ejb.util.ReservationUtils;
 import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAO;
 import cz.muni.fi.jboss.book.persistence.dao.BookDAO;
@@ -112,11 +113,7 @@ public class BookManagerImpl implements BookManager {
 		List<BookCopy> bookCopies = getBookCopiesByBookId(bookId);
 		List<BookCopyWithDetails> bookCopiesWithDetails = new ArrayList<BookCopyWithDetails>();
 		for (BookCopy bookCopy : bookCopies) {
-			boolean isAvailable = true;
-			for (BookCopyReservation reservation : reservationManager.getBookCopyReservations(bookCopy.getId())) {
-				if (!reservation.getReservationState().equals(ReservationState.RETURNED))
-					isAvailable = false;
-			}
+			boolean isAvailable = ReservationUtils.isAvailable(reservationManager, bookCopy);
 			
 			BookCopyWithDetails bookCopyWithDetails = new BookCopyWithDetails();
 			bookCopyWithDetails.setBookCopy(bookCopy);

@@ -33,7 +33,7 @@
             </p:column>
             <p:column>
                 <h:commandLink value="Reserve"
-                               actionListener="#{searchBookBean.reserveBook(bookCopyWithDetails.bookCopy.id)}" />
+                               actionListener="#{reservationBean.reserve(bookCopyWithDetails.bookCopy.id)}" />
             </p:column>
         </p:dataTable>
 	</ui:define>

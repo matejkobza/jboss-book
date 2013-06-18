@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import org.jboss.ejb3.annotation.Clustered;
 
+import cz.muni.fi.jboss.book.ejb.util.ReservationUtils;
 import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAO;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyReservationDAO;
@@ -36,6 +37,10 @@ public class ReservationManagerImpl implements ReservationManager {
 
 	@Override
 	public BookCopyReservation reserveBook(BookCopy bookCopy, User reader) {
+		// already reserved
+		if (!ReservationUtils.isAvailable(this, bookCopy))
+			return null;
+		
 		BookCopyReservation reservation = new BookCopyReservation();
 		reservation.setBookCopy(bookCopy);
 		reservation.setReservationState(ReservationState.NEW);

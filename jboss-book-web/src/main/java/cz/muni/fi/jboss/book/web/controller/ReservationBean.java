@@ -34,13 +34,13 @@ public class ReservationBean {
 		this.bookCopyId = bookCopyId;
 	}
 
-	public boolean reserve(ActionEvent event) {
+	public boolean reserve(Long bookCopyId) {
 		//String readerUsername = (String) event.getComponent().getAttributes().get("readerUsername");
         String username = WebBeanFactory.getLoginBean().getUsername();
         if(username.isEmpty()) {
             return false;
         } else {
-		    Long bookCopyId = (Long) event.getComponent().getAttributes().get("bookCopyId");
+		    //Long bookCopyId = (Long) event.getComponent().getAttributes().get("bookCopyId");
 		    reservationManager.reserveBook(bookCopyId, username);
 		    // TODO
 		    return true;
