@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.IndexColumn;
 
@@ -35,11 +36,13 @@ public class Author implements Serializable {
   private Long id;
   
   @Column(name = "FIRSTNAME")
-  @Size(max = 20)
+  @Size(min = 2, max = 20)
+  @Pattern(regexp = "[A-Z][a-z]*") 
   private String firstName;
   
   @Column(name = "SURNAME")
-  @Size(max = 40)
+  @Size(min = 2, max = 40)
+  @Pattern(regexp = "[A-Z][a-z]*")
   private String surname;
   
   @Column(name = "DESCRIPTION")

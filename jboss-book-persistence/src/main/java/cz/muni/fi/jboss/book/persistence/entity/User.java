@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.IndexColumn;
 
@@ -27,14 +29,14 @@ public class User implements Serializable {
     private static final long serialVersionUID = -5392116112798403077L;
     @Id
     @Column(name = "ID_USER"/*, unique = true*/)
-    //@Size(min = 4, max = 20)
+    @Size(min = 4, max = 20)
     private String username;
     @Column(name = "PASSWORD", nullable = false)
     private String password;
     @Column(name = "NAME")
     private String name;
     @Column(name = "USERROLE")
-    //@NotNull
+    @NotNull
     private UserRole userRole;
 
     @OneToMany(targetEntity = BookCopyReservation.class, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
