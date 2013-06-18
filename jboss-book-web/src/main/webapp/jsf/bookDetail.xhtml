@@ -36,9 +36,9 @@
                 <h:outputText value="#{bookCopyWithDetails.available}"/>
             </p:column>
             <p:column>
-                <h:link value="Reserve" outcome="#">
-                    <f:param name="id" value="#{bookCopyWithDetails.bookCopy.id}"/>
-                </h:link>
+                <p:commandLink value="Reserve"
+                               actionListener="#{searchBookBean.reserveBook(bookCopyWithDetails.bookCopy.id)}"
+                           action="#" />
             </p:column>
         </p:dataTable>
 	</ui:define>
