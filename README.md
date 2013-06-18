@@ -2,14 +2,14 @@ Advanced Java EE project - library
 ==================================
 The goal of this project is demonstrate knowledge gained during summer semester 2013 at fi.muni.cz. Usage of jboss java techs is required.
 
- ✔ - Team 4 members
- ✔ - github account
- ✔ - UML specification
- ✔ - 3 layer implementation
- ✔ - JSF
- ✔ - EJB
- ✔ - JPA2 persistence layer
- ✔ - CDI
+✔ - Team 4 members
+✔ - github account
+✔ - UML specification
+✔ - 3 layer implementation
+✔ - JSF
+✔ - EJB
+✔ - JPA2 persistence layer
+✔ - CDI
 - 3 security roles
 - Bean Validation
 - Seam 3
