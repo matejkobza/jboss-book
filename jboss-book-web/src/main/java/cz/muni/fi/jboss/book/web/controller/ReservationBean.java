@@ -41,9 +41,7 @@ public class ReservationBean {
             return false;
         } else {
 		    //Long bookCopyId = (Long) event.getComponent().getAttributes().get("bookCopyId");
-		    reservationManager.reserveBook(bookCopyId, username);
-		    // TODO
-		    return true;
+		    return (reservationManager.reserveBook(bookCopyId, username) != null);
         }
 	}
 }
