@@ -28,13 +28,14 @@ Setup your JBOSS AS datasource for the project. Tested with JBOSS AS 7.1.1.Final
 http://www.hameister.org/JBoss_DatasourceDerby.html
 You need to set your datasource like this:
 
-><datasources>
->  <datasource jndi-name="java:/DerbyDS" pool-name="DerbyDS" enabled="true" use-ccm="false">
->    <connection-url>jdbc:derby://localhost:1527/jboss-book;create=true</connection-url>
->    <driver>org.apache.derby</driver>
->    <security>
->      <user-name>root</user-name>
->      <password>toor</password>
+<code>
+<datasources>
+  <datasource jndi-name="java:/DerbyDS" pool-name="DerbyDS" enabled="true" use-ccm="false">
+    <connection-url>jdbc:derby://localhost:1527/jboss-book;create=true</connection-url>
+    <driver>org.apache.derby</driver>
+    <security>
+      <user-name>root</user-name>
+      <password>toor</password>
     </security>
     <validation>
       <validate-on-match>false</validate-on-match>
@@ -50,6 +51,7 @@ You need to set your datasource like this:
    <xa-datasource-class>org.apache.derby.jdbc.ClientXADataSource</xa-datasource-class>
  </driver>
 </drivers>
+</code>
 
 After that you can build the project and run ear archive on server.
 
