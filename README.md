@@ -1,31 +1,58 @@
-Advanced Java EE project - library
-==================================
+#Advanced Java EE project - library
+
 The goal of this project is demonstrate knowledge gained during summer semester 2013 at fi.muni.cz. Usage of jboss java techs is required.
 
-- Team 4 members
-- github account
-- UML specification
-- 3 layer implementation
-- JSF
-- EJB
-- JPA2 persistence layer
-- CDI
-- 3 security roles
-- Bean Validation
-- Seam 3
-- Arquillian
-- 2 clusters and demonstration of failure of one
-- deployment to PaaS OpenShift
+- [x] Team 4 members
+- [x] github account
+- [x] UML specification
+- [x] 3 layer implementation
+- [x] JSF
+- [x] EJB
+- [x] JPA2 persistence layer
+- [x] CDI
+- [ ] 3 security roles
+- [ ] Bean Validation
+- [ ] Seam 3
+- [ ] Arquillian
+- [ ] 2 clusters and demonstration of failure of one
+- [ ] deployment to PaaS OpenShift
 
-How to launch DB in netbeans:
+##DB INSTALLATION
 
-1. New connection
- - in services add new database. Right click on Database and than New Connection. Select Java DB (Network) and click next. On next page insert host as 'localhost' (127.0.0.1), port '1527', database: 'jboss-book', username: 'root' and password: 'toor'.
- - start the DB with right click on jboss-book under Databases and click 'Start server'
- - test jboss-book-persistence projekt and everything should be working
+Download derby libraries from http://db.apache.org/derby/derby_downloads.html
 
-2. Use already present connection drivers. (Other solution is to use the present driver by just changing properties of the connection)
- - right click on Java DB in services panel under Databases
- - in this screen change the Java DB Installation path to db-derby under jboss-book folder ('YOUR_PATH_TO_PROJECT/jboss-book/db-derby') and Database location path to database folder under jboss-book/db-derby ('YOUR_PATH_TO_PROJECT/jboss-book/db-derby/database')
+Run Derby from command line using command:
+java -jar derbyrun.jar server start
 
-The most important part is to start db server.
+Setup your JBOSS AS datasource for the project. Tested with JBOSS AS 7.1.1.Final
+http://www.hameister.org/JBoss_DatasourceDerby.html
+You need to set your datasource like this:
+
+<pre>
+&lt;datasources&gt;
+  &lt;datasource jndi-name="java:/DerbyDS" pool-name="DerbyDS" enabled="true" use-ccm="false"&gt;
+    &lt;connection-url&gt;jdbc:derby://localhost:1527/jboss-book;create=true&lt;/connection-url&gt;
+    &lt;driver&gt;org.apache.derby&lt;/driver&gt;
+    &lt;security&gt;
+      &lt;user-name&gt;root&lt;/user-name&gt;
+      &lt;password&gt;toor&lt;/password&gt;
+    &lt;/security&gt;
+    &lt;validation&gt;
+      &lt;validate-on-match&gt;false&lt;/validate-on-match&gt;
+      &lt;background-validation&gt;false&lt;/background-validation&gt;
+    &lt;/validation&gt;
+    &lt;statement&gt;
+      &lt;share-prepared-statements&gt;false&lt;/share-prepared-statements&gt;
+    &lt;/statement&gt;
+  &lt;/datasource&gt;
+&lt;/datasources&gt;
+
+&lt;drivers&gt;
+ &lt;driver name="org.apache.derby" module="org.apache.derby"&gt;
+   &lt;xa-datasource-class&gt;org.apache.derby.jdbc.ClientXADataSource&lt;/xa-datasource-class&gt;
+ &lt;/driver&gt;
+&lt;/drivers&gt;
+</pre>
+
+After that you can build the project and run ear archive on server.
+

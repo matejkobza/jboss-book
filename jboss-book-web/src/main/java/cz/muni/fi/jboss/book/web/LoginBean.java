@@ -48,6 +48,7 @@ public class LoginBean implements Serializable {
 		return this.authenticated;
 	}
 
+    //@TODO implement
 	public void login() {
 		User user = new User();
 		user.setUsername(username);
@@ -58,10 +59,17 @@ public class LoginBean implements Serializable {
 		//}
 	}
 
+    //@TODO implement
 	public void logout() {
         //User user = this.accountManager.find(username);
         //this.accountManager.logout(user);
 		this.authenticated = false;
 	}
+
+    //@TODO
+    public boolean isLibrarian() {
+        this.accountManager.find(username);
+        return true;
+    }
 
 }
