@@ -17,15 +17,37 @@ The goal of this project is demonstrate knowledge gained during summer semester 
 - 2 clusters and demonstration of failure of one
 - deployment to PaaS OpenShift
 
-How to launch DB in netbeans:
+DB INSTALLATION
 
-1. New connection
- - in services add new database. Right click on Database and than New Connection. Select Java DB (Network) and click next. On next page insert host as 'localhost' (127.0.0.1), port '1527', database: 'jboss-book', username: 'root' and password: 'toor'.
- - start the DB with right click on jboss-book under Databases and click 'Start server'
- - test jboss-book-persistence projekt and everything should be working
+Download derby libraries from http://db.apache.org/derby/derby_downloads.html
 
-2. Use already present connection drivers. (Other solution is to use the present driver by just changing properties of the connection)
- - right click on Java DB in services panel under Databases
- - in this screen change the Java DB Installation path to db-derby under jboss-book folder ('YOUR_PATH_TO_PROJECT/jboss-book/db-derby') and Database location path to database folder under jboss-book/db-derby ('YOUR_PATH_TO_PROJECT/jboss-book/db-derby/database')
+Run Derby from command line using command:
+java -jar derbyrun.jar server start
 
-The most important part is to start db server.
+Setup your JBOSS AS datasource for the project. Tested with JBOSS AS 7.1.1.Final
+http://www.hameister.org/JBoss_DatasourceDerby.html
+You need to set your datasource like this:
+
+<datasources>
+  <datasource jndi-name="java:/DerbyDS" pool-name="DerbyDS" enabled="true" use-ccm="false">
+    <connection-url>jdbc:derby://localhost:1527/jboss-book;create=true</connection-url>
+    <driver>org.apache.derby</driver>
+    <security>
+      <user-name>root</user-name>
+      <password>toor</password>
+    </security>
+    <validation>
+      <validate-on-match>false</validate-on-match>
+      <background-validation>false</background-validation>
+    </validation>
+    <statement>
+      <share-prepared-statements>false</share-prepared-statements>
+    </statement>
+  </datasource>
+</datasources>
+<drivers>
+ <driver name="org.apache.derby" module="org.apache.derby">
+   <xa-datasource-class>org.apache.derby.jdbc.ClientXADataSource</xa-datasource-class>
+ </driver>
+</drivers>
+
