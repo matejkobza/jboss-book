@@ -1,5 +1,5 @@
 #Advanced Java EE project - library
-==================================
+
 The goal of this project is demonstrate knowledge gained during summer semester 2013 at fi.muni.cz. Usage of jboss java techs is required.
 
 - [x] Team 4 members
@@ -46,6 +46,7 @@ You need to set your datasource like this:
     &lt;/statement&gt;
   &lt;/datasource&gt;
 &lt;/datasources&gt;
+
 &lt;drivers&gt;
  &lt;driver name="org.apache.derby" module="org.apache.derby"&gt;
    &lt;xa-datasource-class&gt;org.apache.derby.jdbc.ClientXADataSource&lt;/xa-datasource-class&gt;
