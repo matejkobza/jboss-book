@@ -26,10 +26,10 @@ public class AccountManagerImpl implements AccountManager {
 	 * @see cz.muni.fi.jboss.book.ejb.security.RegistrationManager#register(cz.muni.fi.jboss.book.persistence.entity.User)
 	 */
 	@Override
-	public void register(User user) {
+	public User register(User user) {
 		// TODO - set to manager if there's no manager
 		user.setUserRole(UserRole.READER);
-		userDao.createUser(user);
+		return userDao.createUser(user);
 	}
 
     @Override
