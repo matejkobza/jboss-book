@@ -3,7 +3,6 @@ package cz.muni.fi.jboss.book.web.controller;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
 
 import cz.muni.fi.jboss.book.ejb.manager.ReservationManager;
 import cz.muni.fi.jboss.book.web.core.WebBeanFactory;

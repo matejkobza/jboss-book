@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import cz.muni.fi.jboss.book.ejb.security.AccountManager;
 import cz.muni.fi.jboss.book.persistence.entity.User;

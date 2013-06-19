@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-  <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                  template="templates/template2columns.xhtml">
-    
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="templates/template2columns.xhtml">
+
     <ui:define name="leftContent">
-      <h1>#{msgs["registration"]}</h1>
-      <h:panelGrid columns="2">
-        <h:outputLabel for="rfullname" value="#{msgs['fullname']}" />
-        <h:inputText id="rfullname" value="#{registrationBean.fullname}" />
-        
-        <h:outputLabel for="rusername" value="#{msgs['login']}" />
-        <h:inputText id="rusername" value="#{registrationBean.username}" />
-        
-        <h:outputLabel for="rpassword" value="#{msgs['password']}" />
-        <h:inputSecret id="rpassword" value="#{registrationBean.password}" />
-        
-        <h:outputLabel for="rpassword2" value="#{msgs['password2']}" />
-        <h:inputSecret id="rpassword2" value="#{registrationBean.password2}" />
-        
-        <h:column>&nbsp;</h:column>
-        <h:commandButton value="#{msgs['register']}" action="#{registrationBean.register}" />
-        
-      </h:panelGrid>
+        <h1>#{msgs["registration"]}</h1>
+        <h:panelGrid columns="3">
+            <h:outputLabel for="rfullname" value="#{msgs['fullname']}"/>
+            <p:inputText id="rfullname" value="#{registrationBean.fullname}" required="true" />
+            <p:message id="rfullnameMessage" for="rfullname" display="icon" />
+
+            <h:outputLabel for="rusername" value="#{msgs['login']}"/>
+            <p:inputText id="rusername" value="#{registrationBean.username}" required="true" />
+            <p:message id="rusernameMessage" for="rusername" display="icon" />
+
+            <h:outputLabel for="rpassword" value="#{msgs['password']}"/>
+            <p:password id="rpassword" value="#{registrationBean.password}" required="true" />
+            <p:message id="rpasswordMessage" for="rpassword" display="icon" />
+
+            <h:outputLabel for="rpassword2" value="#{msgs['password2']}"/>
+            <p:password id="rpassword2" value="#{registrationBean.password2}" required="true" />
+            <p:message id="rpassword2Message" for="rpassword2" display="icon" />
+
+            <h:column>&nbsp;</h:column>
+            <p:commandButton value="#{msgs['register']}"
+                             actionListener="#{registrationBean.register}"
+                    update="@(form)" />
+        </h:panelGrid>
     </ui:define>
-    
-  </ui:composition>
+
+</ui:composition>
 </html>

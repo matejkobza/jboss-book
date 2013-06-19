@@ -3,13 +3,9 @@ package cz.muni.fi.jboss.book.web.controller;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
 import cz.muni.fi.jboss.book.ejb.entities.BookCopyWithDetails;
 import cz.muni.fi.jboss.book.ejb.manager.BookManager;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
@@ -58,11 +54,6 @@ public class SearchBookBean implements Serializable {
 
     public List<BookCopyWithDetails> getBookCopies() {
         return this.bookCopies;
-    }
-
-    //@TODO implement
-    public void reserveBook(Long bookCopyId) {
-        FacesContext.getCurrentInstance().addMessage("Info", new FacesMessage("some message about booked book"));
     }
 
 }

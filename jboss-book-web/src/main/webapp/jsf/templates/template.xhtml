@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-  <h:head>
-    <h:outputStylesheet library="css" name="style.css" />
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://java.sun.com/jsf/html">
+<h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
     <title>Library</title>
-  </h:head>
-  <h:body>
+</h:head>
+<h:body>
     <h:form>
-      <div id="wrap">
-        <div class="header">
-          <div class="logo"><a href="index.html"><h:graphicImage library="images" name="logo.gif" /></a></div>            
-          <div id="menu">
-            <ul>                                                                       
-              <li class="#{(view.viewId eq '/jsf/index.xhtml') ? 'selected' : ''}"><h:commandLink action="index" value="#{msgs['navigation.home']}" /></li>
-              <li class="#{view.viewId eq '/jsf/about.xhtml' ? 'selected' : ''}"><h:commandLink action="about" value="#{msgs['navigation.aboutUs']}" /></li>
-              <li class="#{view.viewId eq '/jsf/searchBook.xhtml' ? 'selected' : ''}"><h:commandLink action="searchBook" value="#{msgs['navigation.searchBook']}" /></li>
-              <li class="#{view.viewId eq '/jsf/list.xhtml' ? 'selected' : ''}"><h:commandLink action="list" value="#{msgs['navigation.listBooks']}" /></li>
-              <li class="#{view.viewId eq '/jsf/account.xhtml' ? 'selected' : ''}"><h:commandLink action="account" value="#{msgs['navigation.account']}" /></li>
-              <li class="#{view.viewId eq '/jsf/contact.xhtml' ? 'selected' : ''}"><h:commandLink action="contact" value="#{msgs['navigation.contact']}" /></li>
-            </ul>
-          </div>     
-        </div> 
-        <div class="center_content">
-          <ui:insert name="content"></ui:insert>
-          <div class="clear"></div>
-        </div><!--end of center content-->
-        <div class="footer">
-          <div class="left_footer"></div>
-          <div class="right_footer">
-            <a href="#">home</a>
-            <a href="#">about us</a>
-            <a href="#">services</a>
-            <a href="#">privacy policy</a>
-            <a href="#">contact us</a>
-          </div>
+        <p:messages for="messages" id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+
+        <div id="wrap">
+            <div class="header">
+                <div class="logo"><a href="index.html"><h:graphicImage library="images" name="logo.gif"/></a></div>
+                <div id="menu">
+                    <ul>
+                        <li class="#{(view.viewId eq '/jsf/index.xhtml') ? 'selected' : ''}"><h:commandLink
+                                action="index" value="#{msgs['navigation.home']}"/></li>
+                        <li class="#{view.viewId eq '/jsf/about.xhtml' ? 'selected' : ''}"><h:commandLink action="about"
+                                                                                                          value="#{msgs['navigation.aboutUs']}"/>
+                        </li>
+                        <li class="#{view.viewId eq '/jsf/searchBook.xhtml' ? 'selected' : ''}"><h:commandLink
+                                action="searchBook" value="#{msgs['navigation.searchBook']}"/></li>
+                        <li class="#{view.viewId eq '/jsf/list.xhtml' ? 'selected' : ''}"><h:commandLink action="list"
+                                                                                                         value="#{msgs['navigation.listBooks']}"/>
+                        </li>
+                        <li class="#{view.viewId eq '/jsf/account.xhtml' ? 'selected' : ''}"><h:commandLink
+                                action="account" value="#{msgs['navigation.account']}"/></li>
+                        <li class="#{view.viewId eq '/jsf/contact.xhtml' ? 'selected' : ''}"><h:commandLink
+                                action="contact" value="#{msgs['navigation.contact']}"/></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="center_content">
+                <ui:insert name="content"></ui:insert>
+
+                <div class="clear"></div>
+            </div>
+            <!--end of center content-->
+            <div class="footer">
+                <div class="left_footer"></div>
+                <div class="right_footer">
+                    <h:commandLink action="index" value="#{msgs['navigation.home']}" />
+                    <h:commandLink action="about" value="#{msgs['navigation.aboutUs']}" />
+                    <h:commandLink action="contact" value="#{msgs['navigation.contact']}" />
+                </div>
+            </div>
         </div>
-      </div>
     </h:form>
-  </h:body>
+</h:body>
 </html>

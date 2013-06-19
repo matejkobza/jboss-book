@@ -68,6 +68,7 @@ public class RegistrationBean implements Serializable {
 
     public void register() {
         accountManager.register(user);
+        //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "title", "user added successfully"));
     }
 
     @PostConstruct

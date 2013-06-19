@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Time: 10:16 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WebBeanFactory implements Serializable {
+public class WebBeanFactory {
 
     /**
      * use this like WebBeanFactory.getBean("sessionScope.backingBean", BackingBean.class)
