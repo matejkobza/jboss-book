@@ -1,5 +1,6 @@
 package cz.muni.fi.jboss.book.ejb.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -40,7 +41,7 @@ public class ReservationManagerImpl implements ReservationManager {
 		// already reserved
 		if (!ReservationUtils.isAvailable(this, bookCopy))
 			return null;
-		
+
 		BookCopyReservation reservation = new BookCopyReservation();
 		reservation.setBookCopy(bookCopy);
 		reservation.setReservationState(ReservationState.NEW);
@@ -90,7 +91,10 @@ public class ReservationManagerImpl implements ReservationManager {
 
 	@Override
 	public List<BookCopyReservation> getBookCopyReservations(User reader, ReservationState state) {
-		return bookCopyReservationDao.findBookCopyReservations(reader, state);
+		if (reader == null)
+			return bookCopyReservationDao.findBookCopyReservationsByReservationState(state);
+		else
+			return bookCopyReservationDao.findBookCopyReservations(reader, state);
 	}
 
 	@Override
@@ -98,6 +102,21 @@ public class ReservationManagerImpl implements ReservationManager {
 		BookCopy bookCopy = new BookCopy();
 		bookCopy.setId(bookCopyId);
 		return bookCopyReservationDao.findBookCopyReservationsByBookCopy(bookCopy);
+	}
+
+	@Override
+	public List<BookCopyReservation> getAllBookCopyReservations(boolean includeReturned) {
+		List<BookCopyReservation> reservations = bookCopyReservationDao.findAllBookCopyReservations();
+		if (includeReturned)
+			return reservations;
+		else {
+			ArrayList<BookCopyReservation> filteredList = new ArrayList<BookCopyReservation>();
+			for (BookCopyReservation reservation : reservations) {
+				if (!(reservation.getReservationState().equals(ReservationState.RETURNED)))
+					filteredList.add(reservation);
+			}
+			return filteredList;
+		}
 	}
 
 }
