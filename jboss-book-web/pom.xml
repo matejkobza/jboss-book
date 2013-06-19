@@ -48,12 +48,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-impl</artifactId>
-            <version>2.1.21</version>
-        </dependency>-->
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -79,7 +73,7 @@
         </dependency>
 
         <!-- SEAM security -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.jboss.seam</groupId>
             <artifactId>seam-bom</artifactId>
             <version>${seam.version}</version>
@@ -91,7 +85,7 @@
             <groupId>org.jboss.seam.security</groupId>
             <artifactId>seam-security</artifactId>
             <version>${seam.version}</version>
-        </dependency>-->
+        </dependency>
 
     </dependencies>
 

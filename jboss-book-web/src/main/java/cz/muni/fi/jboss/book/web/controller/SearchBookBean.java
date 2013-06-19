@@ -56,4 +56,8 @@ public class SearchBookBean implements Serializable {
         return this.bookCopies;
     }
 
+    public List<Book> getListBooks() {
+        return bookManager.findAllBooks();
+    }
+
 }

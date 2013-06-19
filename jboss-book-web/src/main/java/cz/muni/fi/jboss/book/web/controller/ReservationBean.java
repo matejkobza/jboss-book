@@ -5,6 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import cz.muni.fi.jboss.book.ejb.manager.ReservationManager;
+import cz.muni.fi.jboss.book.ejb.security.AccountManager;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
 import cz.muni.fi.jboss.book.persistence.entity.User;
 import cz.muni.fi.jboss.book.web.core.WebApplication;
@@ -17,8 +18,11 @@ public class ReservationBean {
 	@EJB(name = "ReservationManager")
 	private ReservationManager reservationManager;
 
+    @EJB(name = "AccountManager")
+    private AccountManager accountManager;
+
 	public boolean reserve(Long bookCopyId) {
-		User user = WebBeanFactory.getLoginBean().getUser();
+		User user = accountManager.find(WebBeanFactory.getLoginBean().getUser().getId());
         if(user != null) {
             WebApplication.getReference().addErrorMessage("Reservation", "unable to reserve book. You need to login first.");
             return false;

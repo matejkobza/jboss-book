@@ -42,9 +42,11 @@
         <div class="footer">
             <div class="left_footer"></div>
             <div class="right_footer">
-                <h:commandLink action="index" value="#{msgs['navigation.home']}"/>
-                <h:commandLink action="about" value="#{msgs['navigation.aboutUs']}"/>
-                <h:commandLink action="contact" value="#{msgs['navigation.contact']}"/>
+                <h:form id="bottomForm">
+                    <h:commandLink action="/jsf/index" value="#{msgs['navigation.home']}"/>
+                    <h:commandLink action="/jsf/about" value="#{msgs['navigation.aboutUs']}"/>
+                    <h:commandLink action="/jsf/contact" value="#{msgs['navigation.contact']}"/>
+                </h:form>
             </div>
         </div>
     </div>

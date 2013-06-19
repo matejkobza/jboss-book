@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-  <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                  xmlns:p="http://primefaces.org/ui"
-                  xmlns:h="http://java.sun.com/jsf/html"
-                  template="templates/template.xhtml">
-    
-    <ui:define name="content">
-      <h1>#{msgs['listBooks']}</h1>
-        <p:dataTable>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                template="templates/template2columns.xhtml">
 
+    <ui:define name="leftContent">
+        <h1>#{msgs['listBooks']}</h1>
+        <p:dataTable value="#{searchBookBean.listBooks}" var="book" paginator="true" paginatorAlwaysVisible="false"
+                     paginatorPosition="bottom" rows="5" style="width: 470px;">
+            <p:column headerText="#{msgs['book.title']}">
+                <h:commandLink value="#{book.title}" actionListener="#{searchBookBean.selectBook(book.id)}"
+                               action="/jsf/bookDetail"/>
+            </p:column>
+            <p:column headerText="#{msgs['book.publisher']}">
+                <h:outputText value="#{book.author.firstName} #{book.author.surname}"/>
+            </p:column>
+            <p:column headerText="#{msgs['book.isbn']}">
+                <h:outputText value="#{book.ISBN}"/>
+            </p:column>
+            <p:column headerText="#{msgs['book.numberOfCopies']}">
+                <h:outputText value="#{fn:length(book.bookCopies)}"/>
+            </p:column>
         </p:dataTable>
     </ui:define>
-    
-  </ui:composition>
+
+</ui:composition>
 </html>

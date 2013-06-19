@@ -30,16 +30,16 @@
                     <h:outputLabel for="username" value="#{msgs['login']}"/>
                 </h:column>
                 <h:column>
-                    <p:inputText value="#{loginBean.user.username}" id="username"/>
+                    <p:inputText value="#{credentials.username}" id="username"/>
                 </h:column>
                 <h:column>
                     <h:outputLabel for="password" value="#{msgs['password']}"/>
                 </h:column>
                 <h:column>
-                    <p:password value="#{loginBean.user.password}" id="password"/>
+                    <p:password value="#{credentials.password}" id="password"/>
                 </h:column>
                 <h:column>
-                    <p:commandButton value="#{msgs['login']}" actionListener="#{loginBean.login}"
+                    <p:commandButton value="#{msgs['login']}" actionListener="#{identity.login}"
                                      update="accountPanel"/>
                 </h:column>
                 <h:column>
@@ -54,7 +54,7 @@
                 <h:link outcome="/jsf/account/accountSettings" value="#{msgs['accountSettings']}"/>
                 <h:link outcome="/jsf/account/systemSettings" value="#{msgs['systemSettings']}"/>
                 <hr/>
-                <p:commandLink value="#{msgs['logout']}" actionListener="#{loginBean.logout}" update="accountPanel"/>
+                <p:commandLink value="#{msgs['logout']}" actionListener="#{identity.logout}" update="accountPanel"/>
             </p:panel>
         </p:panel>
     </div>
