@@ -2,7 +2,9 @@ package cz.muni.fi.jboss.book.web.core;
 
 import javax.el.ValueExpression;
 import javax.faces.application.Application;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.util.ResourceBundle;
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,7 +50,7 @@ public class WebApplication {
         return FacesContext.getCurrentInstance();
     }
 
-    /*public void addInfoMessage(String title, String message) {
+    public void addInfoMessage(String title, String message) {
         getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, title, message));
     }
 
@@ -79,6 +81,13 @@ public class WebApplication {
     public void addFatalMessage(String message) {
         addFatalMessage(null, message);
     }
-    */
+
+    /**
+     *
+     * @return return current resource bundle
+     */
+    public ResourceBundle getResourceBundle() {
+        return WebApplication.getReference().getResourceBundle();
+    }
 
 }

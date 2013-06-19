@@ -40,4 +40,6 @@ public class WebBeanFactory {
         return (LoginBean)getBean("sessionScope.loginBean", LoginBean.class);
     }
 
+
+
 }

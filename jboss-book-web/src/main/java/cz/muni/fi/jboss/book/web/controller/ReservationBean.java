@@ -5,6 +5,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import cz.muni.fi.jboss.book.ejb.manager.ReservationManager;
+import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
+import cz.muni.fi.jboss.book.persistence.entity.User;
+import cz.muni.fi.jboss.book.web.core.WebApplication;
 import cz.muni.fi.jboss.book.web.core.WebBeanFactory;
 
 @ManagedBean
@@ -14,33 +17,20 @@ public class ReservationBean {
 	@EJB(name = "ReservationManager")
 	private ReservationManager reservationManager;
 
-	private String readerUsername;
-	private Long bookCopyId;
-
-	public String getReaderUsername() {
-		return readerUsername;
-	}
-
-	public void setReaderUsername(String readerUsername) {
-		this.readerUsername = readerUsername;
-	}
-
-	public Long getBookCopyId() {
-		return bookCopyId;
-	}
-
-	public void setBookCopyId(Long bookCopyId) {
-		this.bookCopyId = bookCopyId;
-	}
-
 	public boolean reserve(Long bookCopyId) {
-		//String readerUsername = (String) event.getComponent().getAttributes().get("readerUsername");
-        String username = WebBeanFactory.getLoginBean().getUsername();
-        if(username.isEmpty()) {
+		User user = WebBeanFactory.getLoginBean().getUser();
+        if(user != null) {
+            WebApplication.getReference().addErrorMessage("Reservation", "unable to reserve book. You need to login first.");
             return false;
         } else {
-		    //Long bookCopyId = (Long) event.getComponent().getAttributes().get("bookCopyId");
-		    return (reservationManager.reserveBook(bookCopyId, username) != null);
+            BookCopyReservation r = reservationManager.reserveBook(bookCopyId, user);
+            if(r == null) {
+                WebApplication.getReference().addErrorMessage("Reservation", "reservation failed.");
+                return false;
+            } else {
+                WebApplication.getReference().addInfoMessage("Reservation", "reservation successful.");
+                return true;
+            }
         }
 	}
 }

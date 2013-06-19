@@ -12,20 +12,21 @@
     <ui:define name="leftContent">
         <h1>#{msgs['searchBook']}</h1>
 
-        <p:panel header="Search book" style="width: 400px;">
+        <p:panel header="#{msgs['searchBook']}" style="width: 465px; margin-bottom: 25px;">
             <h:panelGrid columns="3" cellpadding="2">
                 <h:outputLabel for="#{searchBookBean.bookTitle}"
-                               value="Book title"/>
+                               value="#{msgs['bookTitle']}"/>
                 <h:inputText value="#{searchBookBean.bookTitle}"
-                             label="Book title"></h:inputText>
-                <p:commandButton value="Search" process="@all"
+                             label="#{msgs['bookTitle']}"></h:inputText>
+                <p:commandButton value="#{msgs['search']}" process="@all"
                                  actionListener="#{searchBookBean.searchBookByTitlePart}"
                                  update="resultTable" id="submit"/>
             </h:panelGrid>
         </p:panel>
 
         <p:dataTable var="book" id="resultTable" value="#{searchBookBean.searchBookResults}"
-                     paginator="true" rows="5" style="width: 450px">
+                     paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="5"
+                     style="width: 470px">
             <p:column sortBy="#{book.id}">
                 <f:facet name="header">
                     <h:outputText value="Id"/>
@@ -34,12 +35,12 @@
             </p:column>
             <p:column sortBy="#{book.title}" filterBy="#{book.title}">
                 <f:facet name="header">
-                    <h:outputText value="Name"/>
+                    <h:outputText value="#{msgs['bookTitle']}"/>
                 </f:facet>
                 <h:outputText value="#{book.title}"/>
             </p:column>
             <p:column>
-                <h:commandLink value="Book Detail" actionListener="#{searchBookBean.selectBook(book.id)}"
+                <h:commandLink value="#{msgs['bookDetail']}" actionListener="#{searchBookBean.selectBook(book.id)}"
                                action="bookDetail"/>
             </p:column>
         </p:dataTable>

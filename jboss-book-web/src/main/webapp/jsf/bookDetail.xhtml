@@ -12,7 +12,7 @@
 	<ui:define name="leftContent">
         <h1>#{searchBookBean.book.title}</h1>
         <p:dataTable var="bookCopyWithDetails" value="#{searchBookBean.bookCopies}"
-                     paginator="true" rows="5" style="width: 400px">
+                     paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="5" style="width: 470px">
             <p:column sortBy="#{bookCopyWithDetails.bookCopy.id}">
                 <f:facet name="header">
                     <h:outputText value="Id"/>
@@ -21,19 +21,20 @@
             </p:column>
             <p:column sortBy="#{bookCopyWithDetails.bookCopy.purchaseDate}">
                 <f:facet name="header">
-                    <h:outputText value="Purchase date"/>
+                    <h:outputText value="#{msgs['purchaseDate']}"/>
                 </f:facet>
                 <h:outputText value="#{bookCopyWithDetails.bookCopy.purchaseDate}"/>
             </p:column>
             <p:column>
                 <f:facet name="header">
-                    <h:outputText value="Is available"/>
+                    <h:outputText value="#{msgs['isAvailable']}"/>
                 </f:facet>
                 <h:outputText value="#{bookCopyWithDetails.available}"/>
             </p:column>
             <p:column>
-                <h:commandLink value="Reserve"
-                               actionListener="#{reservationBean.reserve(bookCopyWithDetails.bookCopy.id)}" />
+                <h:commandLink value="#{msgs['reserve']}"
+                               actionListener="#{reservationBean.reserve(bookCopyWithDetails.bookCopy.id)}"
+                        rendered="#{loginBean.authenticated}" />
             </p:column>
         </p:dataTable>
 	</ui:define>
