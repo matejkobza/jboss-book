@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
 
   <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                   template="templates/template2columns.xhtml">
     
     <ui:define name="leftContent">
       <h1>#{msgs['aboutUs']}</h1>
-      about us ... on the whole width of the page
+      <h:outputText value="#{msgs['aboutLibraryLongText']}" />
     </ui:define>
     
   </ui:composition>

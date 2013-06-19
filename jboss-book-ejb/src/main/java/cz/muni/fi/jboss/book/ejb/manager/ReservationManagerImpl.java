@@ -32,9 +32,6 @@ public class ReservationManagerImpl implements ReservationManager {
 	@Inject
 	private BookCopyDAO bookCopyDao;
 
-	@Inject
-	private UserDAO userDao;
-
 	@Override
 	public BookCopyReservation reserveBook(BookCopy bookCopy, User reader) {
 		// already reserved
@@ -50,8 +47,8 @@ public class ReservationManagerImpl implements ReservationManager {
 	}
 
 	@Override
-	public BookCopyReservation reserveBook(Long bookCopyId, String readerUsername) {
-		return reserveBook(bookCopyDao.findBookCopyById(bookCopyId), userDao.findUserByUsername(readerUsername));
+	public BookCopyReservation reserveBook(Long bookCopyId, User user) {
+		return reserveBook(bookCopyDao.findBookCopyById(bookCopyId), user);
 	}
 
 	private void checkReservationState(BookCopyReservation reservation, ReservationState requiredState) {

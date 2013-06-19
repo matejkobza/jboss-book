@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
 
-  <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                  template="template.xhtml">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="template.xhtml">
     <ui:define name="content">
 
-      <div class="left_content">
-        <ui:insert name="leftContent">
-          <ui:include src="/jsf/templates/defaultLeftColumn.xhtml" />
-        </ui:insert>
-        <div class="clear"></div>
-      </div><!--end of left content-->
+        <div class="left_content">
+            <h:form id="leftForm">
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="false"/>
+                <ui:insert name="leftContent">
+                    <ui:include src="/jsf/templates/defaultLeftColumn.xhtml"/>
+                </ui:insert>
+            </h:form>
 
-      <div class="right_content">
-        <ui:insert name="rightContent">
-          <ui:include src="/jsf/templates/defaultRightColumn.xhtml" />
-        </ui:insert>
-        <div class="clear"></div>
-      </div><!--end of right content-->
-    </ui:define>  
-  </ui:composition>
+            <div class="clear"></div>
+        </div>
+        <!--end of left content-->
+
+        <div class="right_content">
+            <h:form id="rightForm">
+                <ui:insert name="rightContent">
+                    <ui:include src="/jsf/templates/defaultRightColumn.xhtml"/>
+                </ui:insert>
+            </h:form>
+
+            <div class="clear"></div>
+        </div>
+        <!--end of right content-->
+    </ui:define>
+</ui:composition>
 </html>

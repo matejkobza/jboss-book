@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
-  <ui:composition>
+<ui:composition>
     <!--<div class="languages_box">
               <span class="red">Languages:</span>
               <a href="#" class="selected"><h:graphicImage library="images" name="gb.gif" /></a>
@@ -22,104 +22,121 @@
 
 
     <div class="cart">
-      <div class="title display-block">#{msgs['account']}</div>
-      <p:panel styleClass="home_cart_content" id="accountPanel">
-        <h:panelGrid rendered="#{!loginBean.authenticated}" columns="2" styleClass="display-block">
-          <h:outputLabel for="username" value="#{msgs['login']}" />
-          <h:inputText value="#{loginBean.username}" id="username" />
-
-          <h:outputLabel for="password" value="#{msgs['password']}" />
-          <h:inputSecret value="#{loginBean.password}" id="password" />
-
-          <h:commandButton value="#{msgs['login']}" action="#{loginBean.login}" />
-
-          <h:column>
-            <h:outputText value="#{msgs['dontHaveAccount']}" />&nbsp;
-            <h:commandLink value="#{msgs['signUp']}" action="registration" />
-          </h:column>
-        </h:panelGrid>
-        <p:panel rendered="#{loginBean.authenticated}" styleClass="accountMenu">
-          <h:commandLink action="newReservation" value="#{msgs['newReservation']}" />
-          <h:commandLink action="borrowed" value="#{msgs['borrowed']}" />
-          <hr />
-          <h:commandLink action="accountSettings" value="#{msgs['accountSettings']}" />
-          <h:commandLink action="systemSettings" value="#{msgs['systemSettings']}" />
-          <hr />
-          <h:commandLink value="#{msgs['logout']}" >
-            <f:ajax event="click" listener="#{loginBean.logout}" render="accountPanel" />
-          </h:commandLink>
+        <div class="title display-block">#{msgs['account']}</div>
+        <p:panel styleClass="home_cart_content" id="accountPanel">
+            <h:panelGrid rendered="#{!loginBean.authenticated}" columns="2" styleClass="display-block"
+                         style="border: 0px !important;">
+                <h:column>
+                    <h:outputLabel for="username" value="#{msgs['login']}"/>
+                </h:column>
+                <h:column>
+                    <p:inputText value="#{loginBean.user.username}" id="username"/>
+                </h:column>
+                <h:column>
+                    <h:outputLabel for="password" value="#{msgs['password']}"/>
+                </h:column>
+                <h:column>
+                    <p:password value="#{loginBean.user.password}" id="password"/>
+                </h:column>
+                <h:column>
+                    <p:commandButton value="#{msgs['login']}" actionListener="#{loginBean.login}"
+                                     update="accountPanel"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{msgs['dontHaveAccount']}"/>&nbsp;
+                    <h:link value="#{msgs['signUp']}" outcome="/jsf/account/registration"/>
+                </h:column>
+            </h:panelGrid>
+            <p:panel rendered="#{loginBean.authenticated}" styleClass="accountMenu">
+                <h:link outcome="/jsf/searchBook" value="#{msgs['newReservation']}"/>
+                <h:link outcome="/jsf/account/borrowed" value="#{msgs['borrowed']}"/>
+                <hr/>
+                <h:link outcome="/jsf/account/accountSettings" value="#{msgs['accountSettings']}"/>
+                <h:link outcome="/jsf/account/systemSettings" value="#{msgs['systemSettings']}"/>
+                <hr/>
+                <p:commandLink value="#{msgs['logout']}" actionListener="#{loginBean.logout}" update="accountPanel"/>
+            </p:panel>
         </p:panel>
-      </p:panel>
     </div>
-    <div class="title"><span class="title_icon"><h:graphicImage library="images" name="bullet3.gif" alt="" title="" /></span><h:outputText value="#{msgs['aboutLibraryTitle']}" /></div> 
+    <div class="title"><span class="title_icon"><h:graphicImage library="images" name="bullet3.gif" alt=""
+                                                                title=""/></span><h:outputText
+            value="#{msgs['aboutLibraryTitle']}"/></div>
     <div class="about">
-      <p>
-        <h:graphicImage library="images" name="about.gif" styleClass="right" />
-        <h:outputText value="#{msgs['aboutLibraryShortText']}" />
-      </p>
+        <p>
+            <h:graphicImage library="images" name="about.gif" styleClass="right"/>
+            <h:outputText value="#{msgs['aboutLibraryShortText']}"/>
+        </p>
 
     </div>
 
     <div class="right_box">
 
-      <div class="title"><span class="title_icon"><h:graphicImage library="images" name="bullet4.gif" alt="" title="" /></span>Promotions</div> 
-      <div class="new_prod_box">
-        <a href="details.html">product name</a>
-        <div class="new_prod_bg">
-          <span class="new_icon"><h:graphicImage library="images" name="promo_icon.gif" /></span>
-          <a href="details.html"><h:graphicImage library="images" name="thumb1.gif" styleClass="thumb" /></a>
-        </div>           
-      </div>
+        <div class="title"><span class="title_icon"><h:graphicImage library="images" name="bullet4.gif" alt=""
+                                                                    title=""/></span>Promotions
+        </div>
+        <div class="new_prod_box">
+            <a href="details.html">product name</a>
 
-      <div class="new_prod_box">
-        <a href="details.html">product name</a>
-        <div class="new_prod_bg">
-          <span class="new_icon"><h:graphicImage library="images" name="promo_icon.gif" /></span>
-          <a href="details.html"><h:graphicImage library="images" name="thumb2.gif" styleClass="thumb" /></a>
-        </div>           
-      </div>                    
+            <div class="new_prod_bg">
+                <span class="new_icon"><h:graphicImage library="images" name="promo_icon.gif"/></span>
+                <a href="details.html"><h:graphicImage library="images" name="thumb1.gif" styleClass="thumb"/></a>
+            </div>
+        </div>
 
-      <div class="new_prod_box">
-        <a href="details.html">product name</a>
-        <div class="new_prod_bg">
-          <span class="new_icon"><h:graphicImage library="images" name="promo_icon.gif" /></span>
-          <a href="details.html"><h:graphicImage library="images" name="thumb3.gif" styleClass="thumb" /></a>
-        </div>           
-      </div>              
+        <div class="new_prod_box">
+            <a href="details.html">product name</a>
+
+            <div class="new_prod_bg">
+                <span class="new_icon"><h:graphicImage library="images" name="promo_icon.gif"/></span>
+                <a href="details.html"><h:graphicImage library="images" name="thumb2.gif" styleClass="thumb"/></a>
+            </div>
+        </div>
+
+        <div class="new_prod_box">
+            <a href="details.html">product name</a>
+
+            <div class="new_prod_bg">
+                <span class="new_icon"><h:graphicImage library="images" name="promo_icon.gif"/></span>
+                <a href="details.html"><h:graphicImage library="images" name="thumb3.gif" styleClass="thumb"/></a>
+            </div>
+        </div>
 
     </div>
 
     <div class="right_box">
 
-      <div class="title"><span class="title_icon"><h:graphicImage library="images" name="bullet5.gif" /></span>Categories</div> 
+        <div class="title"><span class="title_icon"><h:graphicImage library="images" name="bullet5.gif"/></span>Categories
+        </div>
 
-      <ul class="list">
-        <li><a href="#">accesories</a></li>
-        <li><a href="#">books gifts</a></li>
-        <li><a href="#">specials</a></li>
-        <li><a href="#">hollidays gifts</a></li>
-        <li><a href="#">accesories</a></li>
-        <li><a href="#">books gifts</a></li>
-        <li><a href="#">specials</a></li>
-        <li><a href="#">hollidays gifts</a></li>
-        <li><a href="#">accesories</a></li>
-        <li><a href="#">books gifts</a></li>
-        <li><a href="#">specials</a></li>                                              
-      </ul>
+        <ul class="list">
+            <li><a href="#">accesories</a></li>
+            <li><a href="#">books gifts</a></li>
+            <li><a href="#">specials</a></li>
+            <li><a href="#">hollidays gifts</a></li>
+            <li><a href="#">accesories</a></li>
+            <li><a href="#">books gifts</a></li>
+            <li><a href="#">specials</a></li>
+            <li><a href="#">hollidays gifts</a></li>
+            <li><a href="#">accesories</a></li>
+            <li><a href="#">books gifts</a></li>
+            <li><a href="#">specials</a></li>
+        </ul>
 
-      <div class="title"><span class="title_icon"><h:graphicImage library="images" name="bullet6.gif" alt="" title="" /></span>Partners</div> 
+        <div class="title"><span class="title_icon"><h:graphicImage library="images" name="bullet6.gif" alt=""
+                                                                    title=""/></span>Partners
+        </div>
 
-      <ul class="list">
-        <li><a href="#">accesories</a></li>
-        <li><a href="#">books gifts</a></li>
-        <li><a href="#">specials</a></li>
-        <li><a href="#">hollidays gifts</a></li>
-        <li><a href="#">accesories</a></li>
-        <li><a href="#">books gifts</a></li>
-        <li><a href="#">specials</a></li>
-        <li><a href="#">hollidays gifts</a></li>
-        <li><a href="#">accesories</a></li>                              
-      </ul>
+        <ul class="list">
+            <li><a href="#">accesories</a></li>
+            <li><a href="#">books gifts</a></li>
+            <li><a href="#">specials</a></li>
+            <li><a href="#">hollidays gifts</a></li>
+            <li><a href="#">accesories</a></li>
+            <li><a href="#">books gifts</a></li>
+            <li><a href="#">specials</a></li>
+            <li><a href="#">hollidays gifts</a></li>
+            <li><a href="#">accesories</a></li>
+        </ul>
     </div>
-  </ui:composition>
+</ui:composition>
 </html>

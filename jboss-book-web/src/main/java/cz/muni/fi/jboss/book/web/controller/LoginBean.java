@@ -8,6 +8,8 @@ import javax.faces.bean.SessionScoped;
 
 import cz.muni.fi.jboss.book.ejb.security.AccountManager;
 import cz.muni.fi.jboss.book.persistence.entity.User;
+import cz.muni.fi.jboss.book.web.core.WebApplication;
+import cz.muni.fi.jboss.book.web.core.WebBeanFactory;
 
 /**
  * 
@@ -15,7 +17,6 @@ import cz.muni.fi.jboss.book.persistence.entity.User;
  */
 @ManagedBean
 @SessionScoped
-@Deprecated
 public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1516686394858785542L;
@@ -24,52 +25,57 @@ public class LoginBean implements Serializable {
 	private AccountManager accountManager;
 
 	private boolean authenticated = false;
+    private User user = new User();
+    private String password2;
 
-	private String username;
-	private String password;
+    public String getPassword2() {
+        return password2;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+    //@TODO implement there should be performed check
 	public boolean isAuthenticated() {
 		return this.authenticated;
 	}
 
     //@TODO implement
 	public void login() {
-		User user = new User();
-		user.setUsername(username);
-		user.setPassword(password);
-		
-		//if (accountManager.login(user)) {
-			this.authenticated = true;
-		//}
+	    this.authenticated = true;
 	}
 
     //@TODO implement
 	public void logout() {
-        //User user = this.accountManager.find(username);
-        //this.accountManager.logout(user);
-		this.authenticated = false;
+        this.authenticated = false;
 	}
 
-    //@TODO
+    //@TODO implement
     public boolean isLibrarian() {
-        this.accountManager.find(username);
         return true;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void register() {
+        if(!(this.user.getPassword().equals(getPassword2()))) {
+            WebApplication.getReference().addErrorMessage("Registration", "password does not match.");
+            return;
+        }
+        user = accountManager.register(user);
+        if(user != null) {
+            WebApplication.getReference().addInfoMessage("Registration", "you have been registered and logged in.");
+            WebBeanFactory.getLoginBean().setUser(user);
+        } else {
+            WebApplication.getReference().addErrorMessage("Registration", "user registration not successful.");
+        }
     }
 
 }

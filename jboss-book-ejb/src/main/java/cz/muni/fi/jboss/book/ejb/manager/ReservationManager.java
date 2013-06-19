@@ -14,7 +14,7 @@ public interface ReservationManager {
 	 */
 	public BookCopyReservation reserveBook(BookCopy bookCopy, User reader);
 	
-	public BookCopyReservation reserveBook(Long bookCopyId, String readerUsername);
+	public BookCopyReservation reserveBook(Long bookCopyId, User user);
 
 	/**
 	 * Used by Librarian when the reserved book is prepared
