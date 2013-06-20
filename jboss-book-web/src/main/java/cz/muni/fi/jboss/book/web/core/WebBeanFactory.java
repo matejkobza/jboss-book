@@ -2,6 +2,9 @@ package cz.muni.fi.jboss.book.web.core;
 
 import cz.muni.fi.jboss.book.web.controller.LoginBean;
 
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.inject.Inject;
 import java.io.Serializable;
 
 /**
@@ -11,7 +14,9 @@ import java.io.Serializable;
  * Time: 10:16 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WebBeanFactory {
+@ManagedBean
+@ApplicationScoped
+public class WebBeanFactory implements Serializable {
 
     /**
      * use this like WebBeanFactory.getBean("sessionScope.backingBean", BackingBean.class)

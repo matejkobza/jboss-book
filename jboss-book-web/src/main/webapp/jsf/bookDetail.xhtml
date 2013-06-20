@@ -34,7 +34,7 @@
             <p:column>
                 <h:commandLink value="#{msgs['reserve']}"
                                actionListener="#{reservationBean.reserve(bookCopyWithDetails.bookCopy.id)}"
-                        rendered="#{loginBean.authenticated}" />
+                        rendered="#{loginBean.loggedIn}" />
             </p:column>
         </p:dataTable>
 	</ui:define>

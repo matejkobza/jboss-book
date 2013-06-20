@@ -24,7 +24,7 @@ import cz.muni.fi.jboss.book.persistence.UserRole;
  */
 @Entity
 @Table(name = "LIBRARYUSER")
-public class User implements Serializable {
+public class User implements Serializable, org.picketlink.idm.api.User {
 
     private static final long serialVersionUID = -5392116112798403077L;
     @Id

@@ -9,10 +9,6 @@
 
     <name>jboss-book-web</name>
 
-    <properties>
-        <seam.version>3.1.0.Final</seam.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>cz.muni.fi.jboss-book</groupId>
@@ -76,7 +72,7 @@
         <dependency>
             <groupId>org.jboss.seam</groupId>
             <artifactId>seam-bom</artifactId>
-            <version>${seam.version}</version>
+            <version>3.1.0.Final</version>
             <type>pom</type>
             <scope>compile</scope>
         </dependency>
@@ -84,7 +80,8 @@
         <dependency>
             <groupId>org.jboss.seam.security</groupId>
             <artifactId>seam-security</artifactId>
-            <version>${seam.version}</version>
+            <version>3.2.0.Final</version>
+            <type>jar</type>
         </dependency>
 
     </dependencies>
@@ -142,10 +139,16 @@
             <url>http://repository.primefaces.org/</url>
         </repository>
 
-        <repository>
+        <!--<repository>
             <id>jboss-public-repository-group</id>
             <name>JBoss Public Maven Repository Group</name>
-            <url>http://repository.jboss.org/nexus/content/groups/public</url>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>-->
+
+        <repository>
+            <id>seam</id>
+            <name>seam</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
         </repository>
     </repositories>
 </project>

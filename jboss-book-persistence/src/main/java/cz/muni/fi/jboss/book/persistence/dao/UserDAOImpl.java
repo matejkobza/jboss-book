@@ -48,9 +48,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User findUserByUsername(String username) {
-		
 		return em.find(User.class, username);
-		
 	}
 
 	@Override

@@ -3,7 +3,10 @@ package cz.muni.fi.jboss.book.web.core;
 import javax.el.ValueExpression;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import java.util.ResourceBundle;
 
 /**
@@ -15,20 +18,17 @@ import java.util.ResourceBundle;
  */
 public class WebApplication {
 
-
-    static WebApplication ref;
-
-    protected WebApplication() {
-    }
-
-    public static WebApplication getReference() {
-        if (ref == null)
-            ref = new WebApplication();
-        return ref;
-    }
+    private static WebApplication ref;
 
     public Application getApplication() {
         return getFacesContext().getApplication();
+    }
+
+    public static WebApplication getReference() {
+        if(ref == null) {
+            ref = new WebApplication();
+        }
+        return ref;
     }
 
     public void setFacesBean(String beanScopeAndName, Object value) {
@@ -44,10 +44,6 @@ public class WebApplication {
         ValueExpression ve = app.getExpressionFactory().createValueExpression(
                 getFacesContext().getELContext(), "#{" + beanScopeAndName + "}", cls);
         return ve.getValue(getFacesContext().getELContext());
-    }
-
-    private FacesContext getFacesContext() {
-        return FacesContext.getCurrentInstance();
     }
 
     public void addInfoMessage(String title, String message) {
@@ -87,7 +83,11 @@ public class WebApplication {
      * @return return current resource bundle
      */
     public ResourceBundle getResourceBundle() {
-        return WebApplication.getReference().getResourceBundle();
+        return getFacesContext().getApplication().getResourceBundle(getFacesContext(), null);
+    }
+
+    public FacesContext getFacesContext() {
+        return FacesContext.getCurrentInstance();
     }
 
 }
