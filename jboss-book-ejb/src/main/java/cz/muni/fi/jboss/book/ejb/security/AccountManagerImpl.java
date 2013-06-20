@@ -1,5 +1,7 @@
 package cz.muni.fi.jboss.book.ejb.security;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.enterprise.context.Dependent;
@@ -27,8 +29,17 @@ public class AccountManagerImpl implements AccountManager {
 	 */
 	@Override
 	public User register(User user) {
-		// TODO - set to manager if there's no manager
-		user.setUserRole(UserRole.READER);
+		// TODO - do this more effectively
+		List<User> users = userDao.findAllUsers();
+		boolean managerExists = false;
+		for (User oneUser : users) {
+			if (oneUser.getUserRole().equals(UserRole.MANAGER)) {
+				managerExists = true;
+				break;
+			}
+		}
+		
+		user.setUserRole(managerExists ? UserRole.READER : UserRole.MANAGER);
 		return userDao.createUser(user);
 	}
 

@@ -5,7 +5,7 @@ import cz.muni.fi.jboss.book.persistence.entity.User;
 public interface AccountManager {
 
     /**
-     * Register new user to the system. If no librarian in the system first registered user will be one.
+     * Register new user to the system. If no manager in the system first registered user will be one.
      * @param user to be register
      * @return registered user
      */
