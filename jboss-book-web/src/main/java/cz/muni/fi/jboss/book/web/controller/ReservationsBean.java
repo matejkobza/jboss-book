@@ -8,6 +8,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.context.RequestContext;
+
 import cz.muni.fi.jboss.book.ejb.manager.ReservationManager;
 import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
@@ -24,13 +26,13 @@ public class ReservationsBean {
 	private List<BookCopyReservation> reservations = null;
 
 	public ReservationsBean() {
-		//reservationStates.put("all", 0L);
+		// reservationStates.put("all", 0L);
 		reservationStates.put("new", 1L);
 		reservationStates.put("ready", 2L);
 		reservationStates.put("lent", 3L);
 		reservationStates.put("returned", 4L);
 	}
-	
+
 	private ReservationState numberToReservationState(Long stateNum) {
 		if (stateNum.equals(1L))
 			return ReservationState.NEW;
@@ -61,7 +63,7 @@ public class ReservationsBean {
 	public Map<String, Long> getReservationStates() {
 		return reservationStates;
 	}
-	
+
 	public void handleReservationStateChange() {
 		ReservationState state = numberToReservationState(this.reservationState);
 		if (state == null) {
@@ -69,6 +71,44 @@ public class ReservationsBean {
 		} else {
 			reservations = reservationManager.getBookCopyReservations(null, state);
 		}
+	}
+
+	private void updateReservation(Long reservationId, ReservationState state) {
+		if (this.reservations == null)
+			return;
+		for (BookCopyReservation reservation : this.reservations) {
+			if (reservation.getId().equals(reservationId)) {
+				reservation.setReservationState(state);
+				break;
+			}
+		}
+	}
+
+	public boolean prepareBook(Long reservationId) {
+		reservationManager.prepareBook(reservationId);
+		// TODO - only if the call succeeded
+		updateReservation(reservationId, ReservationState.READY);
+		RequestContext.getCurrentInstance().update("resultTable");
+		// TODO
+		return true;
+	}
+
+	public boolean lendBook(Long reservationId) {
+		reservationManager.lendBook(reservationId);
+		// TODO - only if the call succeeded
+		updateReservation(reservationId, ReservationState.LENT);
+		RequestContext.getCurrentInstance().update("resultTable");
+		// TODO
+		return true;
+	}
+	
+	public boolean returnBook(Long reservationId) {
+		reservationManager.returnBook(reservationId);
+		// TODO - only if the call succeeded
+		updateReservation(reservationId, ReservationState.RETURNED);
+		RequestContext.getCurrentInstance().update("resultTable");
+		// TODO
+		return true;
 	}
 
 }

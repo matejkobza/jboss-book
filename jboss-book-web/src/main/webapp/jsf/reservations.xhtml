@@ -51,20 +51,30 @@
 				</f:facet>
 				<h:outputText value="#{reservation.reservationState}" />
 			</p:column>
-			<p:column sortBy="#{reservation.user.name}" filterBy="#{reservation.user.name}">
+			<p:column sortBy="#{reservation.user.name}"
+				filterBy="#{reservation.user.name}">
 				<f:facet name="header">
 					<h:outputText value="User" />
 				</f:facet>
 				<h:outputText value="#{reservation.user.name}" />
 			</p:column>
-			<p:column sortBy="#{reservation.user.username}" filterBy="#{reservation.user.username}">
+			<p:column sortBy="#{reservation.user.username}"
+				filterBy="#{reservation.user.username}">
 				<f:facet name="header">
 					<h:outputText value="Username" />
 				</f:facet>
 				<h:outputText value="#{reservation.user.username}" />
 			</p:column>
 			<p:column>
-				TODO - change state
+				<h:commandLink value="#{msgs['prepareBook']}"
+					actionListener="#{reservationsBean.prepareBook(reservation.id)}"
+					rendered="#{reservation.reservationState == 'NEW'}" />
+				<h:commandLink value="#{msgs['lendBook']}"
+					actionListener="#{reservationsBean.lendBook(reservation.id)}"
+					rendered="#{reservation.reservationState == 'READY'}" />
+				<h:commandLink value="#{msgs['returnBook']}"
+					actionListener="#{reservationsBean.returnBook(reservation.id)}"
+					rendered="#{reservation.reservationState == 'LENT'}" />
 			</p:column>
 		</p:dataTable>
 	</ui:define>
