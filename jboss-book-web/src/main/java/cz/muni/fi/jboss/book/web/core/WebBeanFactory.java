@@ -1,10 +1,9 @@
 package cz.muni.fi.jboss.book.web.core;
 
-import cz.muni.fi.jboss.book.web.controller.LoginBean;
+import cz.muni.fi.jboss.book.web.controller.IdentityBean;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Inject;
 import java.io.Serializable;
 
 /**
@@ -41,8 +40,8 @@ public class WebBeanFactory implements Serializable {
         return bean;
     }
 
-    public static LoginBean getLoginBean() {
-        return (LoginBean)getBean("sessionScope.loginBean", LoginBean.class);
+    public static IdentityBean getLoginBean() {
+        return (IdentityBean)getBean("sessionScope.identityBean", IdentityBean.class);
     }
 
 

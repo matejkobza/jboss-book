@@ -13,4 +13,8 @@
         <security:authenticatorClass>cz.muni.fi.jboss.book.web.util.Authenticator</security:authenticatorClass>
     </security:IdentityImpl>
 
+    <alternatives>
+        <class>cz.muni.fi.jboss.book.web.controller.IdentityBean</class>
+    </alternatives>
+
 </beans>

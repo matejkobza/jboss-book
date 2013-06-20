@@ -10,7 +10,7 @@
 
     <ui:define name="leftContent">
         <h1>#{msgs["registration"]}</h1>
-        <h:panelGrid columns="3" rendered="#{!loginBean.loggedIn}">
+        <h:panelGrid columns="3" rendered="#{!identityBean.loggedIn}">
             <h:outputLabel for="rfullname" value="#{msgs['fullname']} *"/>
             <p:inputText id="rfullname" value="#{registrationBean.user.name}" required="true" />
             <p:message id="rfullnameMessage" for="rfullname" display="icon" />

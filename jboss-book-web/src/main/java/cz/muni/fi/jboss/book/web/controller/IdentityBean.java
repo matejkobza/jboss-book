@@ -10,9 +10,6 @@ import javax.faces.bean.SessionScoped;
 import cz.muni.fi.jboss.book.ejb.security.AccountManager;
 import cz.muni.fi.jboss.book.persistence.UserRole;
 import cz.muni.fi.jboss.book.persistence.entity.User;
-import cz.muni.fi.jboss.book.web.core.WebApplication;
-import cz.muni.fi.jboss.book.web.util.Authenticator;
-import cz.muni.fi.jboss.book.web.util.PasswordUtils;
 import org.jboss.seam.security.IdentityImpl;
 
 
@@ -22,9 +19,7 @@ import org.jboss.seam.security.IdentityImpl;
 @ManagedBean
 @SessionScoped
 @Alternative
-public class LoginBean extends IdentityImpl implements Serializable {
-
-    private static final long serialVersionUID = 1516686394858785542L;
+public class IdentityBean extends IdentityImpl {
 
     @EJB(name = "AccountManager")
     private AccountManager accountManager;
