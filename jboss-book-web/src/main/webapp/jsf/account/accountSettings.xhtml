@@ -4,8 +4,35 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-        template="templates/template2columns.xhtml">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="../templates/template2columns.xhtml">
     <ui:define name="leftContent">
+        <p:panel rendered="#{identityBean.loggedIn}" styleClass="loggedInContentWrapper">
+            <h1><h:outputText value="#{msgs['accountSettings']}"/></h1>
+
+            <p:panel header="#{msgs['username']}">
+                <span style="width: 100px; display: block; float: left;"><h:outputText value="Name"/></span>
+                <p:inputText value="#{settingsBean.username}"/>
+            </p:panel>
+
+            <p:commandButton value="#{msgs['update']}" actionListener="#{settingsBean.updateName}"
+                             update=":rightForm:accountPanel" styleClass="margin10"/>
+
+            <p:panel header="#{msgs['changePassword']}" style="margin-top: 20px;">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Password"/>
+                    <p:password value="#{settingsBean.password1}" />
+                    <h:outputText value="Password again"/>
+                    <p:password value="#{settingsBean.password2}"/>
+                    <h:outputText value="New password"/>
+                    <p:password value="#{settingsBean.newPassword}"/>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:commandButton value="#{msgs['update']}" actionListener="#{settingsBean.updatePassword}"
+                             styleClass="margin10"/>
+        </p:panel>
 
     </ui:define>
 </ui:composition>

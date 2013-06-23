@@ -6,13 +6,6 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
 
-/**
- * Created with IntelliJ IDEA.
- * User: matejkobza
- * Date: 6/18/13
- * Time: 10:16 PM
- * To change this template use File | Settings | File Templates.
- */
 @ManagedBean
 @ApplicationScoped
 public class WebBeanFactory implements Serializable {
@@ -40,7 +33,7 @@ public class WebBeanFactory implements Serializable {
         return bean;
     }
 
-    public static IdentityBean getLoginBean() {
+    public static IdentityBean getIdentityBean() {
         return (IdentityBean)getBean("sessionScope.identityBean", IdentityBean.class);
     }
 

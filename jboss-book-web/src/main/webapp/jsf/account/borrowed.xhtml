@@ -1,17 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!-- this screen should be only available for reservations, that readed has made. I dont think there will be too much
+reservations for one user. Also we dont need filter on every column. It's more nice to have feature but not required. -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
-        template="templates/template2columns.xhtml">
-    <ui:define name="leftContent">
-        <h1><h:outputText value="#{msgs['borrowedBooks']}"/></h1>
-        <p:dataTable value="" var="book">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="../templates/template2columns.xhtml">
 
-        </p:dataTable>
+    <ui:define name="leftContent">
+        <p:panel rendered="#{identityBean.loggedIn}" styleClass="loggedInContentWrapper">
+            <h1>#{msgs['reservations']}</h1>
+
+            <p:dataTable var="reservation" id="resultTable"
+                         value="#{reservationsBean.reservations}" paginator="true" paginatorAlwaysVisible="false"
+                         paginatorPosition="bottom" rows="50"
+                         style="width: 470px">
+                <p:column sortBy="#{reservation.id}">
+                    <f:facet name="header">
+                        <h:outputText value="Id"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.id}"/>
+                </p:column>
+                <p:column sortBy="#{reservation.bookCopy.book.title}">
+                    <f:facet name="header">
+                        <h:outputText value="Book title"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.bookCopy.book.title}"/>
+                </p:column>
+                <p:column sortBy="#{reservation.bookCopy.purchaseDate}">
+                    <f:facet name="header">
+                        <h:outputText value="Purchase date"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.bookCopy.purchaseDate}"/>
+                </p:column>
+                <!-- status is always reservered -->
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Status"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.reservationState}"/>
+                </p:column>
+                <!-- the reservation is always made for me
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="User"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.user.name}"/>
+                </p:column>-->
+                <!-- these action buttons have what purpose? Maybe cancel reservation on a book? But we have no status reservered book!!! -->
+                <!--<p:column>
+                    <h:commandLink value="#{msgs['prepareBook']}"
+                                   actionListener="#{reservationsBean.prepareBook(reservation.id)}"
+                                   rendered="#{reservation.reservationState == 'NEW'}"/>
+                    <h:commandLink value="#{msgs['lendBook']}"
+                                   actionListener="#{reservationsBean.lendBook(reservation.id)}"
+                                   rendered="#{reservation.reservationState == 'READY'}"/>
+                    <h:commandLink value="#{msgs['returnBook']}"
+                                   actionListener="#{reservationsBean.returnBook(reservation.id)}"
+                                   rendered="#{reservation.reservationState == 'LENT'}"/>
+                </p:column>-->
+            </p:dataTable>
+        </p:panel>
     </ui:define>
+
 </ui:composition>
 </html>

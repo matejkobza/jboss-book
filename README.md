@@ -10,9 +10,9 @@ The goal of this project is demonstrate knowledge gained during summer semester 
 - [x] EJB
 - [x] JPA2 persistence layer
 - [x] CDI
-- [ ] 3 security roles
+- [x] 3 security roles
 - [ ] Bean Validation
-- [ ] Seam 3
+- [x] Seam 3
 - [ ] Arquillian
 - [ ] 2 clusters and demonstration of failure of one
 - [ ] deployment to PaaS OpenShift
@@ -54,5 +54,5 @@ You need to set your datasource like this:
 &lt;/drivers&gt;
 </pre>
 
-After that you can build the project and run ear archive on server.
+After that you can build the project and deploy ear archive to the server.
 

@@ -18,4 +18,6 @@ public interface AccountManager {
      */
     public User find(String username);
 
+    public void update(User user);
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import cz.muni.fi.jboss.book.persistence.entity.User;
 
@@ -55,4 +56,17 @@ public class UserDAOImpl implements UserDAO {
 	public List<User> findAllUsers() {
 		return em.createQuery("SELECT u FROM User u").getResultList();
 	}
+
+    @Override
+    public void deleteUserByUsername(String username) {
+        em.remove(em.find(User.class, username));
+    }
+
+    /*@Override
+    public List<User> searchUsers(String key) {
+        //Query q = em.createQuery("SELECT u FROM User u WHERE u.name LIKE :X");
+        //q.setParameter("X", "%" + key + "%");
+        //return q.getResultList();
+        return findAllUsers();
+    } */
 }

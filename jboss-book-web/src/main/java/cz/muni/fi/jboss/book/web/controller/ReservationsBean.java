@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import cz.muni.fi.jboss.book.web.core.WebApplication;
 import org.primefaces.context.RequestContext;
 
 import cz.muni.fi.jboss.book.ejb.manager.ReservationManager;
@@ -56,6 +57,13 @@ public class ReservationsBean {
 		return reservationState;
 	}
 
+    public String getLocalizedReservationState(ReservationState key) {
+        if(WebApplication.getReference().getResourceBundle().containsKey(key.toString())) {
+            return WebApplication.getReference().getResourceBundle().getString(key.toString());
+        }
+        return key.toString();
+    }
+
 	public void setReservationState(Long reservationState) {
 		this.reservationState = reservationState;
 	}
@@ -64,6 +72,9 @@ public class ReservationsBean {
 		return reservationStates;
 	}
 
+    /**
+     * this is not used i think
+     */
 	public void handleReservationStateChange() {
 		ReservationState state = numberToReservationState(this.reservationState);
 		if (state == null) {

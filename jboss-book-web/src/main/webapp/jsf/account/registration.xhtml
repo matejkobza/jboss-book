@@ -30,7 +30,7 @@
             <h:column>&nbsp;</h:column>
             <p:commandButton value="#{msgs['register']}"
                              actionListener="#{registrationBean.register}"
-                    update="@(#accountPanel)" />
+                    update=":rightForm:accountPanel" />
         </h:panelGrid>
     </ui:define>
 

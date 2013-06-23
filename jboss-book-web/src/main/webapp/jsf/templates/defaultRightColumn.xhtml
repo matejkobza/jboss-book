@@ -47,21 +47,25 @@
                 </h:column>
             </h:panelGrid>
             <p:panel rendered="#{identityBean.loggedIn}" styleClass="accountMenu">
-                <span style="font-weight: bold; width: 130px; display: block; float: left;"><h:outputText value="#{msgs['username']}:"/></span>
-                <h:outputText value="#{identityBean.user.name}"/><br />
-                <span style="font-weight: bold; width: 130px; display: block; float: left;"><h:outputText value="#{msgs['role']}:" /></span>
-                <h:outputText value=" #{identityBean.user.userRole}" />
-                <br /><br />
-                <h:link outcome="/jsf/searchBook" value="#{msgs['newReservation']}"/>
-                <h:link outcome="/jsf/account/borrowed" value="#{msgs['borrowed']}"/>
-                <h:link outcome="/jsf/account/reservations" value="#{msgs['reservations']}"/>
-                <h:link outcome="/jsf/account/manageUsers" value="#{msgs['manageUsers']}" rendered="#{identityBean.manager}" />
+                <span style="font-weight: bold; width: 130px; display: block; float: left;"><h:outputText
+                        value="#{msgs['username']}:"/></span>
+                <h:outputText value="#{identityBean.user.name}"/><br/>
+                <span style="font-weight: bold; width: 130px; display: block; float: left;"><h:outputText
+                        value="#{msgs['role']}:"/></span>
+                <h:outputText value=" #{identityBean.user.userRole}"/>
+                <br/><br/>
+                <h:link outcome="/jsf/searchBook" value="#{msgs['newReservation']}" rendered="#{identityBean.reader}"/>
+                <h:link outcome="/jsf/account/borrowed" value="#{msgs['borrowed']}" rendered="#{identityBean.reader}"/>
+                <h:link outcome="/jsf/account/reservations" value="#{msgs['reservations']}"
+                        rendered="#{identityBean.reader}"/>
+                <h:link outcome="/jsf/account/manageUsers" value="#{msgs['manageUsers']}"
+                        rendered="#{identityBean.manager}"/>
                 <hr/>
                 <h:link outcome="/jsf/account/accountSettings" value="#{msgs['accountSettings']}"/>
                 <h:link outcome="/jsf/account/systemSettings" value="#{msgs['systemSettings']}"
                         rendered="#{identityBean.manager}"/>
                 <hr/>
-                <p:commandLink value="#{msgs['logout']}" actionListener="#{identityBean.logout}" update="accountPanel"/>
+                <h:commandLink value="#{msgs['logout']}" actionListener="#{identityBean.logout}" />
             </p:panel>
         </p:panel>
     </div>

@@ -102,9 +102,9 @@ public class RecordInitializer {
 
 	@PostConstruct
 	public void create() {
-		createUsers();
-		createBooks();
-		reserveBooks();
+		//createUsers();
+		//createBooks();
+		//reserveBooks();
 	}
 
 }

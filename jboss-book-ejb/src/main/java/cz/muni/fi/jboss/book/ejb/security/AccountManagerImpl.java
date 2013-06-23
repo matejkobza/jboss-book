@@ -48,5 +48,9 @@ public class AccountManagerImpl implements AccountManager {
         return userDao.findUserByUsername(username);
     }
 
+    public void update(User user) {
+        userDao.updateUser(user);
+    }
+
 }
 

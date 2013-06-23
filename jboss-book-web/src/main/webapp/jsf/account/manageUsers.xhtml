@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="../templates/template2columns.xhtml">
+    <ui:define name="leftContent">
+        <p:panel rendered="#{identityBean.loggedIn and identityBean.manager}" styleClass="loggedInContentWrapper">
+            <h1><h:outputText value="#{msgs['manageUsers']}"/></h1>
+            <p:panel header="Add new librarian">
+                <h:panelGrid columns="3">
+                    <h:outputLabel for="rfullname" value="#{msgs['fullname']} *"/>
+                    <p:inputText id="rfullname" value="#{registrationBean.user.name}" required="true"/>
+                    <p:message id="rfullnameMessage" for="rfullname" display="icon"/>
+
+                    <h:outputLabel for="rusername" value="#{msgs['login']} *"/>
+                    <p:inputText id="rusername" value="#{registrationBean.user.username}" required="true"/>
+                    <p:message id="rusernameMessage" for="rusername" display="icon"/>
+
+                    <h:outputLabel for="rpassword" value="#{msgs['password']} *"/>
+                    <p:password id="rpassword" value="#{registrationBean.user.password}" required="true"/>
+                    <p:message id="rpasswordMessage" for="rpassword" display="icon"/>
+
+                    <h:outputLabel for="rpassword2" value="#{msgs['password2']} *"/>
+                    <p:password id="rpassword2" value="#{registrationBean.password2}" required="true"/>
+                    <p:message id="rpassword2Message" for="rpassword2" display="icon"/>
+
+                    <h:column>&nbsp;</h:column>
+                    <p:commandButton value="#{msgs['register']}"
+                                     actionListener="#{registrationBean.createLibrarian}"/>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:panel header="Filter" style="margin-top: 15px;">
+                <h:panelGrid columns="3">
+                    <h:outputText value="#{msgs['searchByUsername']}"/>
+                    <p:inputText value="#{searchUserBean.username}"/>
+                    <p:commandButton value="#{msgs['search']}" actionListener="#{searchUserBean.searchByFilter}"/>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:dataTable id="usersTable" style="margin-top: 15px;" value="#{searchUserBean.users}"
+                         var="user">
+                <f:facet name="header">
+                    <h:outputText value="#{msgs['users']}" />
+                </f:facet>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['username']}"/>
+                    </f:facet>
+                    <h:outputText value="#{user.name}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['action']}" />
+                    </f:facet>
+                    <p:commandButton value="#{msgs['makeLibrarian']}"
+                                     actionListener="#{identityBean.addLibrarian(user)}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+</html>
