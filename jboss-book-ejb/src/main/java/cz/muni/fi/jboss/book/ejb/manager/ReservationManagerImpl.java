@@ -74,7 +74,7 @@ public class ReservationManagerImpl implements ReservationManager {
 	@Override
 	public void lendBook(Long reservationId) {
 		BookCopyReservation reservation = getReservation(reservationId);
-		checkReservationState(reservation, ReservationState.READY);
+		//checkReservationState(reservation, ReservationState.READY);
 		reservation.setReservationState(ReservationState.LENT);
 		bookCopyReservationDao.updateBookCopyReservation(reservation);
 	}
@@ -116,5 +116,12 @@ public class ReservationManagerImpl implements ReservationManager {
 			return filteredList;
 		}
 	}
+
+    @Override
+    public void cancelReservation(Long reservationId) {
+        BookCopyReservation bookCopyReservation = bookCopyReservationDao.findBookCopyReservationById(reservationId);
+        bookCopyReservationDao.deleteBookCopyReservation(bookCopyReservation);
+    }
+
 
 }

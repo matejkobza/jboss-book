@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this screen should be only available for reservations, that readed has made. I dont think there will be too much
+reservations for one user. Also we dont need filter on every column. It's more nice to have feature but not required. -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="../templates/template2columns.xhtml">
+
+    <ui:define name="leftContent">
+        <p:panel rendered="#{identityBean.loggedIn and identityBean.librarian}" styleClass="loggedInContentWrapper">
+            <h1><h:outputText value="#{msgs['readers']}"/></h1>
+
+            <p:panel collapsed="false" toggleable="true" header="Reader" id="userDetailPanel">
+                <h:panelGrid columns="3" rendered="#{!reservationsBean.userSelected}">
+                    <p:outputLabel for="user" value="#{msgs['readerName']}:"/>
+                    <p:autoComplete id="user" value="#{reservationsBean.readerName}"
+                                    completeMethod="#{reservationsBean.complete}"
+                                    forceSelection="true"/>
+                    <p:commandButton value="#{msgs['search']}" actionListener="#{reservationsBean.searchUser}"
+                                     update="userDetailPanel"/>
+
+                </h:panelGrid>
+                <h:panelGrid columns="2" rendered="#{reservationsBean.userSelected}">
+                    <h:outputText value="#{msgs['username']}: "/>
+                    <h:outputText value="#{reservationsBean.reader.name}"/>
+                </h:panelGrid>
+
+                <p:dataTable rendered="#{reservationsBean.userSelected}" id="readerBorrowingsTable" var="reservation"
+                             value="#{reservationsBean.readerBorrowings}">
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['borrowings']}"/>
+                    </f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs['book.title']}"/>
+                        </f:facet>
+                        <h:outputText value="#{reservation.bookCopy.book.title}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs['reservation.dateCreated']}"/>
+                        </f:facet>
+                        <h:outputText value="#{reservation.created}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs['action']}"/>
+                        </f:facet>
+                        <p:commandLink value="#{msgs['return']}"
+                                       actionListener="#{reservationsBean.returnBook(reservation.id)}"
+                                       update=":leftForm:readerBorrowingsTable"/>
+                    </p:column>
+                </p:dataTable>
+
+                <p:dataTable rendered="#{reservationsBean.userSelected}" id="readerReservationsTable"
+                             value="#{reservationsBean.readerReservations}" var="reservation" style="margin-top: 20px;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['reservations']}"/>
+                    </f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs['book.title']}"/>
+                        </f:facet>
+                        <h:outputText value="#{reservation.bookCopy.book.title}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs['reservation.dateCreated']}"/>
+                        </f:facet>
+                        <h:outputText value="#{reservation.created}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs['action']}"/>
+                        </f:facet>
+                        <p:commandLink value="#{msgs['lend']}"
+                                       actionListener="#{reservationsBean.lendBook(reservation.id)}"
+                                       update=":leftForm:readerBorrowingsTable,:leftForm:readerReservationsTable"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+
+            <h2>Search Book</h2>
+            <p:dataTable var="reservation" id="reservationsTable"
+                         value="#{reservationsBean.reservations}"
+                         paginator="true"
+                         paginatorPosition="bottom"
+                         paginatorAlwaysVisible="false"
+                         rows="50"
+                         style="width: 470px; margin-top: 20px;">
+                <p:column sortBy="#{reservation.bookCopy.book.title}"
+                          filterBy="#{reservation.bookCopy.book.title}">
+                    <f:facet name="header">
+                        <h:outputText value="Book title"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.bookCopy.book.title}"/>
+                </p:column>
+                <p:column sortBy="#{reservation.reservationState}">
+                    <f:facet name="header">
+                        <h:outputText value="Available items"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.reservationState}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
+</html>

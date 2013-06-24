@@ -54,4 +54,6 @@ public interface ReservationManager {
      */
 	public List<BookCopyReservation> getAllBookCopyReservations(boolean includeReturned);
 
+    public void cancelReservation(Long reservationId);
+
 }

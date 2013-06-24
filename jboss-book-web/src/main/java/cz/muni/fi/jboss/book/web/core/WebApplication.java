@@ -7,6 +7,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class WebApplication {
@@ -18,7 +19,7 @@ public class WebApplication {
     }
 
     public static WebApplication getReference() {
-        if(ref == null) {
+        if (ref == null) {
             ref = new WebApplication();
         }
         return ref;
@@ -72,11 +73,11 @@ public class WebApplication {
     }
 
     /**
-     *
      * @return return current resource bundle
      */
     public ResourceBundle getResourceBundle() {
-        return getFacesContext().getApplication().getResourceBundle(getFacesContext(), null);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("Messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
+        return resourceBundle;
     }
 
     public FacesContext getFacesContext() {

@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
-	template="templates/template2columns.xhtml">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="templates/template2columns.xhtml">
 
-	<ui:define name="leftContent">
+    <ui:define name="leftContent">
         <h1>#{searchBookBean.book.title}</h1>
         <p:dataTable var="bookCopyWithDetails" value="#{searchBookBean.bookCopies}"
-                     paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="5" style="width: 470px">
+                     paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="5"
+                     style="width: 470px" id="bookDetailTable">
             <p:column sortBy="#{bookCopyWithDetails.bookCopy.id}">
                 <f:facet name="header">
-                    <h:outputText value="Id"/>
+                    <h:outputText value="#{msgs['id']}"/>
                 </f:facet>
                 <h:outputText value="#{bookCopyWithDetails.bookCopy.id}"/>
             </p:column>
@@ -32,11 +33,12 @@
                 <h:outputText value="#{bookCopyWithDetails.available}"/>
             </p:column>
             <p:column>
-                <h:commandLink value="#{msgs['reserve']}"
+                <p:commandLink value="#{msgs['reserve']}"
                                actionListener="#{reservationBean.reserve(bookCopyWithDetails.bookCopy.id)}"
-                        rendered="#{identityBean.loggedIn}" />
+                               rendered="#{identityBean.loggedIn and bookCopyWithDetails.available}"
+                               update=":leftForm:bookDetailTable"/>
             </p:column>
         </p:dataTable>
-	</ui:define>
+    </ui:define>
 </ui:composition>
 </html>
