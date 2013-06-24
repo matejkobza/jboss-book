@@ -58,6 +58,7 @@ public class BookCopyReservationDAOImplTest{
 		newReservation.setBookCopy(createTestBookCopy());
 		newReservation.setReservationState(ReservationState.NEW);
 		newReservation.setUser(user);
+		newReservation.setCreated(new Date(2012, 1, 1));
 		return newReservation;
 	}
 	
@@ -92,7 +93,7 @@ public class BookCopyReservationDAOImplTest{
 	private Author createAuthor(){
 		Author author = new Author();
 		author.setDescription("test description");
-		author.setFirstName("J. R. R.");
+		author.setFirstName("Johnny");
 		author.setSurname("Tolkien");
 		AuthorDAOImpl authorDao = new AuthorDAOImpl();
 		authorDao.setEm(emf.createEntityManager());

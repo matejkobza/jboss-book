@@ -46,6 +46,7 @@ public class BookCopyReservation implements Serializable {
     // commented out because of a good reason :-)
     // current date is set in ReservationManagerImpl.reserveBook() (not past)
     //@Past//purchase date must the date in the past
+    @NotNull
     private Date created;
 
     public Date getCreated() {

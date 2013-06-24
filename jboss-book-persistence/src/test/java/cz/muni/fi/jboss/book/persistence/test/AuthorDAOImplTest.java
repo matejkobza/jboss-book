@@ -145,8 +145,8 @@ public class AuthorDAOImplTest {
 		}
 		/* set different values to fields */
 		result.setDescription("different desc");
-		result.setFirstName("new first name");
-		result.setSurname("new Surname");
+		result.setFirstName("Newname");
+		result.setSurname("New Surname");
 		Book book3 = createTestBookWithAuthor(result);
 		books.add(book3);
 		result.setBooks(books);
