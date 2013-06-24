@@ -20,6 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import cz.muni.fi.jboss.book.ejb.manager.AuthorManager;
 import cz.muni.fi.jboss.book.ejb.manager.BookManagerImpl;
 import cz.muni.fi.jboss.book.persistence.entity.Author;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
@@ -77,6 +78,47 @@ public class AuthorManagerTest {
 		assertEquals(author2.getDescription(), author.getDescription());
 		assertEquals(author2.getFirstName(), author.getFirstName());
 		assertEquals(author2.getSurname(), author.getSurname());	
+	}
+	
+	@Test
+	public void testUpdateAuthor(){
+		Author author = createTestAuthorA();
+		try{
+			autorManager.create(author);
+		}catch(Exception ex){
+			fail();
+		}
+		String desc  = "Descccc";
+		String name = "TestName";
+		String surN = "Surn";
+		author.setDescription(desc);
+		author.setFirstName(name);
+		author.setSurname(surN);
+		try{
+			autorManager.update(author);
+		}catch(Exception ex){
+			fail();
+		}
+		
+		assertEquals(desc, author.getDescription());
+		assertEquals(name, author.getFirstName());
+		assertEquals(surN, author.getSurname());
+	}
+	
+	@Test
+	public void testDeleteAuthor(){
+		Author author = createTestAuthorA();
+		try{
+			autorManager.create(author);
+		}catch(Exception ex){
+			fail();
+		}
+		try{
+			autorManager.delete(author);
+		}catch(Exception ex){
+			fail();
+		}
+		assertFalse(authorManager.findAllAuthors().contains(author));
 	}
 	
 	
