@@ -46,18 +46,24 @@
                      style="width: 470px">
             <p:column sortBy="#{book.id}">
                 <f:facet name="header">
-                    <h:outputText value="Id"/>
+                    <h:outputText value="#{msgs['id']}"/>
                 </f:facet>
                 <h:outputText value="#{book.id}"/>
             </p:column>
             <p:column sortBy="#{book.title}" filterBy="#{book.title}">
                 <f:facet name="header">
-                    <h:outputText value="#{msgs['bookTitle']}"/>
+                    <h:outputText value="#{msgs['book.title']}"/>
                 </f:facet>
                 <h:outputText value="#{book.title}"/>
             </p:column>
             <p:column>
-                <h:commandLink value="#{msgs['bookDetail']}" actionListener="#{searchBookBean.selectBook(book.id)}"
+                <f:facet name="header">
+                    <h:outputText value="#{msgs['book.author']}"/>
+                </f:facet>
+                <h:outputText value="#{book.author.firstName} #{book.author.surname}"/>
+            </p:column>
+            <p:column>
+                <p:commandLink value="#{msgs['bookDetail']}" actionListener="#{searchBookBean.selectBook(book.id)}"
                                action="/jsf/bookDetail"/>
             </p:column>
         </p:dataTable>

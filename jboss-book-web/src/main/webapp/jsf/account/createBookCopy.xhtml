@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="../templates/template2columns.xhtml">
+
+    <ui:define name="leftContent">
+        <p:panel rendered="#{identityBean.loggedIn and identityBean.librarian}" styleClass="loggedInContentWrapper">
+            <h1>#{msgs['addBookCopyToSystem']}</h1>
+
+            <h:link value="#{msgs['back']}" outcome="/jsf/account/createBook" styleClass="margin10"/>
+
+            <p:panel header="#{msgs['createBookCopy']}" id="createBookPanel">
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{msgs['book.title']}"/>
+                    <h:outputText value="#{bookCopyBean.book.title}"/>
+
+                    <h:outputText value="#{msgs['book.author']}"/>
+                    <h:outputText value="#{bookCopyBean.book.author.firstName} #{bookCopyBean.book.author.surname}"/>
+
+                    <h:outputText value="#{msgs['purchaseDate']}"/>
+                    <p:inputMask value="#{bookCopyBean.date}" mask="9999-99-99"/>
+
+                    <h:column></h:column>
+                    <p:commandButton value="#{msgs['send']}" actionListener="#{bookCopyBean.save}"
+                                     update="bookCopiesTable"/>
+                </h:panelGrid>
+            </p:panel>
+
+            <h:link value="#{msgs['back']}" outcome="/jsf/account/createBook" styleClass="margin10"/>
+
+            <p:dataTable var="bookCopy" value="#{bookCopyBean.bookCopies}" id="bookCopiesTable">
+                <p:column>
+                    <h:outputText value="#{bookCopy.book.title}"/>
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{bookCopy.book.ISBN}"/>
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{bookCopy.purchaseDate}"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton value="#{msgs['delete']}"
+                                     actionListener="#{bookCopyBean.delete(bookCopy.id)}"
+                                     update=":leftForm:bookCopiesTable"
+                                     immediate="true"/>
+                </p:column>
+            </p:dataTable>
+
+            <h:link value="#{msgs['back']}" outcome="/jsf/account/createBook" styleClass="margin10"/>
+        </p:panel>
+    </ui:define>
+</ui:composition>
+</html>
