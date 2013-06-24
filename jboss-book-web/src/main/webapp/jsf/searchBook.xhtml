@@ -12,7 +12,7 @@
     <ui:define name="leftContent">
         <h1>#{msgs['searchBook']}</h1>
 
-        <p:panel header="#{msgs['searchBook']}" style="width: 465px; margin-bottom: 25px;">
+        <p:panel header="#{msgs['searchBookByTitle']}" style="width: 465px; margin-bottom: 25px;">
             <h:panelGrid columns="3" cellpadding="2">
                 <h:outputLabel for="#{searchBookBean.bookTitle}"
                                value="#{msgs['bookTitle']}"/>
@@ -21,6 +21,22 @@
                 <p:commandButton value="#{msgs['search']}" process="@all"
                                  actionListener="#{searchBookBean.searchBookByTitlePart}"
                                  update="resultTable" id="submit"/>
+            </h:panelGrid>
+        </p:panel>
+        
+        <p:panel header="#{msgs['searchBookByAuthor']}" style="width: 465px; margin-bottom: 25px;">
+            <h:panelGrid columns="5" cellpadding="2">
+                <h:outputLabel for="#{searchBookBean.authorFirstName}"
+                               value="#{msgs['author.firstname']}"/>
+                <h:inputText value="#{searchBookBean.authorFirstName}"
+                             label="#{msgs['author.firstname']}"></h:inputText>
+                <h:outputLabel for="#{searchBookBean.authorSurname}"
+                               value="#{msgs['author.surname']}"/>
+                <h:inputText value="#{searchBookBean.authorSurname}"
+                             label="#{msgs['author.surname']}"></h:inputText>
+                <p:commandButton value="#{msgs['search']}" process="@all"
+                                 actionListener="#{searchBookBean.searchBookByAuthor}"
+                                 update="resultTable" id="authorSubmit"/>
             </h:panelGrid>
         </p:panel>
 
@@ -44,6 +60,9 @@
                                action="/jsf/bookDetail"/>
             </p:column>
         </p:dataTable>
+        
+        <h2>#{msgs['searchByAuthor']}</h2>
+        
     </ui:define>
 
 </ui:composition>

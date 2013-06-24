@@ -15,6 +15,7 @@ import org.jboss.ejb3.annotation.Clustered;
 import cz.muni.fi.jboss.book.ejb.entities.BookCopyWithDetails;
 import cz.muni.fi.jboss.book.ejb.util.ReservationUtils;
 import cz.muni.fi.jboss.book.persistence.ReservationState;
+import cz.muni.fi.jboss.book.persistence.dao.AuthorDAO;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAO;
 import cz.muni.fi.jboss.book.persistence.dao.BookDAO;
 import cz.muni.fi.jboss.book.persistence.entity.Author;
@@ -35,11 +36,29 @@ public class BookManagerImpl implements BookManager {
 	@Inject
 	private BookCopyDAO bookCopyDao;
 
+	@Inject
+	private AuthorDAO authorDao;
+
 	@EJB
 	private ReservationManager reservationManager;
 
+	private boolean authorExists(Author author) {
+		// TODO - inefficient - fix
+		List<Author> authors = authorDao.findAllAuthors();
+		for (Author oneAuthor : authors) {
+			if (author.getFirstName().equals(oneAuthor.getFirstName())
+					&& author.getSurname().equals(oneAuthor.getSurname()))
+				return true;
+		}
+		
+		return false;
+	}
+
 	@Override
 	public Book addBook(Book book) {
+		Author author = book.getAuthor();
+		if (!authorExists(author))
+			authorDao.createAuthor(author);
 		return bookDao.createBook(book);
 	}
 
@@ -79,7 +98,7 @@ public class BookManagerImpl implements BookManager {
 		author.setFirstName(firstName);
 		author.setSurname(surname);
 
-		return bookDao.findBookByAuthor(author);
+		return bookDao.findBookByAuthor2(author);
 	}
 
 	@Override
@@ -114,13 +133,13 @@ public class BookManagerImpl implements BookManager {
 		List<BookCopyWithDetails> bookCopiesWithDetails = new ArrayList<BookCopyWithDetails>();
 		for (BookCopy bookCopy : bookCopies) {
 			boolean isAvailable = ReservationUtils.isAvailable(reservationManager, bookCopy);
-			
+
 			BookCopyWithDetails bookCopyWithDetails = new BookCopyWithDetails();
 			bookCopyWithDetails.setBookCopy(bookCopy);
 			bookCopyWithDetails.setAvailable(isAvailable);
 			bookCopiesWithDetails.add(bookCopyWithDetails);
 		}
-		
+
 		return bookCopiesWithDetails;
 	}
 

@@ -1,10 +1,14 @@
 package cz.muni.fi.jboss.book.persistence.dao;
 
-import cz.muni.fi.jboss.book.persistence.entity.Author;
-import cz.muni.fi.jboss.book.persistence.entity.Book;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import cz.muni.fi.jboss.book.persistence.entity.Author;
+import cz.muni.fi.jboss.book.persistence.entity.Book;
 
 /**
  *
@@ -122,6 +126,44 @@ public class BookDAOImpl implements BookDAO {
             "SELECT b FROM Book b WHERE b.author = :author")
             .setParameter("author", author).getResultList();
     return books;
+  }
+
+  @Override
+  public List<Book> findBookByAuthor2(Author author) {
+	    if (author == null) {
+	        throw new NullPointerException("author is null");
+	      }
+	    
+	    boolean firstNameEmpty = author.getFirstName().isEmpty();
+	    boolean surnameEmpty = author.getSurname().isEmpty();
+	    
+	    if (firstNameEmpty && surnameEmpty)
+	    	return new ArrayList<Book>();
+	    
+	    // TODO - use stringbuilder
+	    String queryString = "SELECT b FROM Book b INNER JOIN b.author a WHERE b.author = a.id AND (";
+	    if (!firstNameEmpty) {
+	    	queryString += "UPPER(a.firstName) LIKE UPPER(:firstName) ";
+	    	if (!surnameEmpty)
+	    		queryString += "OR ";
+	    }
+	    if (!surnameEmpty) {
+	    	queryString += "UPPER(a.surname) LIKE UPPER(:surname)";
+	    }
+	    queryString += ")";
+	    
+	    /*-List<Book> books = em.createQuery(
+	            "SELECT b FROM Book b INNER JOIN b.author a WHERE b.author = a.id AND "
+	            + "(UPPER(a.firstName) LIKE UPPER(:firstName) OR UPPER(a.surname) LIKE UPPER(:surname))")
+	            .setParameter("firstName", "%" + author.getFirstName() + "%")
+	            .setParameter("surname", "%" + author.getSurname() + "%").getResultList();*/
+	    Query query = em.createQuery(queryString);
+	    if (!firstNameEmpty)
+	    	query = query.setParameter("firstName", "%" + author.getFirstName() + "%");
+	    if (!surnameEmpty)
+	    	query = query.setParameter("surname", "%" + author.getSurname() + "%");
+	    
+	    return (List<Book>) query.getResultList();
   }
 
   @Override

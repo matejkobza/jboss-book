@@ -14,50 +14,75 @@ import cz.muni.fi.jboss.book.persistence.entity.Book;
 @SessionScoped
 public class SearchBookBean implements Serializable {
 
-    @EJB(name = "BookManager")
-    private BookManager bookManager;
+	@EJB(name = "BookManager")
+	private BookManager bookManager;
 
-    private String bookTitle;
-    private Collection<Book> searchBookResults;
-    private Book selectedBook;
-    private List<BookCopyWithDetails> bookCopies;
+	private String bookTitle;
+	private Collection<Book> searchBookResults;
+	private Book selectedBook;
+	private List<BookCopyWithDetails> bookCopies;
 
-    public String getBookTitle() {
-        return bookTitle;
-    }
+	private String authorFirstName;
+	private String authorSurname;
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
+	public String getBookTitle() {
+		return bookTitle;
+	}
 
-    public Collection<Book> getSearchBookResults() {
-        return searchBookResults;
-    }
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
+	}
 
-    public void setSearchBookResults(Collection<Book> searchBookResults) {
-        this.searchBookResults = searchBookResults;
-    }
+	public Collection<Book> getSearchBookResults() {
+		return searchBookResults;
+	}
 
-    public void searchBookByTitlePart() {
-        String title = bookTitle == null ? "" : bookTitle.trim();
-        this.searchBookResults = bookManager.findBookByTitlePart(title);
-    }
+	public void setSearchBookResults(Collection<Book> searchBookResults) {
+		this.searchBookResults = searchBookResults;
+	}
 
-    public Book getBook() {
-        return this.selectedBook;
-    }
+	public void searchBookByTitlePart() {
+		String title = bookTitle == null ? "" : bookTitle.trim();
+		this.searchBookResults = bookManager.findBookByTitlePart(title);
+	}
+	
+	public void searchBookByAuthor() {
+		String firstName = this.authorFirstName == null ? "" : this.authorFirstName.trim();
+		String surname = this.authorSurname == null ? "" : this.authorSurname.trim();
+		this.searchBookResults = bookManager.findBookByAuthor(firstName, surname);
+	}
 
-    public void selectBook(Long bookId) {
-        this.selectedBook = bookManager.findBookById(bookId);
-        this.bookCopies = bookManager.getBookCopiesWithDetailsByBookId(bookId);
-    }
+	public Book getBook() {
+		return this.selectedBook;
+	}
 
-    public List<BookCopyWithDetails> getBookCopies() {
-        return this.bookCopies;
-    }
+	public void selectBook(Long bookId) {
+		this.selectedBook = bookManager.findBookById(bookId);
+		this.bookCopies = bookManager.getBookCopiesWithDetailsByBookId(bookId);
+	}
 
-    public List<Book> getListBooks() {
-        return bookManager.findAllBooks();
-    }
+	public List<BookCopyWithDetails> getBookCopies() {
+		return this.bookCopies;
+	}
+
+	public List<Book> getListBooks() {
+		return bookManager.findAllBooks();
+	}
+
+	public String getAuthorFirstName() {
+		return authorFirstName;
+	}
+
+	public void setAuthorFirstName(String authorFirstName) {
+		this.authorFirstName = authorFirstName;
+	}
+
+	public String getAuthorSurname() {
+		return authorSurname;
+	}
+
+	public void setAuthorSurname(String authorSurname) {
+		this.authorSurname = authorSurname;
+	}
 
 }

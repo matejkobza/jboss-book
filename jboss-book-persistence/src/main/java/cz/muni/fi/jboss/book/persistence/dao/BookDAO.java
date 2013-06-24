@@ -85,4 +85,6 @@ public interface BookDAO {
    * @return List of all books
    */
   public List<Book> findAllBooks();
+
+  public List<Book> findBookByAuthor2(Author author);
 }
