@@ -37,12 +37,12 @@ public class Author implements Serializable {
   
   @Column(name = "FIRSTNAME")
   @Size(min = 2, max = 20)
-  @Pattern(regexp = "[A-Z][a-z]*") 
+  @Pattern(regexp = "[A-Za-z]*") 
   private String firstName;
   
   @Column(name = "SURNAME")
   @Size(min = 2, max = 40)
-  @Pattern(regexp = "[A-Z][a-z]*")
+  @Pattern(regexp = "[A-Za-z. ]*")
   private String surname;
   
   @Column(name = "DESCRIPTION")
