@@ -14,6 +14,8 @@ public interface AuthorManager {
 
     public Author find(Long id);
 
+    public List<Author> findAllAuthors();
+
     public List<Author> findByName(String key);
 
 }

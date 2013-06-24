@@ -12,8 +12,8 @@
         <p:panel rendered="#{identityBean.loggedIn and identityBean.librarian}" styleClass="loggedInContentWrapper">
             <h1>#{msgs['addBookToSystem']}</h1>
 
-            <p:panel header="#{msgs['createBook']}">
-                <h:panelGrid columns="2" id="createBookPanel">
+            <p:panel header="#{msgs['createBook']}" id="createBookPanel">
+                <h:panelGrid columns="2">
                     <p:outputLabel for="searchAuthor" value="#{msgs['searchAuthor']}"/>
                     <p:autoComplete minQueryLength="3" id="searchAuthor" value="#{bookBean.authorName}"
                                     completeMethod="#{bookBean.complete}" maxResults="10" forceSelection="true"/>
@@ -32,49 +32,40 @@
                 </h:panelGrid>
             </p:panel>
 
-            <p:commandButton value="#{msgs['send']}" actionListener="#{bookBean.updateOrCreateBook}" styleClass="margin10"/>
-        </p:panel>
+            <p:commandButton value="#{msgs['send']}" actionListener="#{bookBean.updateOrCreateBook}"
+                             styleClass="margin10" update=":leftForm:booksTable" />
 
-        <p:dataTable var="book" value="#{bookBean.books}" rows="50" paginator="true" paginatorPosition="bottom"
-                     paginatorAlwaysVisible="false">
-            <p:column filterBy="#{book.title}" sortBy="#{book.title}">
-                <f:facet name="header">
-                    <h:outputText value="#{msgs['book.title']}"/>
-                </f:facet>
-                <h:outputText value="#{book.title}"/>
-            </p:column>
-            <p:column filterBy="#{book.author}" sortBy="#{book.author}">
-                <f:facet name="header">
-                    <h:outputText value="#{msgs['book.author']}"/>
-                </f:facet>
-                <h:outputText value="#{book.author.firstName} #{book.author.surname}"/>
-            </p:column>
-            <p:column filterBy="#{book.publisher}">
-                <f:facet name="header">
+            <p:dataTable var="book" value="#{bookBean.books}" rows="50" paginator="true" paginatorPosition="bottom"
+                         paginatorAlwaysVisible="false" id="booksTable">
+                <p:column filterBy="#{book.title}" sortBy="#{book.title}">
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['book.title']}"/>
+                    </f:facet>
+                    <h:outputText value="#{book.title}"/>
+                </p:column>
+                <p:column filterBy="#{book.author}" sortBy="#{book.author}">
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['book.author']}"/>
+                    </f:facet>
+                    <h:outputText value="#{book.author.firstName} #{book.author.surname}"/>
+                </p:column>
+                <p:column filterBy="#{book.publisher}">
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['book.publisher']}"/>
+                    </f:facet>
                     <h:outputText value="#{book.publisher}"/>
-                </f:facet>
-                <h:outputText value="#{book.publisher}"/>
-            </p:column>
-            <p:column sortBy="#{book.ISBN}">
-                <f:facet name="header">
-                    <h:outputText value="#{msgs['book.isbn']}"/>
-                </f:facet>
-                <h:outputText value="#{book.ISBN}"/>
-            </p:column>
-            <p:column sortBy="#{book.pages}">
-                <f:facet name="header">
-                    <h:outputText value="#{msgs['book.numberOfPages']}"/>
-                </f:facet>
-                <h:outputText value="#{book.pages}"/>
-            </p:column>
-            <p:column>
-                <f:facet name="header">
-                    <h:outputText value="#{msgs['action']}"/>
-                </f:facet>
-                <p:commandLink value="#{msgs['edit']}" actionListener="#{bookBean.loadBook(book.id)}"
-                               update=":createBookPanel"/>
-            </p:column>
-        </p:dataTable>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['action']}"/>
+                    </f:facet>
+                    <p:commandLink value="#{msgs['edit']}" actionListener="#{bookBean.selectBook(book)}"
+                                   update=":leftForm:createBookPanel"/>&nbsp;
+                    <p:commandLink value="#{msgs['delete']}" actionListener="#{bookBean.deleteBook(book.id)}"
+                                   update=":leftForm:booksTable" />
+                </p:column>
+            </p:dataTable>
+        </p:panel>
     </ui:define>
 </ui:composition>
 </html>

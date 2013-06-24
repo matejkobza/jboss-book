@@ -11,10 +11,10 @@ The goal of this project is demonstrate knowledge gained during summer semester 
 - [x] JPA2 persistence layer
 - [x] CDI
 - [x] 3 security roles
-- [ ] Bean Validation
+- [x] Bean Validation
 - [x] Seam 3
-- [ ] Arquillian
-- [ ] 2 clusters and demonstration of failure of one
+- [/] Arquillian
+- [/] 2 clusters and demonstration of failure of one
 - [ ] deployment to PaaS OpenShift
 
 ##DB INSTALLATION

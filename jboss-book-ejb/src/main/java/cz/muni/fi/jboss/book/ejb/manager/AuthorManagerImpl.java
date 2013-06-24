@@ -34,7 +34,7 @@ public class AuthorManagerImpl implements AuthorManager {
 
     @Override
     public void update(Author author) {
-        authorDAO.deleteAuthor(author);
+        authorDAO.updateAuthor(author);
     }
 
     @Override
@@ -45,5 +45,10 @@ public class AuthorManagerImpl implements AuthorManager {
     @Override
     public List<Author> findByName(String key) {
         return authorDAO.searchByName(key);
+    }
+
+    @Override
+    public List<Author> findAllAuthors() {
+        return authorDAO.findAllAuthors();
     }
 }

@@ -24,8 +24,27 @@ public class BookBean implements Serializable {
     private BookManager bookManager;
 
     private Book book = new Book();
-    private Author author = new Author();
+
     private String authorName;
+    private String authorSurname;
+    private String authorDesc;
+    private Long authorId;
+
+    public String getAuthorSurname() {
+        return authorSurname;
+    }
+
+    public void setAuthorSurname(String authorSurname) {
+        this.authorSurname = authorSurname;
+    }
+
+    public String getAuthorDesc() {
+        return authorDesc;
+    }
+
+    public void setAuthorDesc(String authorDesc) {
+        this.authorDesc = authorDesc;
+    }
 
     public String getAuthorName() {
         return authorName;
@@ -43,25 +62,30 @@ public class BookBean implements Serializable {
         this.book = book;
     }
 
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public void createAuthor() {
-        authorManager.create(this.author);
-        WebApplication.getReference().addInfoMessage("Book service", "author created successfully.");
+    public void updateOrCreateAuthor() {
+        if (this.authorId == null) {
+            Author author = new Author();
+            author.setFirstName(this.authorName);
+            author.setSurname(this.authorSurname);
+            author.setDescription(this.authorDesc);
+            authorManager.create(author);
+            WebApplication.getReference().addInfoMessage("Author service", "author created successfully.");
+        } else {
+            Author author = authorManager.find(this.authorId);
+            author.setFirstName(this.authorName);
+            author.setSurname(this.authorSurname);
+            author.setDescription(this.authorDesc);
+            authorManager.update(author);
+            WebApplication.getReference().addInfoMessage("Author service", "author updated successfully.");
+        }
     }
 
     public void updateOrCreateBook() {
         if (this.book.getId() == null) {
             List<Author> authors = authorManager.findByName(this.authorName);
             if (authors.size() == 1) {
-                this.author = authors.get(0);
-                this.book.setAuthor(this.author);
+                Author author = authors.get(0);
+                this.book.setAuthor(author);
                 bookManager.addBook(this.book);
                 WebApplication.getReference().addInfoMessage("Book service", "book created successfully.");
             } else {
@@ -88,4 +112,33 @@ public class BookBean implements Serializable {
     public List<Book> getBooks() {
         return bookManager.findAllBooks();
     }
+
+    public List<Author> getAuthors() {
+        return authorManager.findAllAuthors();
+    }
+
+    public void selectBook(Book book) {
+        this.book = book;
+        //this.author = book.getAuthor();
+        this.authorName = book.getAuthor().getFirstName() + " " + book.getAuthor().getSurname();
+    }
+
+    public void selectAuthor(Author author) {
+        this.authorId = author.getId();
+        this.authorName = author.getFirstName();
+        this.authorSurname = author.getSurname();
+        this.authorDesc = author.getDescription();
+    }
+
+    public void deleteBook(Long bookId) {
+        bookManager.deleteBook(bookId);
+        WebApplication.getReference().addInfoMessage("Book service", "book deleted successfully.");
+    }
+
+    //@TODO how should be this done?
+    public void deleteAuthor(Long authorId) {
+        authorManager.delete(authorManager.find(authorId));
+        WebApplication.getReference().addInfoMessage("Author service", "author deleted successfully.");
+    }
+
 }
