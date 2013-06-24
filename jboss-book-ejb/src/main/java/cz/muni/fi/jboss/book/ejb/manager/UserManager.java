@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserManager {
 
-    /*public List<User> getUsers();
+    public List<User> getUsers();
 
     public List<User> getReaders();
 
@@ -19,7 +19,5 @@ public interface UserManager {
     public List<User> searchUsers(String key);
 
     public void update(User user);
-      */
-
 
 }

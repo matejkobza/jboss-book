@@ -62,11 +62,11 @@ public class UserDAOImpl implements UserDAO {
         em.remove(em.find(User.class, username));
     }
 
-    /*@Override
+    @Override
     public List<User> searchUsers(String key) {
-        //Query q = em.createQuery("SELECT u FROM User u WHERE u.name LIKE :X");
-        //q.setParameter("X", "%" + key + "%");
-        //return q.getResultList();
-        return findAllUsers();
-    } */
+        Query q = em.createQuery("SELECT u FROM User u WHERE LOWER(u.name) LIKE LOWER(:X)");
+        q.setParameter("X", "%" + key + "%");
+        return q.getResultList();
+//        return findAllUsers();
+    }
 }

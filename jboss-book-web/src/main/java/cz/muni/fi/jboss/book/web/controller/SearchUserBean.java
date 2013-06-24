@@ -17,17 +17,14 @@ public class SearchUserBean implements Serializable {
     @EJB(name = "UserManager")
     private UserManager userManager;
 
-    public SearchUserBean() {
-        this.users = new ArrayList<User>();
-
-        //this.users.addAll(userManager.getReaders());
-        //this.users.addAll(userManager.getLibrarians());
-    }
-
     private String username;
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     public List<User> getUsers() {
+        if(this.users.isEmpty()) {
+            this.users.addAll(userManager.getReaders());
+            this.users.addAll(userManager.getLibrarians());
+        }
         return users;
     }
 
@@ -44,7 +41,8 @@ public class SearchUserBean implements Serializable {
     }
 
     public void searchByFilter() {
-
+        this.users.clear();
+        this.users.addAll(userManager.searchUsers(this.username));
     }
 
 }

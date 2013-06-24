@@ -12,56 +12,37 @@ reservations for one user. Also we dont need filter on every column. It's more n
 
     <ui:define name="leftContent">
         <p:panel rendered="#{identityBean.loggedIn}" styleClass="loggedInContentWrapper">
-            <h1>#{msgs['reservations']}</h1>
+            <h1>#{msgs['borrowedBooks']}</h1>
 
             <p:dataTable var="reservation" id="resultTable"
-                         value="#{reservationsBean.reservations}" paginator="true" paginatorAlwaysVisible="false"
+                         value="#{reservationsBean.userBorrowings}" paginator="true" paginatorAlwaysVisible="false"
                          paginatorPosition="bottom" rows="50"
                          style="width: 470px">
                 <p:column sortBy="#{reservation.id}">
                     <f:facet name="header">
-                        <h:outputText value="Id"/>
+                        <h:outputText value="#{msgs['id']}"/>
                     </f:facet>
                     <h:outputText value="#{reservation.id}"/>
                 </p:column>
                 <p:column sortBy="#{reservation.bookCopy.book.title}">
                     <f:facet name="header">
-                        <h:outputText value="Book title"/>
+                        <h:outputText value="#{msgs['bookTitle']}"/>
                     </f:facet>
                     <h:outputText value="#{reservation.bookCopy.book.title}"/>
                 </p:column>
                 <p:column sortBy="#{reservation.bookCopy.purchaseDate}">
                     <f:facet name="header">
-                        <h:outputText value="Purchase date"/>
+                        <h:outputText value="#{msgs['purchaseDate']}"/>
                     </f:facet>
-                    <h:outputText value="#{reservation.bookCopy.purchaseDate}"/>
+                    <h:outputText value="#{reservation.created}"/>
                 </p:column>
                 <!-- status is always reservered -->
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Status"/>
+                        <h:outputText value="#{msgs['status']}"/>
                     </f:facet>
                     <h:outputText value="#{reservation.reservationState}"/>
                 </p:column>
-                <!-- the reservation is always made for me
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="User"/>
-                    </f:facet>
-                    <h:outputText value="#{reservation.user.name}"/>
-                </p:column>-->
-                <!-- these action buttons have what purpose? Maybe cancel reservation on a book? But we have no status reservered book!!! -->
-                <!--<p:column>
-                    <h:commandLink value="#{msgs['prepareBook']}"
-                                   actionListener="#{reservationsBean.prepareBook(reservation.id)}"
-                                   rendered="#{reservation.reservationState == 'NEW'}"/>
-                    <h:commandLink value="#{msgs['lendBook']}"
-                                   actionListener="#{reservationsBean.lendBook(reservation.id)}"
-                                   rendered="#{reservation.reservationState == 'READY'}"/>
-                    <h:commandLink value="#{msgs['returnBook']}"
-                                   actionListener="#{reservationsBean.returnBook(reservation.id)}"
-                                   rendered="#{reservation.reservationState == 'LENT'}"/>
-                </p:column>-->
             </p:dataTable>
         </p:panel>
     </ui:define>

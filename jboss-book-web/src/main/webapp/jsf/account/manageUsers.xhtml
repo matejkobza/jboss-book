@@ -39,14 +39,15 @@
                 <h:panelGrid columns="3">
                     <h:outputText value="#{msgs['searchByUsername']}"/>
                     <p:inputText value="#{searchUserBean.username}"/>
-                    <p:commandButton value="#{msgs['search']}" actionListener="#{searchUserBean.searchByFilter}"/>
+                    <p:commandButton value="#{msgs['search']}" actionListener="#{searchUserBean.searchByFilter}"
+                                     update="usersTable" immediate="true"/>
                 </h:panelGrid>
             </p:panel>
 
             <p:dataTable id="usersTable" style="margin-top: 15px;" value="#{searchUserBean.users}"
                          var="user">
                 <f:facet name="header">
-                    <h:outputText value="#{msgs['users']}" />
+                    <h:outputText value="#{msgs['users']}"/>
                 </f:facet>
                 <p:column>
                     <f:facet name="header">
@@ -56,10 +57,24 @@
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="#{msgs['action']}" />
+                        <h:outputText value="#{msgs['role']}"/>
                     </f:facet>
-                    <p:commandButton value="#{msgs['makeLibrarian']}"
-                                     actionListener="#{identityBean.addLibrarian(user)}"/>
+                    <h:outputText value="#{user.userRole}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['action']}"/>
+                    </f:facet>
+                    <p:commandLink value="#{msgs['makeLibrarian']}"
+                                   actionListener="#{identityBean.addLibrarian(user)}"
+                                   rendered="#{(user.reader)}"
+                                   immediate="true"
+                                   update="usersTable"/>
+                    <p:commandLink value="#{msgs['removeLibrarian']}"
+                                   actionListener="#{identityBean.removeLibrarian(user)}"
+                                   rendered="#{user.librarian}"
+                                   immediate="true"
+                                   update="usersTable"/>
                 </p:column>
             </p:dataTable>
         </p:panel>

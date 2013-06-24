@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="../templates/template2columns.xhtml">
+
+    <ui:define name="leftContent">
+        <p:panel rendered="#{identityBean.loggedIn and identityBean.librarian}" styleClass="loggedInContentWrapper">
+            <h1>#{msgs['addBookToSystem']}</h1>
+
+            <p:panel header="#{msgs['createBook']}">
+                <h:panelGrid columns="2" id="createBookPanel">
+                    <p:outputLabel for="searchAuthor" value="#{msgs['searchAuthor']}"/>
+                    <p:autoComplete minQueryLength="3" id="searchAuthor" value="#{bookBean.authorName}"
+                                    completeMethod="#{bookBean.complete}" maxResults="10" forceSelection="true"/>
+
+                    <p:outputLabel for="title" value="#{msgs['book.title']}"/>
+                    <p:inputText id="title" value="#{bookBean.book.title}"/>
+
+                    <p:outputLabel for="publisher" value="#{msgs['book.publisher']}"/>
+                    <p:inputText id="publisher" value="#{bookBean.book.publisher}"/>
+
+                    <p:outputLabel for="isbn" value="#{msgs['book.isbn']}"/>
+                    <p:inputText id="isbn" value="#{bookBean.book.ISBN}"/>
+
+                    <p:outputLabel for="pages" value="#{msgs['book.numberOfPages']}"/>
+                    <p:inputText id="pages" value="#{bookBean.book.pages}"/>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:commandButton value="#{msgs['send']}" actionListener="#{bookBean.updateOrCreateBook}" styleClass="margin10"/>
+        </p:panel>
+
+        <p:dataTable var="book" value="#{bookBean.books}" rows="50" paginator="true" paginatorPosition="bottom"
+                     paginatorAlwaysVisible="false">
+            <p:column filterBy="#{book.title}" sortBy="#{book.title}">
+                <f:facet name="header">
+                    <h:outputText value="#{msgs['book.title']}"/>
+                </f:facet>
+                <h:outputText value="#{book.title}"/>
+            </p:column>
+            <p:column filterBy="#{book.author}" sortBy="#{book.author}">
+                <f:facet name="header">
+                    <h:outputText value="#{msgs['book.author']}"/>
+                </f:facet>
+                <h:outputText value="#{book.author.firstName} #{book.author.surname}"/>
+            </p:column>
+            <p:column filterBy="#{book.publisher}">
+                <f:facet name="header">
+                    <h:outputText value="#{book.publisher}"/>
+                </f:facet>
+                <h:outputText value="#{book.publisher}"/>
+            </p:column>
+            <p:column sortBy="#{book.ISBN}">
+                <f:facet name="header">
+                    <h:outputText value="#{msgs['book.isbn']}"/>
+                </f:facet>
+                <h:outputText value="#{book.ISBN}"/>
+            </p:column>
+            <p:column sortBy="#{book.pages}">
+                <f:facet name="header">
+                    <h:outputText value="#{msgs['book.numberOfPages']}"/>
+                </f:facet>
+                <h:outputText value="#{book.pages}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="#{msgs['action']}"/>
+                </f:facet>
+                <p:commandLink value="#{msgs['edit']}" actionListener="#{bookBean.loadBook(book.id)}"
+                               update=":createBookPanel"/>
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>
+</html>

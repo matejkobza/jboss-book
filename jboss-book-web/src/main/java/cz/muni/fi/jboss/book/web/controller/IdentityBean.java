@@ -40,21 +40,21 @@ public class IdentityBean extends IdentityImpl {
 
     public boolean isManager() {
         if (this.user != null) {
-            return this.user.getUserRole().equals(UserRole.MANAGER);
+            return this.user.isManager();
         }
         return false;
     }
 
     public boolean isLibrarian() {
         if (this.user != null) {
-            return this.user.getUserRole().equals(UserRole.LIBRARIAN);
+            return this.user.isLibrarian();
         }
         return false;
     }
 
     public boolean isReader() {
         if (this.user != null) {
-            return this.user.getUserRole().equals(UserRole.READER);
+            return this.user.isReader();
         }
         return false;
     }
@@ -63,6 +63,12 @@ public class IdentityBean extends IdentityImpl {
         user.setUserRole(UserRole.LIBRARIAN);
         accountManager.update(user);
         WebApplication.getReference().addInfoMessage("Account settings", "librarian added successfully.");
+    }
+
+    public void removeLibrarian(User user) {
+        user.setUserRole(UserRole.READER);
+        accountManager.update(user);
+        WebApplication.getReference().addInfoMessage("Account settings", "librarian removed successfully.");
     }
 
 }

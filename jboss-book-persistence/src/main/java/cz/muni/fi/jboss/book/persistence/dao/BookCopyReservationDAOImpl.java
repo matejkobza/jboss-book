@@ -87,11 +87,9 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
     if (bookCopy == null) {
       throw new IllegalArgumentException("Id is null");
     }
-    List<BookCopyReservation> reservations =
-            em.createQuery(
+    return (List<BookCopyReservation>) em.createQuery(
             "SELECT b FROM BookCopyReservation b WHERE b.bookCopy = :bookCopy")
             .setParameter("bookCopy", bookCopy).getResultList();
-    return reservations;
   }
 
   @Override
@@ -99,11 +97,9 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
     if (user == null) {
       throw new NullPointerException("user is null");
     }
-    List<BookCopyReservation> reservations =
-            em.createQuery(
+    return (List<BookCopyReservation>) em.createQuery(
             "SELECT b FROM BookCopyReservation b WHERE b.user = :user")
             .setParameter("user", user).getResultList();
-    return reservations;
   }
 
   @Override
@@ -111,11 +107,9 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
     if (rS == null) {
       throw new NullPointerException("reservation state is null");
     }
-    List<BookCopyReservation> reservations =
-            em.createQuery(
+    return (List<BookCopyReservation>) em.createQuery(
             "SELECT b FROM BookCopyReservation b WHERE b.reservationState = :rS")
             .setParameter("rS", rS).getResultList();
-    return reservations;
   }
 
   @Override
@@ -132,10 +126,9 @@ public class BookCopyReservationDAOImpl implements BookCopyReservationDAO {
 		if (rS == null) {
 			throw new NullPointerException("reservation state is null");
 		}
-		List<BookCopyReservation> reservations = em.createQuery(
-				"SELECT b FROM BookCopyReservation b WHERE b.user == :user AND b.reservationState == :rS")
+		return em.createQuery(
+				"SELECT b FROM BookCopyReservation b WHERE b.user = :user AND b.reservationState = :rS")
 				.setParameter("user", user).setParameter("rS", rS)
 				.getResultList();
-		return reservations;
 	}
 }

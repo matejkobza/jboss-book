@@ -23,16 +23,16 @@ public class UserManagerImpl implements UserManager {
     @Inject
     private UserDAO userDAO;
 
-    /*@Override
+    @Override
     public List<User> getUsers() {
         return userDAO.findAllUsers();
     }
 
     @Override
     public List<User> getReaders() {
-        List<User> users = new ArrayList<User>();
-        for (User user : users) {
-            if (user.getUserRole().equals(UserRole.READER)) {
+        List<User> users = new ArrayList<>();
+        for (User user : userDAO.findAllUsers()) {
+            if (user.getUserRole() == UserRole.READER) {
                 users.add(user);
             }
         }
@@ -41,9 +41,9 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public List<User> getLibrarians() {
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
         for(User user : userDAO.findAllUsers()) {
-            if(user.getUserRole().equals(UserRole.LIBRARIAN)) {
+            if(user.getUserRole() == UserRole.LIBRARIAN) {
                 users.add(user);
             }
         }
@@ -68,5 +68,5 @@ public class UserManagerImpl implements UserManager {
     @Override
     public void update(User user) {
         userDAO.updateUser(user);
-    }        */
+    }
 }
