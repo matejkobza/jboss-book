@@ -15,7 +15,8 @@ reservations for one user. Also we dont need filter on every column. It's more n
             <h1><h:outputText value="#{msgs['reservations']}"/></h1>
 
             <p:dataTable var="reservation" id="resultTable"
-                         value="#{reservationsBean.userReservations}" paginator="true" paginatorAlwaysVisible="false"
+                         value="#{reservationsBean.userReservationsHistory}" paginator="true"
+                         paginatorAlwaysVisible="false"
                          paginatorPosition="bottom" rows="50"
                          style="width: 470px">
                 <p:column sortBy="#{reservation.id}">
@@ -36,11 +37,13 @@ reservations for one user. Also we dont need filter on every column. It's more n
                     </f:facet>
                     <h:outputText value="#{reservation.bookCopy.purchaseDate}"/>
                 </p:column>
+                <p:column sortBy="#{reservation.reservationState}">
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['status']}"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.reservationState}"/>
+                </p:column>
             </p:dataTable>
-        </p:panel>
-
-        <p:panel rendered="#{identityBean.loggedIn and identityBean.librarian}" styleClass="loggedInContentWrapper">
-            <h1><h:outputText value="#{msgs['reservations']}"/></h1>
         </p:panel>
     </ui:define>
 

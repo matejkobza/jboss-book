@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import cz.muni.fi.jboss.book.ejb.security.AccountManager;
 import cz.muni.fi.jboss.book.persistence.UserRole;
 import cz.muni.fi.jboss.book.persistence.entity.User;
+import cz.muni.fi.jboss.book.web.core.WebApplication;
 import org.jboss.seam.security.IdentityImpl;
 
 
@@ -33,25 +34,41 @@ public class IdentityBean extends IdentityImpl {
         return this.user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public boolean isManager() {
         if (this.user != null) {
-            return this.user.getUserRole().equals(UserRole.MANAGER);
+            return this.user.isManager();
         }
         return false;
     }
 
     public boolean isLibrarian() {
         if (this.user != null) {
-            return this.user.getUserRole().equals(UserRole.LIBRARIAN);
+            return this.user.isLibrarian();
         }
         return false;
     }
 
     public boolean isReader() {
         if (this.user != null) {
-            return this.user.getUserRole().equals(UserRole.READER);
+            return this.user.isReader();
         }
         return false;
+    }
+
+    public void addLibrarian(User user) {
+        user.setUserRole(UserRole.LIBRARIAN);
+        accountManager.update(user);
+        WebApplication.getReference().addInfoMessage("Account settings", "librarian added successfully.");
+    }
+
+    public void removeLibrarian(User user) {
+        user.setUserRole(UserRole.READER);
+        accountManager.update(user);
+        WebApplication.getReference().addInfoMessage("Account settings", "librarian removed successfully.");
     }
 
 }

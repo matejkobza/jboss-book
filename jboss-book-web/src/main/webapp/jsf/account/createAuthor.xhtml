@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this screen should be only available for reservations, that readed has made. I dont think there will be too much
+reservations for one user. Also we dont need filter on every column. It's more nice to have feature but not required. -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="../templates/template2columns.xhtml">
+
+    <ui:define name="leftContent">
+        <p:panel rendered="#{identityBean.loggedIn and identityBean.librarian}" styleClass="loggedInContentWrapper">
+            <h1>#{msgs['addBookToSystem']}</h1>
+
+            <p:panel header="#{msgs['createAuthor']}">
+                <h:panelGrid columns="2">
+                    <p:outputLabel for="authorName" value="#{msgs['author.firstname']}"/>
+                    <p:inputText id="authorName" value="#{bookBean.author.firstName}"/>
+
+                    <p:outputLabel for="authorSurname" value="#{msgs['author.surname']}"/>
+                    <p:inputText id="authorSurname" value="#{bookBean.author.surname}"/>
+
+                    <p:outputLabel for="authorDescription" value="#{msgs['author.description']}"/>
+                    <p:inputText id="authorDescription" value="#{bookBean.author.description}"/>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:commandButton value="#{msgs['send']}" actionListener="#{bookBean.createAuthor}" styleClass="margin10"
+                             immediate="true"/>
+
+
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
+</html>

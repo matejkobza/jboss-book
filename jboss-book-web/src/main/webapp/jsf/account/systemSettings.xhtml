@@ -4,9 +4,13 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-        template="templates/template2columns.xhtml">
-    <ui:define name="">
-
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/template2columns.xhtml">
+    <ui:define name="leftContent">
+        <p:panel rendered="#{identityBean.loggedIn and identityBean.manager}" styleClass="loggedInContentWrapper">
+            Here will be some system specific settings. Maybe later.
+        </p:panel>
     </ui:define>
 </ui:composition>
 </html>

@@ -124,4 +124,25 @@ public class User implements Serializable, org.picketlink.idm.api.User {
         return "User [username=" + username + ", password=" + password + ", name="
                 + name + ", userRole=" + userRole + "]";
     }
+
+    public boolean isLibrarian() {
+        if (this.userRole == UserRole.LIBRARIAN) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isReader() {
+        if (this.userRole == UserRole.READER) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isManager() {
+        if (this.userRole == UserRole.MANAGER) {
+            return true;
+        }
+        return false;
+    }
 }

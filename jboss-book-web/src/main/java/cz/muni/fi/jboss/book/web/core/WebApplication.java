@@ -9,13 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.util.ResourceBundle;
 
-/**
- * Created with IntelliJ IDEA.
- * User: matejkobza
- * Date: 6/18/13
- * Time: 10:20 PM
- * To change this template use File | Settings | File Templates.
- */
 public class WebApplication {
 
     private static WebApplication ref;

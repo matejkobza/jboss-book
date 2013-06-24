@@ -46,7 +46,12 @@ public interface ReservationManager {
 	 * @param bookCopyId BookCopy ID
 	 */
 	public List<BookCopyReservation> getBookCopyReservations(Long bookCopyId);
-	
+
+    /**
+     *
+     * @param includeReturned includes returned books
+     * @return
+     */
 	public List<BookCopyReservation> getAllBookCopyReservations(boolean includeReturned);
 
 }
