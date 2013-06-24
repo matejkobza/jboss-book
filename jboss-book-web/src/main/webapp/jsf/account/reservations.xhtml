@@ -15,7 +15,9 @@ reservations for one user. Also we dont need filter on every column. It's more n
             <h1><h:outputText value="#{msgs['reservations']}"/></h1>
 
             <p:dataTable var="reservation" id="resultTable"
-                         value="#{reservationsBean.userReservations}" paginator="true" paginatorAlwaysVisible="false"
+                         value="#{reservationsBean.userReservations}"
+                         paginator="true"
+                         paginatorAlwaysVisible="false"
                          paginatorPosition="bottom" rows="50"
                          style="width: 470px">
                 <p:column sortBy="#{reservation.id}">
@@ -34,13 +36,54 @@ reservations for one user. Also we dont need filter on every column. It's more n
                     <f:facet name="header">
                         <h:outputText value="#{msgs['purchaseDate']}"/>
                     </f:facet>
-                    <h:outputText value="#{reservation.bookCopy.purchaseDate}"/>
+                    <h:outputText value="#{reservation.created}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['action']}"/>
+                    </f:facet>
+                    <p:commandLink value="#{msgs['cancelReservation']}"
+                                   actionListener="#{reservationsBean.cancelReservation(reservation.id)}"
+                                   update=":leftForm:resultTable"/>
                 </p:column>
             </p:dataTable>
         </p:panel>
 
         <p:panel rendered="#{identityBean.loggedIn and identityBean.librarian}" styleClass="loggedInContentWrapper">
             <h1><h:outputText value="#{msgs['reservations']}"/></h1>
+
+            <p:dataTable var="reservation" value="#{reservationsBean.activeReservations}" id="reservationsTable">
+                <f:facet name="header">
+                    <h:outputText value="#{msgs['reservations']}"/>
+                </f:facet>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['book.title']}"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.bookCopy.book.title}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['book.author']}"/>
+                    </f:facet>
+                    <h:outputText
+                            value="#{reservation.bookCopy.book.author.firstName} #{reservation.bookCopy.book.author.surname}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['username']}"/>
+                    </f:facet>
+                    <h:outputText value="#{reservation.user.name}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['action']}"/>
+                    </f:facet>
+                    <p:commandLink value="#{msgs['ready']}"
+                                   actionListener="#{reservationsBean.prepareBook(reservation.id)}"
+                                   update=":leftForm:reservationsTable"/>
+                </p:column>
+            </p:dataTable>
         </p:panel>
     </ui:define>
 

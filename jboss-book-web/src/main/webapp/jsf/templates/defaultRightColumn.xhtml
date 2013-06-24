@@ -54,16 +54,17 @@
                         value="#{msgs['role']}:"/></span>
                 <h:outputText value=" #{identityBean.user.userRole}"/>
                 <br/><br/>
+                <h:link outcome="/jsf/account/readers" value="#{msgs['readers']}" rendered="#{identityBean.librarian}" />
                 <h:link outcome="/jsf/searchBook" value="#{msgs['newReservation']}" rendered="#{identityBean.reader}"/>
+                <h:link outcome="/jsf/account/borrowed" value="#{msgs['borrowed']}" rendered="#{identityBean.reader}"/>
+                <h:link outcome="/jsf/account/reservations" value="#{msgs['reservations']}"
+                        rendered="#{identityBean.reader or identityBean.librarian}"/>
+                <h:link outcome="/jsf/account/history" value="#{msgs['history']}"
+                        rendered="#{identityBean.reader}"/>
                 <h:link outcome="/jsf/account/createBook" value="#{msgs['manageBooks']}"
                         rendered="#{identityBean.librarian}"/>
                 <h:link outcome="/jsf/account/createAuthor" value="#{msgs['manageAuthors']}"
                         rendered="#{identityBean.librarian}"/>
-                <h:link outcome="/jsf/account/borrowed" value="#{msgs['borrowed']}" rendered="#{identityBean.reader}"/>
-                <h:link outcome="/jsf/account/reservations" value="#{msgs['reservations']}"
-                        rendered="#{identityBean.reader}"/>
-                <h:link outcome="/jsf/account/history" value="#{msgs['history']}"
-                        rendered="#{identityBean.reader}"/>
                 <h:link outcome="/jsf/account/manageUsers" value="#{msgs['manageUsers']}"
                         rendered="#{identityBean.manager}"/>
                 <hr/>

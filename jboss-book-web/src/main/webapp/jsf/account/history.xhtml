@@ -41,7 +41,7 @@ reservations for one user. Also we dont need filter on every column. It's more n
                     <f:facet name="header">
                         <h:outputText value="#{msgs['status']}"/>
                     </f:facet>
-                    <h:outputText value="#{reservation.reservationState}"/>
+                    <h:outputText value="#{reservationsBean.getLocalizedReservationState(reservation.reservationState)}"/>
                 </p:column>
             </p:dataTable>
         </p:panel>

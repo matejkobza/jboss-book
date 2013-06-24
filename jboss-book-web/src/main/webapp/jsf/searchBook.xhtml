@@ -25,7 +25,7 @@
         </p:panel>
         
         <p:panel header="#{msgs['searchBookByAuthor']}" style="width: 465px; margin-bottom: 25px;">
-            <h:panelGrid columns="5" cellpadding="2">
+            <h:panelGrid columns="2">
                 <h:outputLabel for="#{searchBookBean.authorFirstName}"
                                value="#{msgs['author.firstname']}"/>
                 <h:inputText value="#{searchBookBean.authorFirstName}"
@@ -34,6 +34,7 @@
                                value="#{msgs['author.surname']}"/>
                 <h:inputText value="#{searchBookBean.authorSurname}"
                              label="#{msgs['author.surname']}"></h:inputText>
+                <h:column></h:column>
                 <p:commandButton value="#{msgs['search']}" process="@all"
                                  actionListener="#{searchBookBean.searchBookByAuthor}"
                                  update="resultTable" id="authorSubmit"/>
@@ -60,8 +61,6 @@
                                action="/jsf/bookDetail"/>
             </p:column>
         </p:dataTable>
-        
-        <h2>#{msgs['searchByAuthor']}</h2>
         
     </ui:define>
 

@@ -36,13 +36,6 @@ reservations for one user. Also we dont need filter on every column. It's more n
                     </f:facet>
                     <h:outputText value="#{reservation.created}"/>
                 </p:column>
-                <!-- status is always reservered -->
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{msgs['status']}"/>
-                    </f:facet>
-                    <h:outputText value="#{reservation.reservationState}"/>
-                </p:column>
             </p:dataTable>
         </p:panel>
     </ui:define>
