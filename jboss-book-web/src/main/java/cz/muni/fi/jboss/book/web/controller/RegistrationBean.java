@@ -58,10 +58,9 @@ public class RegistrationBean implements Serializable {
 
         String hash = PasswordUtils.hash(getPassword2());
         this.user.setPassword(hash);
-        user = accountManager.register(user);
+        this.user.setUserRole(UserRole.LIBRARIAN);
+        user = accountManager.createUser(user);
         if (user != null) {
-            user.setUserRole(UserRole.LIBRARIAN);
-            accountManager.update(user);
             WebApplication.getReference().addInfoMessage("Registration", "librarian registration successful.");
         } else {
             WebApplication.getReference().addErrorMessage("Registration", "librarian registration was not successful.");
