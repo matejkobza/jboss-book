@@ -9,7 +9,7 @@ public interface AccountManager {
      * @param user to be register
      * @return registered user
      */
-	public abstract User register(User user);
+	public User register(User user);
 
     /**
      * Looking for user? Here's your solution
@@ -19,5 +19,7 @@ public interface AccountManager {
     public User find(String username);
 
     public void update(User user);
+
+	public User createUser(User user);
 
 }

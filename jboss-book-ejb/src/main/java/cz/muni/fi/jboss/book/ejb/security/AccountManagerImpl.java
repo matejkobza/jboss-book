@@ -51,6 +51,11 @@ public class AccountManagerImpl implements AccountManager {
     public void update(User user) {
         userDao.updateUser(user);
     }
+    
+	@Override
+	public User createUser(User user) {
+		return userDao.createUser(user);
+	}
 
 }
 
