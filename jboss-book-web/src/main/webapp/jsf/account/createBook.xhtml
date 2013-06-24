@@ -29,6 +29,12 @@
 
                     <p:outputLabel for="pages" value="#{msgs['book.numberOfPages']}"/>
                     <p:inputText id="pages" value="#{bookBean.book.pages}"/>
+                    
+                    <p:outputLabel for="bookCopyCount" value="#{msgs['book.bookCopyCount']}"/>
+                    <p:inputText id="bookCopyCount" value="#{bookBean.bookCopyCount}"/>
+                    
+                    <p:outputLabel for="purchaseDate" value="#{msgs['book.purchaseDate']}"/>
+                    <p:calendar value="#{bookBean.purchaseDate}" id="purchaseDate" />  
                 </h:panelGrid>
             </p:panel>
 
