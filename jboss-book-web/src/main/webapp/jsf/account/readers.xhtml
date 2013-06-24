@@ -21,7 +21,7 @@ reservations for one user. Also we dont need filter on every column. It's more n
                                     completeMethod="#{reservationsBean.complete}"
                                     forceSelection="true"/>
                     <p:commandButton value="#{msgs['search']}" actionListener="#{reservationsBean.searchUser}"
-                                     update="userDetailPanel"/>
+                                     update="userDetailPanel, :leftForm:availableBooksTable"/>
 
                 </h:panelGrid>
                 <h:panelGrid columns="2" rendered="#{reservationsBean.userSelected}">
@@ -52,7 +52,7 @@ reservations for one user. Also we dont need filter on every column. It's more n
                         </f:facet>
                         <p:commandLink value="#{msgs['return']}"
                                        actionListener="#{reservationsBean.returnBook(reservation.id)}"
-                                       update=":leftForm:readerBorrowingsTable"/>
+                                       update=":leftForm:readerBorrowingsTable,:leftForm:availableBooksTable"/>
                     </p:column>
                 </p:dataTable>
 
@@ -79,32 +79,50 @@ reservations for one user. Also we dont need filter on every column. It's more n
                         </f:facet>
                         <p:commandLink value="#{msgs['lend']}"
                                        actionListener="#{reservationsBean.lendBook(reservation.id)}"
-                                       update=":leftForm:readerBorrowingsTable,:leftForm:readerReservationsTable"/>
+                                       update=":leftForm:readerBorrowingsTable,:leftForm:readerReservationsTable,:leftForm:availableBooksTable"
+                                />
                     </p:column>
                 </p:dataTable>
             </p:panel>
 
 
-            <h2>Search Book</h2>
-            <p:dataTable var="reservation" id="reservationsTable"
-                         value="#{reservationsBean.reservations}"
+            <h2>#{msgs['searchBook']}</h2>
+            <p:dataTable var="book" id="availableBooksTable"
+                         value="#{bookBean.books}"
                          paginator="true"
                          paginatorPosition="bottom"
                          paginatorAlwaysVisible="false"
                          rows="50"
                          style="width: 470px; margin-top: 20px;">
-                <p:column sortBy="#{reservation.bookCopy.book.title}"
-                          filterBy="#{reservation.bookCopy.book.title}">
+                <p:column sortBy="#{book.title}"
+                          filterBy="#{book.title}">
                     <f:facet name="header">
-                        <h:outputText value="Book title"/>
+                        <h:outputText value="#{msgs['book.title']}"/>
                     </f:facet>
-                    <h:outputText value="#{reservation.bookCopy.book.title}"/>
+                    <h:outputText value="#{book.title}"/>
                 </p:column>
-                <p:column sortBy="#{reservation.reservationState}">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['book.author']}"/>
+                    </f:facet>
+                    <h:outputText value="#{book.author.firstName} #{book.author.surname}"/>
+                </p:column>
+                <p:column>
                     <f:facet name="header">
                         <h:outputText value="Available items"/>
                     </f:facet>
-                    <h:outputText value="#{reservation.reservationState}"/>
+                    <h:outputText value="#{reservationsBean.calculateAvailableItems(book)}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs['action']}"/>
+                    </f:facet>
+                    <p:commandLink value="#{msgs['reserve']}" actionListener="#{reservationsBean.reserveBook(book)}"
+                                   update=":leftForm:availableBooksTable, :leftForm:readerReservationsTable"
+                                   rendered="#{reservationsBean.userSelected and (reservationsBean.calculateAvailableItems(book) gt 0)}"/>&nbsp;
+                    <p:commandLink value="#{msgs['lend']}" actionListener="#{reservationsBean.lendBook(book)}"
+                                   update=":leftForm:availableBooksTable, :leftForm:readerBorrowingsTable"
+                                   rendered="#{reservationsBean.userSelected and (reservationsBean.calculateAvailableItems(book) gt 0)}"/>
                 </p:column>
             </p:dataTable>
         </p:panel>

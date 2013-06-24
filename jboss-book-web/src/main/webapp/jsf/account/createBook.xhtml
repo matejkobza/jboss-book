@@ -29,17 +29,17 @@
 
                     <p:outputLabel for="pages" value="#{msgs['book.numberOfPages']}"/>
                     <p:inputText id="pages" value="#{bookBean.book.pages}"/>
-                    
+
                     <p:outputLabel for="bookCopyCount" value="#{msgs['book.bookCopyCount']}"/>
                     <p:inputText id="bookCopyCount" value="#{bookBean.bookCopyCount}"/>
-                    
+
                     <p:outputLabel for="purchaseDate" value="#{msgs['book.purchaseDate']}"/>
-                    <p:calendar value="#{bookBean.purchaseDate}" id="purchaseDate" />  
+                    <p:calendar value="#{bookBean.purchaseDate}" id="purchaseDate"/>
                 </h:panelGrid>
             </p:panel>
 
             <p:commandButton value="#{msgs['send']}" actionListener="#{bookBean.updateOrCreateBook}"
-                             styleClass="margin10" update=":leftForm:booksTable" />
+                             styleClass="margin10" update=":leftForm:booksTable"/>
 
             <p:dataTable var="book" value="#{bookBean.books}" rows="50" paginator="true" paginatorPosition="bottom"
                          paginatorAlwaysVisible="false" id="booksTable">
@@ -47,7 +47,8 @@
                     <f:facet name="header">
                         <h:outputText value="#{msgs['book.title']}"/>
                     </f:facet>
-                    <h:outputText value="#{book.title}"/>
+                    <h:commandLink action="/jsf/account/createBookCopy" actionListener="#{bookCopyBean.setBook(book)}"
+                                   value="#{book.title}"/>
                 </p:column>
                 <p:column filterBy="#{book.author}" sortBy="#{book.author}">
                     <f:facet name="header">
@@ -68,7 +69,7 @@
                     <p:commandLink value="#{msgs['edit']}" actionListener="#{bookBean.selectBook(book)}"
                                    update=":leftForm:createBookPanel"/>&nbsp;
                     <p:commandLink value="#{msgs['delete']}" actionListener="#{bookBean.deleteBook(book.id)}"
-                                   update=":leftForm:booksTable" />
+                                   update=":leftForm:booksTable"/>
                 </p:column>
             </p:dataTable>
         </p:panel>

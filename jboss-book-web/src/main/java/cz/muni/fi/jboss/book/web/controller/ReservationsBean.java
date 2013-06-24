@@ -10,8 +10,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import cz.muni.fi.jboss.book.ejb.entities.BookCopyWithDetails;
+import cz.muni.fi.jboss.book.ejb.manager.BookManager;
 import cz.muni.fi.jboss.book.ejb.manager.UserManager;
 import cz.muni.fi.jboss.book.persistence.UserRole;
+import cz.muni.fi.jboss.book.persistence.entity.Book;
+import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.User;
 import cz.muni.fi.jboss.book.web.core.WebApplication;
 import cz.muni.fi.jboss.book.web.core.WebBeanFactory;
@@ -29,6 +33,9 @@ public class ReservationsBean implements Serializable {
 
     @EJB(name = "UserManager")
     private UserManager userManager;
+
+    @EJB(name = "BookManager")
+    private BookManager bookManager;
 
     private String readerName;
     private User reader;
@@ -132,7 +139,10 @@ public class ReservationsBean implements Serializable {
 // Pragma mark - current logged in user
 
     public List<BookCopyReservation> getUserReservations() {
-        return reservationManager.getBookCopyReservations(WebBeanFactory.getIdentityBean().getUser(), ReservationState.NEW);
+        List<BookCopyReservation> reservations = new ArrayList<>();
+        reservations.addAll(reservationManager.getBookCopyReservations(WebBeanFactory.getIdentityBean().getUser(), ReservationState.NEW));
+        reservations.addAll(reservationManager.getBookCopyReservations(WebBeanFactory.getIdentityBean().getUser(), ReservationState.READY));
+        return reservations;
     }
 
     public List<BookCopyReservation> getUserReservationsHistory() {
@@ -147,6 +157,36 @@ public class ReservationsBean implements Serializable {
 
     public List<BookCopyReservation> getUserBorrowings() {
         return reservationManager.getBookCopyReservations(WebBeanFactory.getIdentityBean().getUser(), ReservationState.LENT);
+    }
+
+
+    public int calculateAvailableItems(Book book) {
+        int a=0;
+        for (BookCopyWithDetails bookCopyWithDetails : bookManager.getBookCopiesWithDetailsByBookId(book.getId())) {
+            if (bookCopyWithDetails.isAvailable()) {
+                a++;
+            }
+        }
+        return a;
+    }
+
+    public void lendBook(Book book) {
+        for (BookCopyWithDetails bookCopyWithDetails : bookManager.getBookCopiesWithDetailsByBookId(book.getId())) {
+            if(bookCopyWithDetails.isAvailable()) {
+                BookCopyReservation bookCopyReservation = reservationManager.reserveBook(bookCopyWithDetails.getBookCopy(), this.reader);
+                this.lendBook(bookCopyReservation.getId());
+                return;
+            }
+        }
+    }
+
+    public void reserveBook(Book book) {
+        for (BookCopyWithDetails bookCopyWithDetails : bookManager.getBookCopiesWithDetailsByBookId(book.getId())) {
+            if(bookCopyWithDetails.isAvailable()) {
+                reservationManager.reserveBook(bookCopyWithDetails.getBookCopy(), this.reader);
+                return;
+            }
+        }
     }
 
 }

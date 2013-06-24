@@ -123,5 +123,10 @@ public class ReservationManagerImpl implements ReservationManager {
         bookCopyReservationDao.deleteBookCopyReservation(bookCopyReservation);
     }
 
+    @Override
+    public List<BookCopyReservation> getBookCopyReservations(ReservationState reservationState) {
+        return bookCopyReservationDao.findBookCopyReservationsByReservationState(reservationState);
+    }
+
 
 }
