@@ -43,7 +43,9 @@ public class BookCopyReservation implements Serializable {
 
     @Column(nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
-    @Past//purchase date must the date in the past
+    // commented out because of a good reason :-)
+    // current date is set in ReservationManagerImpl.reserveBook() (not past)
+    //@Past//purchase date must the date in the past
     private Date created;
 
     public Date getCreated() {

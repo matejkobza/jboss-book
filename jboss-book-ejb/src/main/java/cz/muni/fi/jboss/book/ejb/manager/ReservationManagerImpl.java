@@ -1,6 +1,7 @@
 package cz.muni.fi.jboss.book.ejb.manager;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -15,7 +16,6 @@ import cz.muni.fi.jboss.book.ejb.util.ReservationUtils;
 import cz.muni.fi.jboss.book.persistence.ReservationState;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyDAO;
 import cz.muni.fi.jboss.book.persistence.dao.BookCopyReservationDAO;
-import cz.muni.fi.jboss.book.persistence.dao.UserDAO;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopyReservation;
 import cz.muni.fi.jboss.book.persistence.entity.User;
@@ -43,6 +43,7 @@ public class ReservationManagerImpl implements ReservationManager {
 		reservation.setBookCopy(bookCopy);
 		reservation.setReservationState(ReservationState.NEW);
 		reservation.setUser(reader);
+		reservation.setCreated(new Date());
 
 		return bookCopyReservationDao.createBookCopyReservation(reservation);
 	}
