@@ -23,7 +23,7 @@
       <property name="hibernate.connection.password" value="toor"/>
       <property name="hibernate.connection.url" value="jdbc:derby://localhost:1527/jboss-book"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
       <property name="hibernate.connection.autocommit" value="true"/> 
     </properties>

@@ -31,7 +31,8 @@
 
                     <h:column>&nbsp;</h:column>
                     <p:commandButton value="#{msgs['register']}"
-                                     actionListener="#{registrationBean.createLibrarian}"/>
+                                     actionListener="#{registrationBean.createLibrarian}"
+                            update=":leftForm:usersTable" />
                 </h:panelGrid>
             </p:panel>
 
