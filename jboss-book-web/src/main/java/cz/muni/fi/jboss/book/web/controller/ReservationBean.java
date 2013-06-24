@@ -24,12 +24,9 @@ public class ReservationBean {
     @EJB(name = "AccountManager")
     private AccountManager accountManager;
 
-    @Inject
-    private IdentityBean identityBean;
-
 	public boolean reserve(Long bookCopyId) {
-		User user = accountManager.find(identityBean.getUser().getId());
-        if(user != null) {
+		User user = accountManager.find(WebBeanFactory.getIdentityBean().getUser().getUsername());
+        if(user == null) {
             WebApplication.getReference().addErrorMessage("Reservation", "unable to reserve book. You need to login first.");
             return false;
         } else {
