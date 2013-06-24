@@ -2,10 +2,13 @@ package cz.muni.fi.jboss.book.ejb.test;
 
 import java.util.List;
 
+import javax.ejb.BeforeCompletion;
+import javax.inject.Inject;
 import javax.inject.Named;
+import static org.junit.Assert.*
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.core.api.annotation.Inject;
+
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -18,11 +21,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import cz.muni.fi.jboss.book.ejb.manager.BookManagerImpl;
+import cz.muni.fi.jboss.book.persistence.entity.Author;
 import cz.muni.fi.jboss.book.persistence.entity.Book;
 import cz.muni.fi.jboss.book.persistence.entity.BookCopy;
+import javax.inject.Inject;
 
 @RunWith(Arquillian.class)
-public class BookReservationTest {
+public class AuthorManagerTest {
 
 	@Deployment
     public static JavaArchive createDeployment() {
@@ -32,7 +37,7 @@ public class BookReservationTest {
 	                    .name("PU")
 	                    .jtaDataSource("java:/DerbyDS")
 	                .up();
-		 JavaArchive jar = ShrinkWrap.create(JavaArchive.class)
+		JavaArchive jar = ShrinkWrap.create(JavaArchive.class)
             .addPackage("cz.muni.fi.jboss.book.ejb.manager")
             .addPackage("cz.muni.fi.jboss.book.persistence")
             .addPackage("cz.muni.fi.jboss.book.persistence.entity")
@@ -43,22 +48,39 @@ public class BookReservationTest {
 		return jar;
     }
 	
-	@Inject @Named("reservationManager")
-	private BookManagerImpl fBookManager;
-
-	@Test 
-	public void testInject() {
-		fBookManager = new BookManagerImpl();
-		Assert.assertNotNull(fBookManager);
-		List<Book> books = fBookManager.findAllBooks();
-		Assert.assertNotNull(books);
+	@Inject
+	private AuthorManager authorManager;
+	
+	@Before
+	private setUp(){
+		
 	}
 	
-	@Inject BookCopy fBookCopy;
-	@Inject Book fBook;
+	private Author createTestAuthorA(){
+		Author author = new Author();
+		author.setDescription("test descr");
+		author.setFirstName("Radek");
+		author.setSurname("Nejedly");
+		return author;
+	}
 	
 	@Test
-	public void test() {
-		Assert.assertNotNull(fBookCopy);
+	public void testCreateAuthor(){
+		Author author = createTestAuthorA();
+		try{
+			autorManager.create(author);
+		}catch(Exception ex){
+			fail();
+		}
+		assertNotNull(author.getId());
+		Author author2 = createTestAuthorA();
+		assertEquals(author2.getDescription(), author.getDescription());
+		assertEquals(author2.getFirstName(), author.getFirstName());
+		assertEquals(author2.getSurname(), author.getSurname());	
 	}
+	
+	
+	
+	
+	
 }
